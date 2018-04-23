@@ -370,7 +370,13 @@ body .container .right_col {
 table .mcenter {
     text-align: center;
 }
-/* ---- */ 
+/* ---- */
+/* manage_bill page */
+.profile-product-tilte {
+    font-size:20px;
+    font-style: unset;
+    padding-top: 50px;
+}
 /* -----------------------------------*/
 /* footer */
 footer {

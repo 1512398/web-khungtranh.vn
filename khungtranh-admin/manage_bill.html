@@ -118,9 +118,9 @@
                                                     <td class="mcenter"><strong>Thanh Phong</strong> Do</td>
                                                     <td class="mcenter"></td>
                                                     <td class="mcenter">
-                                                        <a href="javascript:;" class="btn btn-primary btn-md" data-toggle="tooltip" data-placement="top" title="View bill"><i class="fa fa-folder"></i></a>
-                                                        <a href="javascript:;" class="btn btn-info btn-md"  data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
-                                                        <a href="javascript:;" class="btn btn-danger btn-md" data-toggle="tooltip" data-placement="top" title="Move to system bin"><i class="fa fa-trash-o"></i></a>    
+                                                        <a href="javascript:;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#viewModal"><i class="fa fa-folder" data-toggle="tooltip" data-placement="top" title="View bill"></i></a>
+                                                        <a href="javascript:;" class="btn btn-info btn-md"  ><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+                                                        <a href="javascript:;" class="btn btn-danger btn-md" ><i class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="Move to system bin"></i></a>    
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -143,6 +143,73 @@
              <!--/footer-->
         </div>
     </div>
+    <!-- modal view -->
+    <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="exampleModalLabel">View Bill </h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body "style="height:80%">
+                <div id="testmodal" style="padding: 5px 10px;">
+                    <div class="col-xs-7">
+                        <div id="prodcut-image">
+                            <img src="image/frame2.jpg" alt="..." style="width:90%;text-align: center">
+                        </div>
+                        <div class="product_gallery" style="padding-top:10px">
+                            <a href="">
+                                <img src="image/frame2.jpg" alt="..." style="width:62px;">
+                            </a>
+                            <a href="">
+                                    <img src="image/frame2.jpg" alt="..."style="width:62px">
+                            </a>
+                            <a href="">
+                                <img src="image/frame2.jpg" alt="..."style="width:62px;">
+                            </a>
+                            <a href="">
+                                <img src="image/frame2.jpg" alt="..."style="width:62px">
+                            </a>
+                        </div>
+                    </div>
+                    <div id="col-xs-5" >
+                        <h2 class="product_title"> Frame by gold </h2>
+                        <p> Somethings about product
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci nesciunt, veritatis odit quia assumenda praesentium maiores sit minima ipsam quibusdam laudantium iure quisquam laboriosam quam cupiditate aliquid sint consectetur id?    
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="profile-product-tilte row-md-4">  
+                        <label class="col-md-5 "> User buy </label>
+                        <div class="col-md-7">
+                            <img src="image/avatar.jpg" alt="..." style="width:40px;border-radius: 50%;border:1px solid black">
+                            <small><strong> Thanh Phong </strong> Do</small>
+                        </div>
+                    </div>
+                    <div class="profile-product-tilte row-md-4">
+                        <label class="col-md-5 "> Time </label>
+                        <small class="col-md-7"> Friday, April 8th 2018	</small>
+                    </div>
+                    <div class="profile-product-tilte row-md-4">
+                        <label class="col-md-5 "> Status </label>
+                        <small class="col-md-7" style="color:green"> Paied by Credit Card </small>
+                    </div>
+                    <div class="profile-product-tilte row-md-4">
+                            <label class="col-md-5 "> Cost </label>
+                            <small class="col-md-7"> <label> 1.790.000 <label style="font-style: italic; color:red"> vnd </label></label> <label class="pull-right"><span class="fa fa-angle-up"></span>10% VAT</label></small>
+                        </div>
+                </div>  
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
     <script src="./js/jquery/jquery.min.js"></script>
     <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="./js/index.js"></script>
