@@ -1,0 +1,173 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Administrators | Khungtranh.vn </title>
+    <!-- Bootstrap -->
+    <link href="./lib/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+    <!-- font -->
+    <link href="./fonts/css/font-awesome.min.css" rel="stylesheet" >
+    <link href="./css/index.css" rel="stylesheet">
+</head>
+<body class="main">
+    <div class="container">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col">
+                    <div class="navbar nav_title" id="ms">
+                        <a href="index.html" class="site_title"><i class="fa fa-window"></i> <span> KHUNGTRANH.VN </span></a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- info -->
+                    <div class="profile clearfix">
+                            <div class="profile_pic">
+                              <img src="image/avatar.jpg" alt="..." class="img-circle profile_img">
+                            </div>
+                            <div class="profile_info">
+                              <span>Welcome,</span>
+                              <h2> Admin </h2>
+                            </div>
+                    </div>
+                          
+                    <!-- /info -->
+                    <br/>
+                    <!-- sidebar menu -->
+                    <div id="main_menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3> Information </h3>
+                            <ul class="nav side-menu">
+                                <li><a href="index.html"><i class="fa fa-home"></i> Dashbroard <span class="fa fa-chevron-right"></span> </a></li>
+                                <li><a href="add.html"><i class="fa fa-edit"></i> Add/Edit item <span class="fa fa-chevron-right"></span></a></li>
+                                <li><a href="manage_account.html"><i class="fa fa-users"></i> Manager Account <span class="fa fa-chevron-right"></span></a></li>
+                                <li><a href="manage_bill.html"><i class="fa fa-file-word-o"></i> Manager Bill <span class="fa fa-chevron-right"></span></a></li>
+                                <li><a href="mail_support.html"><i class="fa fa-envelope"> </i>Mail Support <span class="fa fa-chevron-right"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                </div>
+            </div>
+            <!-- nav -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="image/avatar.jpg" alt="...">Admin
+                                    <span class="fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li><a href=""><i class="fa fa-sign-out pull-right"></i> Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- page main -->
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="page-title">
+                        <div class="title_left">
+                            <h3> Manage Account </h3>
+                        </div>
+                        <div class="title_right">
+                        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Go!</button>
+                                </span>
+                            </div>
+                        </div>
+                        </div>              
+                        <div class="clearfix"></div>
+                        <div id="row">
+                            <div class="col-md-12">
+                                <div id="x_panel">
+                                    <div id="x_title">
+                                        <h2> Profile <small> users </small></h2>
+                                        <div id="clearfix"></div>
+                                    </div>
+                                    <div id="x_content">                                            
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <!-- header table -->
+                                                <tr>
+                                                    <th style="width:1%">#</th>
+                                                    <th style="width:10%;" class="mcenter">Avatar</th>
+                                                    <th style="width:15%;" class="mcenter">Name</th>
+                                                    <th style="width:30%" class="mcenter"> Profile </th>  
+                                                    <th style="width:20%;" class="mcenter">Last Bill History</th>
+                                                    <th class="mcenter">Edit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Information an account -->
+                                                <tr>
+                                                    <td class="mcenter">1</td>
+                                                    <td class="mcenter">
+                                                        <img src="image/avt.JPG" alt="..." style="width:50px;text-align: center;">
+                                                    </td>
+                                                    <td class="mcenter"><strong>Trung Hieu</strong> Hoang</td>
+                                                    <td class="mcenter" >
+                                                        <div class="progress" style="color:black; font-size:13px">
+                                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width:75%">
+                                                        </div>
+                                                        25%
+                                                        </div>
+                                                    </td>
+                                                    <td class="mcenter" style="color: green"> Not Found </td>
+                                                    <td class="mcenter"> 
+                                                        <a href="javascript:;" class="btn btn-primary btn-md" data-toggle="tooltip" data-placement="top" title="View profile"><i class="fa fa-folder"></i></a>
+                                                        <a href="javascript:;" class="btn btn-info btn-md"  data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
+                                                        <a href="javascript:;" class="btn btn-danger btn-md" data-toggle="tooltip" data-placement="top" title="Ban account"><i class="fa fa-trash-o"></i></a>    
+                                                    </td>  
+                                                </tr>
+                                                <tr>
+                                                    <td class="mcenter">2</td>
+                                                    <td class="mcenter">
+                                                        <img src="image/avatar.jpg" alt="..." style="width:50px;text-align: center;">
+                                                    </td>
+                                                    <td class="mcenter"><strong>Thanh Phong</strong> Do </td>
+                                                    <td class="mcenter" >
+                                                        <div class="progress" style="color:black; font-size:13px">
+                                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width:85%">
+                                                        </div>
+                                                        15%
+                                                        </div>
+                                                    </td>
+                                                    <td class="mcenter" style="color: gray">Friday, April 8th 2018 </td>
+                                                    <td class="mcenter"> 
+                                                        <a href="" class="btn btn-primary btn-md" data-toggle="tooltip" data-placement="top" title="View profile"><i class="fa fa-folder"></i></a>
+                                                        <a href="" class="btn btn-info btn-md"  data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
+                                                        <a href="" class="btn btn-danger btn-md" data-toggle="tooltip" data-placement="top" title="Ban account"><i class="fa fa-trash-o"></i></a>    
+                                                    </td>  
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <!-- /page main-->
+            <!-- footer -->
+            <footer>
+                <div class="pull-right">
+                KhungTranh.vn design by <a href="javascript:;"> Phong, Hieu</a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+             <!--/footer-->
+        </div>
+    </div>
+    <script src="./js/jquery/jquery.min.js"></script>
+    <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+
+/* -- */
+body {
+	padding-top: 90px;
+	background-image: url('../image/background.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+}
+.box-login {
+	border: 1px solid black;
+	padding: 30px;
+	border-block-end: indianred;
+}
+.box-login>.box-heading {
+    text-align: center;
+}
+.box-login>.box-heading a {
+}
+.box-login>.box-heading hr{
+    margin-top: 10px;
+    margin-bottom: 0px;
+    clear: both;
+    border: 0;
+    height: 1px;
+}
+
+.btn-login {
+	background-color: #59B2E0;
+	outline: none;
+	color: #fff;
+	font-size: 14px;
+	height: auto;
+	font-weight: normal;
+	padding: 14px 0;
+    border-color: #fff;
+    
+}
+.btn-login:hover,
+.btn-login:focus {
+	color: #fff;
+	background-color: #53A3CD;
+	border-color: #53A3CD;
+}
+.btn-register {
+	background-color: #1CB94E;
+	outline: none;
+	color: #fff;
+	font-size: 14px;
+	height: auto;
+	font-weight: normal;
+	padding: 14px 0;
+	text-transform: uppercase;
+	border-color: #1CB94A;
+}
+.btn-register:hover,
+.btn-register:focus {
+	color: #fff;
+	background-color: #1CA347;
+	border-color: #1CA347;
+}
