@@ -1,0 +1,514 @@
+body{
+    margin:0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    color:  #666;
+    line-height: 1.6em;
+}
+a:hover{
+
+    text-decoration: none;
+}
+a{
+    color:#666;
+    text-decoration: none;
+}
+#header nav{
+    padding: 0 100px;
+    margin-top: 0;
+}
+
+#header .navbar-brand{
+    font-size: 2em;
+}
+
+#header .navbar-brand:hover{
+    text-decoration: none;
+}
+#header {
+    padding-bottom: 5px;
+    margin-top: 0;
+}
+
+main{
+    padding-top: 60px;
+} 
+.container{
+    width: 80%;
+    margin:auto;
+    overflow: auto;
+}
+
+#header{
+    background-color: #333;
+    min-height: 55px;
+    color: #fff;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    /* overflow: auto; */
+    border-bottom: white 5px solid;
+}
+
+header a{
+    color: #fff;
+}
+
+.logo{
+    float: left;
+    width: 30%;
+    margin-top: 15px;
+}
+
+nav{
+    margin-top: 25px;
+    float: right;
+    width: 70%;
+}
+
+nav ul{
+    float: right;
+}
+
+nav li{
+    list-style: none;
+    float: left;
+    padding: 0 10px;
+}
+
+#gallery{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+#gallery li{
+    display: block;
+    float: left;
+    width: 23%;
+    height: 110px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin:0 12px 7px 0;
+    position: relative;
+}
+#carouseltitle{
+    padding: 10px;
+    padding-top: 30px;
+}
+
+#gallery img{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+nav a{
+    color: #fff;
+    padding-bottom: 0px;
+}
+
+.nav-link{
+    padding-bottom: 0px;
+    
+}
+nav ul a{
+    border-bottom: #333 3px solid;   
+}
+
+.current{
+    border-bottom: #03899c 3px solid;
+}
+
+nav ul a:hover{    
+    border-bottom: #03899c 3px solid;
+}
+
+section{
+    padding: 20px 0;
+    overflow: hidden;
+}
+
+.tagline{
+    background: #03899c;
+    color: #fff;
+}
+
+
+.tagline h1{
+    text-align: center;
+    font-size:35px;
+}
+
+footer{
+    background: #03899c;
+    color: #fff;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.overlay{
+    display: none;
+    background: rgba(5, 136, 153, 0.65);
+  
+    color: #fff;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100%;
+    padding: 20px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    pointer-events: none; 
+}
+
+.carousel img{
+    width: 100%;
+    height: 500px;
+}
+
+.carousel-caption{
+    background-color: rgba(5, 136, 153, 0.65);
+  }
+
+.carousel-caption h3{
+    font-weight: bold;
+   
+  }
+
+#DatHangTrucTuyen {
+    background-color: #03899c;
+}
+
+#icon {
+    font-size: 5em;
+    color: white;
+}
+
+#DatHangTrucTuyen *{
+    background-color: #03899c;
+    color: white;
+}
+
+#DatHangTrucTuyen card{
+    border:none;
+}
+
+#headerLine{
+    width: 100px;
+    border-color: white;
+    border-width: 3px;
+}
+
+.StepDatHang{
+    border: white solid 3px;
+    padding: 30px 5px;
+    margin: 0 3px;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    height: 100%;
+}
+#DatHangTrucTuyen .row{
+    padding-bottom: 2px;
+}
+
+#DatHangTrucTuyen .row .col-md-3, .col-sm-12{
+    padding: 0;
+}
+
+#DatHangTrucTuyen .row h2{
+    display: inline-block;
+    border-radius: 100%;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    justify-content: f;
+    color: #03899c;
+    margin: 0;
+    margin-left: 3px;
+}
+
+#btnDatHang{
+    background-color:tomato;
+    border:solid white 3px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.8em;
+    border: white solid ;
+    padding: 5px 20px;
+    border-radius: 10px;
+    margin: 0 5px;
+    display: inline-block;
+}
+
+#btnDatHang:hover{
+    color: lemonchiffon;
+}
+#btnfocus{
+    display: inline-block;
+    margin: 0px 10px;
+    font-size: 2em;
+}
+#sanphamInfo{
+    border: #03899c solid 3px;
+    border-radius: 10px;
+    display: flex;
+    background-color: #bcedf3;
+    align-content: center;
+}
+
+#sanphamInfo:hover{
+    background-color: #91e3ee;
+    cursor: pointer;
+}
+#sanphamImg{
+    padding: 0;
+}
+#sanphamImg img{
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+}
+#sanphamDetails h5{
+    padding-top: 3px;
+    color: #03899c;
+    font-weight: bold;
+}
+
+#sanphamDetails p{
+    margin-bottom: 0;
+}
+
+#sanphamPrice{
+    font-size: 1.2em;
+    margin-bottom: 3px;
+}
+
+#sanphamStars{
+    color: yellow;
+    font-size: 1.1em;
+}
+
+
+
+.navBarSPnoibat button{
+    background-color: #03899c;
+}
+
+footer p{
+    margin: 3px;
+}
+
+#followus{
+    font-size: 3em; 
+}
+
+#khungtranh_catalogue .card img{
+    width: 100px;
+    height: 100%;
+}
+#khungtranh_catalogue p,h6{
+    margin: 0;
+}
+
+#khungtranh_catalogue span{
+    font-size: 1em 
+}
+
+#khungtranh_catalogue h6{
+    color: #03899c;
+    font-weight: bold;
+}
+
+#frame_main img{
+    height: 100%;
+    width: 100%;
+}
+.dathang_item{
+    border: #333 solid 1px;
+    border-top: none;
+    overflow: scroll;
+}
+
+.dathang_item .col-9{
+    overflow: scroll;
+}
+
+.dathang_item:hover{
+    background-color: #b4e7ee;
+    cursor: pointer;
+}
+
+#khungtranh_catalogue .card-header{
+    background-color: #333;
+    color: #fff;
+}
+
+#khungtranh_catalogue a{
+    color: #fff;
+}
+
+#khungtranh_catalogue a:hover{
+    color: tomato;
+}
+
+#DatHangKhungTranh{
+    background-color: #eee;
+}
+
+#khungtranh_catalogue>div{
+    border: white dashed 3px;
+    height: 650px;
+    overflow-y: scroll;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+#khungtranh_catalogue{
+    background-color: #03899c;
+}
+
+#khungtranh_catalogue>h3{
+    color: #fff;
+}
+
+#dathang_main{
+    padding: 10px;
+    background-color: moccasin;
+}
+
+#dathang_main #frame_main{
+    width: 80%;
+    height: 50%;
+}
+
+#HinhNguoiDung img{
+    width: 100%;
+    height: 100%;
+}
+
+.HinhNguoiDungItem{
+    padding:5px;
+    margin:10px;
+    border: #03899c dashed 3px;
+    border-radius: 10px;
+}
+
+.HinhNguoiDungItem:hover{
+    cursor: pointer;
+    z-index: 100;
+    background-color: rgb(184, 181, 181);
+}
+
+.AddHinhNguoiDungItem{
+    margin:10px; 
+    border: #03899c dashed 3px;
+    border-radius: 10px;
+    height: 80px;
+    background-color: rgba(178, 192, 194, 0.65);
+}
+
+.AddHinhNguoiDungItem{
+    font-size:1em;
+}
+
+.AddHinhNguoiDungItem:hover{
+    background-color: rgb(184, 181, 181);
+    cursor: pointer;
+}
+
+.AddHinhNguoiDungItem:active{
+    background-color: #333;
+    color: #fff;
+}
+#dathang_main{
+    position: static;
+}
+
+#frame_main{
+    position: relative;
+}
+
+#frame_main #pic{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#frame_main #frame{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#listHinhNguoiDung{
+    padding: 0;
+    list-style: none;
+    overflow-y: scroll;
+}
+
+.currentHinhNguoiDung div{
+    padding: 3px;
+    margin: 0;
+    height: 128px;
+    border-color: tomato;
+}
+
+.dathang_current{
+    background-color:#b4eaf1;
+}
+
+#dathang_controlpanel{
+    background-color: #333;
+    border-radius: 24px;
+    color: #fff;
+}
+
+#frame_btn{
+    display: inline-block;
+    padding: 3px;
+    margin-bottom:5px    ;
+}
+
+#frame_btn:hover{
+    cursor: pointer;
+    background-color: #666;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+#abc p{
+    margin: 4px;
+}
+
+.imgavt{
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+}
+.usercontrol:hover {
+    border: none !important;
+}
+
+.usercontrol a:hover{
+    border: none !important;
+}
+#navbarDropdown{
+    border: none !important;
+}
+
+@media only screen and (max-width: 800px) {
+    #abcd {
+        height:210vh !important;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #abcd {
+        height:230vh !important;
+    }
+}

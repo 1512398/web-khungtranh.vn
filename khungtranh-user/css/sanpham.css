@@ -1,0 +1,53 @@
+.card-title{
+    color: #03899c;
+    font-weight: bold;
+}
+.card-text{
+    margin-bottom: 5px;
+}
+
+.card{
+    margin:0px;
+    position: relative;
+    /* box-shadow: 1px 1px 1px 2px; */
+}
+
+.breadcrumb-item a{
+    color: #03899c ;
+}
+
+.breadcrumb .active{
+    color: tomato ;
+}
+
+.navMatHang{
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 25px;
+    /* position: fixed; */
+    padding-bottom: 23px;
+}
+
+.navMatHang li{
+    border:#666 solid 1px;
+    margin-bottom: 1px;
+    padding-bottom: 3px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-radius: 5px;
+}
+
+.navMatHang h4{
+    color: #03899c;
+}
+
+.active{
+    color:tomato;
+}
+.card:hover{
+    /* border:#03899c solid 2px; */
+    box-shadow: 1px 1px 2px 2px;
+    cursor: pointer;
+    
+}
