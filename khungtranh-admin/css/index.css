@@ -377,6 +377,10 @@ table .mcenter {
     font-style: unset;
     padding-top: 50px;
 }
+/* mail page */
+.left_mail {
+    border: 1px solid black;
+}
 /* -----------------------------------*/
 /* footer */
 footer {
