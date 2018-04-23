@@ -1,0 +1,42 @@
+.ThongTinGiaoHang{
+    background-color: #eee;
+}
+
+.ThongTinGiaoHang h4{
+    color:tomato;
+}
+
+.ThongTinThanhToan{
+    background-color: #eee;
+}
+
+.ThongTinThanhToan h4{
+    color: tomato;
+}
+
+.ThongTinThanhToan ul li{
+    width: 32%;
+    background-color: #fff;
+    padding: 10px;
+    margin: 2px 5px;
+}
+
+.thanhtoan_icon{
+    font-size: 3em;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.tab-pane{
+    background-color: #fff;
+    padding: 10px;
+}
+
+.tab-content{
+    padding: 5px;
+}
+
+li .active{
+    color: tomato;
+    margin-bottom: 0px;
+}

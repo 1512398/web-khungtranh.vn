@@ -1,0 +1,110 @@
+p{
+    margin: 0px;
+}
+.hinhthucgiaohang{
+    border: #03899c solid 2px;
+    padding: 10px;
+    padding-bottom: 0px;
+    border-radius: 10px
+    
+}
+.hinhthucgiaohang h5{
+    color: #03899c;
+    font-weight: bold;
+}
+
+.hinhthucgiaohang p:first-of-type{
+    font-style: italic;
+}
+.hinhthucgiaohang p:nth-last-of-type(1){
+    
+    font-weight:  bold;
+}
+.hinhthucgiaohang p{
+    margin: 2px;
+}
+
+.hinhthucgiaohang:hover{
+    border: tomato solid 2px;
+    cursor: pointer;
+}
+
+.activehinhthucgiaohang * {
+    color:tomato;
+}
+
+.activehinhthucgiaohang h5 {
+    color:tomato;
+}
+
+.activehinhthucgiaohang{
+    border: tomato solid 2px;
+}
+
+.activehinhthucgiaohang #tick{
+    visibility: visible !important;
+}
+.thanhtoandonhang{
+    background-color:#eee;
+}
+
+.thanhtoandonhang h4{
+    color: #03899c;
+    font-weight: bold;
+}
+
+.giohang_item img{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.giohang_item h6{
+    font-weight: bold;
+    color: #03899c;
+    padding-bottom: 5px;
+}
+
+.soluong input{
+    border-radius: 0px;
+}
+
+.thanhtoandonhang p{
+    padding: 5px 0;
+}
+
+.chitietdonhang th{
+    color: #03899c;
+}
+
+.chitietdonhang{
+    background-color: #eee;
+}
+
+.trashbin{
+    font-size: 2em;
+    display: block;
+    margin:auto;
+    padding: 5px;
+    margin-top: 20px;
+}
+.trashbin:hover{
+    background-color: #666;
+    color: #eee;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.tbSoluong {
+    min-width: 38px;
+    color: #03899c;
+}
+
+@media only screen and (max-width: 600px) {
+    img {
+        display: none;
+    }
+    .giohang_item .col-3{
+        display: none !important;
+    }
+}

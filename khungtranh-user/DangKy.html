@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Đăng ký | khungtranh.vn
+    </title>
+    <!-- Java Script -->
+    <script src="./js/jquery-3.3.1.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/lightbox.js"></script>
+    <script src="./js/script.js"></script>
+
+    <!-- Style CSS -->
+    <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    
+
+    <link rel="stylesheet" href="./css/lightbox.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dangky.css">
+    <script defer src="fontawesome/svg-with-js/js/fontawesome-all.js"></script>
+</head>
+
+<body>
+    <!-- nav bar -->
+    <div class="container-fluid justify-content-start flex-row d-flex" id="header">
+        <nav class="navbar navbar-expand-lg navbar-dark container-fluid" style="background-color: #333;">
+            <a class="navbar-brand" href="./index.html">khungtranh.vn</a>
+            <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation"></button>
+            <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavId">
+                <ul class="navbar-nav mt-2 mt-lg-0">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="./index.html">Trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./DatHang.html">Đặt hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./SanPham.html">Sản phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./LienHe.html">Liên hệ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./DangNhap.html">Đăng nhập</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+
+    <main class="pb-5 mb-5 justify-content-center align-items-center d-flex">
+        <div class="container flex-row d-flex justify-content-center">
+            <div class="col-md-5 pt-4 align-self-center dangky">
+                <h3 class="text-center">Đăng ký tài khoản</h3>
+                <hr>
+                <form>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Họ và tên</label>
+                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Họ và tên" required>
+                        </div>
+                        
+                        <div class="form-group">
+                                <label for="exampleInputEmail1">Nhập địa chỉ email</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="name@example.com" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Mật khẩu</label>
+                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                                <label for="exampleInputPassword1">Nhập lại mật khẩu</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <div class="form-group form-check">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                          <label class="form-check-label" for="exampleCheck1">Đồng ý với chính sách và bảo mật</label>
+                        </div>
+                        <button type="submit" style="width:100%" class="btn btn-success">Đăng ký tài khoản</button>
+                        <button type="submit" style="width:100%" class="btn btn-danger mt-1"><i class="fab fa-google"></i> 
+                            Đăng nhập với Google</button>
+                        <button type="submit" style="width:100%" class="btn btn-primary mt-1"> 
+                            <i class="fab fa-facebook"></i>    
+                            Đăng nhập với Facebook</button>
+                        <hr>
+                </form>
+                <p class="text-center">Đã có tài khoản? <a href="./DangNhap.html">Đăng Nhập</a></p>
+            </div>
+        </div>
+    </main>
+
+
+    <footer>
+        <div class="container mb-4">
+            <div class="row mt-3">
+                <div class="col-md-6 col-sm-12  text-left">
+                    <h5>Xưởng khung tranh khungtranh.vn</h5>
+                    <p>
+                        <i class="fas fa-phone"></i> (+84) 1228759002</p>
+                    <p>
+                        <i class="far fa-envelope"></i> lienhe@khungtranh.vn</p>
+                    <p>
+                        <i class="fas fa-map-marker"></i> 227 Nguyễn Văn Cừ, phường 4 Quận 5, TP. Hồ Chí Minh</p>
+                </div>
+
+                <div class="col-md-6 col-sm-12 text-left" id="followus">
+                    <h5>Follow us on</h5>
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-twitter-square"></i>
+                    <i class="fab fa-skype"></i>
+                </div>
+            </div>
+        </div>
+
+        <p>Copyright &copy; 2018, All Rights Reserved</p>
+    </footer>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+</body>
+
+</html>
