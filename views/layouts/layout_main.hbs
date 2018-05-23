@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,22 +13,23 @@
     <link href='https://fonts.googleapis.com/css?family=Signika' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-   
+
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/jquery-ui.css">
     <script defer src="fontawesome/svg-with-js/js/fontawesome-all.js"></script>
-        <!-- Java Script -->
-        <script src="/js/jquery-3.3.1.min.js"></script>
-        <script src="/js/script.js"></script>
+    <!-- Java Script -->
+    <script src="/js/handlebars-v4.0.11.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/script.js"></script>
     <script src="js/jquery-ui.js"></script>
-    
+
 </head>
+
 <body>
-    {{> header}}
-    {{{ body }}}
-    {{> footer}}
+    {{> header}} {{{ body }}} {{> footer}}
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/popper.min.js"></script>
 </body>
+
 </html>
