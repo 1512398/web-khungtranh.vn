@@ -1,0 +1,23 @@
+{
+  "name": "web-khungtranh.vn",
+  "version": "1.0.0",
+  "description": "FinalProjectPTUDW15CNTN",
+  "main": "index.js",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1512398/web-khungtranh.vn.git"
+  },
+  "author": "1512159-HoangTrungHieu 1512398-DoThanhPhong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1512398/web-khungtranh.vn/issues"
+  },
+  "homepage": "https://github.com/1512398/web-khungtranh.vn#readme"
+}
