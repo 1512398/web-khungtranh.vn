@@ -14,9 +14,42 @@ module.exports = function (app, passport) {
     app.get('/DatHang', function(req, res){
         res.render('DatHang');
     })
+
+    app.get('/ThanhToan', function(req, res){
+        res.render('ThanhToan');
+    })
     
     app.get('/SanPham', function(req, res){
         res.render('SanPham');
+    })
+
+    app.post('/payment', function(req, res){
+        const  create_payment_json = {
+            "intent": "sale",
+            "payer": {
+                "payment_method": "paypal"
+            },
+            "redirect_urls": {
+                "return_url": "http://localhost:5000/success",
+                "cancel_url": "http://localhost:5000/cancle"
+            },
+            "transactions": [{
+                "item_list": {
+                    "items": [{
+                        "name": "item",
+                        "sku": "item",
+                        "price": "1.00",
+                        "currency": "USD",
+                        "quantity": 1
+                    }]
+                },
+                "amount": {
+                    "currency": "USD",
+                    "total": "1.00"
+                },
+                "description": "This is the payment description."
+            }]
+        };
     })
     
     app.get('/DangKy', function (req, res) {

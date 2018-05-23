@@ -48,7 +48,7 @@ app.use(passport.session()); // persistent login sessions
 var flash    = require('connect-flash');
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-///===== Sync database =====
+//===== Sync database =====
 //Prepare database
 
 var models = require('./models');
@@ -62,6 +62,14 @@ app.get('/sync', function(req, res){
 var user = require('./models/user')
 console.log(models.User)
 require('./config/passport.js')(passport, models.User);
+
+//===== Paypal ======
+var paypal = require('paypal-rest-sdk');
+paypal.configure({
+    'mode': 'sandbox', //sandbox or live
+    'client_id': 'AadTle1CigTgjx1qEONv_JwQyHQ7yuexLicGX_wlTT32CzrVMUmZnwQMJ1H_tuUU8EV7RT4MpZZeAlKD',
+    'client_secret': 'EHJFYLAlXgZgMnuE-Ownw2bvVZf3nG0sPIl9evhCYJS9mbcw0s545CqOc5U0mJEunj1AnwwaaiNHMvoZ'
+  });
 
 
 // Define your routes
