@@ -1,36 +1,37 @@
-module.exports = function (app, passport,paypal) {
-    app.get('/', function(req, res){
+module.exports = function (app, passport, paypal, onepayDom) {
+
+    app.get('/', function (req, res) {
         res.render('index');
     })
-    
-    app.get('/index', function(req, res){
+
+    app.get('/index', function (req, res) {
         res.redirect('/');
     })
-    
-    app.get('/LienHe', function(req, res){
+
+    app.get('/LienHe', function (req, res) {
         res.render('LienHe');
     })
-    
-    app.get('/DatHang', function(req, res){
+
+    app.get('/DatHang', function (req, res) {
         res.render('DatHang');
     })
 
-    app.get('/ThanhToan', function(req, res){
+    app.get('/ThanhToan', function (req, res) {
         res.render('ThanhToan');
     })
-    
-    app.get('/SanPham', function(req, res){
+
+    app.get('/SanPham', function (req, res) {
         res.render('SanPham');
     })
-
-    app.post('/pay', function(req, res){
-        const  create_payment_json = {
+    // Paypal 
+    app.post('/paypal', function (req, res) {
+        const create_payment_json = {
             "intent": "sale",
             "payer": {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "http://localhost:5000/success",
+                "return_url": "http://localhost:5000/paypalsuccess",
                 "cancel_url": "http://localhost:5000/cancle"
             },
             "transactions": [{
@@ -39,7 +40,7 @@ module.exports = function (app, passport,paypal) {
                         "name": "item",
                         "sku": "item",
                         "price": "1.00",
-                        "currency": "USD",
+                        "currency": "VND",
                         "quantity": 1
                     }]
                 },
@@ -54,8 +55,8 @@ module.exports = function (app, passport,paypal) {
             if (error) {
                 throw error;
             } else {
-                for(let i = 0;i<payment.links.length;i++){
-                    if(payment.links[i].rel === 'approval_url'){
+                for (let i = 0; i < payment.links.length; i++) {
+                    if (payment.links[i].rel === 'approval_url') {
                         res.redirect(payment.links[i].href);
                     }
 
@@ -64,7 +65,7 @@ module.exports = function (app, passport,paypal) {
         });
     });
 
-    app.get('/success',function(req,res){
+    app.get('/paypalsuccess', function (req, res) {
         const payerId = req.query.PayerID;
         const paymentId = req.query.paymentId;
         var execute_payment_json = {
@@ -86,10 +87,94 @@ module.exports = function (app, passport,paypal) {
             }
         });
     });
-    
-    app.get('/cancle',function(req,res){
+
+    app.get('/cancle', function (req, res) {
         res.send('cancled!')
     })
+
+    app.post('/payment/checkout', (req, res) => {
+        const params = Object.assign({}, req.body);
+
+        const clientIp =
+            req.headers['x-forwarded-for'] ||
+            req.connection.remoteAddress ||
+            req.socket.remoteAddress ||
+            (req.connection.socket ? req.connection.socket.remoteAddress : null);
+
+        const amount = parseInt('200000'.replace(/,/g, ''), 10);
+        const now = new Date();
+
+        // NOTE: only set the common required fields and optional fields from all gateways here, redundant fields will invalidate the payload schema checker
+        const checkoutData = {
+            amount,
+            clientIp: clientIp.length > 15 ? '127.0.0.1' : clientIp,
+            locale: 'vn',
+            billingCity: params.billingCity || '',
+            billingPostCode: params.billingPostCode || '',
+            billingStateProvince: params.billingStateProvince || '',
+            billingStreet: params.billingStreet || '',
+            billingCountry: params.billingCountry || '',
+            deliveryAddress: params.billingStreet || '',
+            deliveryCity: params.billingCity || '',
+            deliveryCountry: params.billingCountry || '',
+            currency: 'VND',
+            deliveryProvince: params.billingStateProvince || '',
+            customerEmail: params.email,
+            customerPhone: params.phoneNumber,
+            orderId: `node-${now.toISOString()}`,
+            // returnUrl: ,
+            transactionId: `node-${now.toISOString()}`, // same as orderId (we don't have retry mechanism)
+            customerId: params.email,
+        };
+
+        // pass checkoutData to gateway middleware via res.locals
+        res.locals.checkoutData = checkoutData;
+
+        // Note: these handler are asynchronous
+        let asyncCheckout = null;
+        OnePayDomestic = require('./onepay-handlers')
+        asyncCheckout = OnePayDomestic.checkoutOnePayDomestic(req, res);
+
+        if (asyncCheckout) {
+            asyncCheckout
+                .then(checkoutUrl => {
+                    res.writeHead(301, { Location: checkoutUrl.href });
+                    res.end();
+                })
+                .catch(err => {
+                    res.send(err);
+                });
+        } else {
+            res.send('Payment method not found');
+        }
+    });
+
+    app.get('/payment/onepaydom/callback', (req, res) => {
+        let asyncFunc = null;
+
+
+        asyncFunc = OnePayDomestic.callbackOnePayDomestic(req, res);
+
+        if (asyncFunc) {
+            asyncFunc.then(() => {
+                res.send({
+                    title: 'ABCD',
+                    isSucceed: res.locals.isSucceed,
+                    email: res.locals.email,
+                    orderId: res.locals.orderId,
+                    price: res.locals.price,
+                    message: res.locals.message,
+                    billingStreet: res.locals.billingStreet,
+                    billingCountry: res.locals.billingCountry,
+                    billingCity: res.locals.billingCity,
+                    billingStateProvince: res.locals.billingStateProvince,
+                    billingPostalCode: res.locals.billingPostalCode,
+                });
+            });
+        } else {
+            res.send('No callback found');
+        }
+    });
 
     app.get('/DangKy', function (req, res) {
         // render the page and pass in any flash data if it exists
@@ -130,15 +215,15 @@ module.exports = function (app, passport,paypal) {
             failureRedirect: '/'
         }));
 
-    app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+    app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
     // the callback after google has authenticated the user
     app.get('/auth/google/callback',
-            passport.authenticate('google', {
-                    successRedirect : '/profile',
-                    failureRedirect : '/'
-            }));
-    
+        passport.authenticate('google', {
+            successRedirect: '/profile',
+            failureRedirect: '/'
+        }));
+
 
     app.get('/profile', isLoggedIn, function (req, res) {
         res.send('Wellcome :) ')

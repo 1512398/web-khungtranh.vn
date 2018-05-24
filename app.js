@@ -79,16 +79,16 @@ const { VNPay } = require('vn-payments');
 const { SohaPay } = require('vn-payments');
 const { NganLuong } = require('vn-payments')
 
-const onepayIntl = new OnePayInternational({
-    paymentGateway: 'https://mtf.onepay.vn/vpcpay/vpcpay.op',
-    merchant: 'ONEPAY',
-    accessCode: 'D67342C2',
-    secureSecret: 'A3EFDFABA8653DF2342E8DAC29B51AF0'
-  });
+const onepayDom = new OnePayDomestic({
+	paymentGateway: 'https://mtf.onepay.vn/onecomm-pay/vpc.op',
+	merchant: 'ONEPAY',
+	accessCode: 'D67342C2',
+	secureSecret: 'A3EFDFABA8653DF2342E8DAC29B51AF0',
+});
 
 
 // Define your routes
-require('./routes/routes.js')(app, passport, paypal);
+require('./routes/routes.js')(app, passport, paypal,onepayDom);
 
 
 // Set Server Port & Start Server
