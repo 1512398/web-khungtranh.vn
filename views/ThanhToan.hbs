@@ -4,7 +4,7 @@
 
         <div class="row">
 
-            <div class="col-md-9">
+            <div class="col-lg-9">
                 <!--  Thong tin giao hang -->
                 <div class="ThongTinGiaoHang p-3 mt-2">
 
@@ -65,27 +65,29 @@
                 </div>
 
                 <!-- Thong tin thanh toan -->
-                <div class="ThongTinThanhToan p-3 mt-2">
-                    <h4 class=" font-weight-bold">Thông tin thanh toán</h4>
-                    <ul class="nav nav-tabs nav-justified">
-                        <li class="active text-center">
+                <div class="ThongTinThanhToan mt-2 p-3">
+                    <div class="m-3">
+                        <h4 class="font-weight-bold">Thông tin thanh toán</h4>
+                    </div>
+                    <ul class="nav nav-tabs nav-justified row p-3 pb-0">
+                        <li class="active text-center col-sm-12 col-lg-4 m-0">
                             <a data-toggle="tab" href="#home">
                                 <i class="fas fa-money-bill-alt thanhtoan_icon"></i>
                                 <br> Thanh toán khi nhận hàng</a>
                         </li>
-                        <li class="text-center">
+                        <li class="text-center col-sm-12 col-lg-4 m-0">
                             <a data-toggle="tab" href="#menu1">
-                                <i class="far fa-credit-card thanhtoan_icon"></i>
-                                <br> Thẻ tín dụng/Thẻ ghi nợ</a>
+                                <i class="fab fa-paypal thanhtoan_icon"></i>
+                                <br> Thanh toán với Paypal</a>
                         </li>
-                        <li class="text-center" href="#menu2">
+                        <li class="text-center col-sm-12 col-lg-4 m-0" href="#menu2">
                             <a data-toggle="tab" href="#menu2">
                                 <i class="far fa-address-card thanhtoan_icon"></i>
                                 <br> Thẻ ATM nội địa</a>
                         </li>
                     </ul>
 
-                    <div class="tab-content p-0 pl-1 pr-2">
+                    <div class="tab-content p-0">
                         <div id="home" class="tab-pane fade in active">
                             <h3>Thanh toán khi nhận hàng</h3>
                             <p>Bạn có thể thanh toán bằng tiền mặt khi nhận hàng tại nhà</p>
@@ -95,15 +97,20 @@
                         </div>
                         <div id="menu1" class="tab-pane fade">
                             <div class="row">
-                                <div class="col-md-9">
-                                    <h3>Thẻ tín dụng/Thẻ ghi nợ</h3>
+                                <div class="col-md-12">
+                                    {{!-- <h3>Thẻ tín dụng/Thẻ ghi nợ</h3> --}}
+                                    <h3>Thanh toán với Paypal</h3>
                                     <div style="font-size:2em">
                                         <i class="fab fa-cc-mastercard"></i>
                                         <i class="fab fa-cc-visa"></i>
                                         <i class="fab fa-cc-jcb"></i>
                                     </div>
-                                    <br>
-                                    <label for="validationCustom02">Số thẻ</label>
+                                    <div style="width:100%">
+                                        <p class=" text-justify" style="width:100%">Với Paypal, nay bạn có thể mua sắm và thanh toán trực tuyến an toàn, dễ dàng và nhanh chóng hơn nhiều tại tất cả các cửa hàng mình yêu thích</p>
+                                    
+                                    </div>
+                        
+                                    {{!-- <label for="validationCustom02">Số thẻ</label>
                                     <input type="number" class="form-control" id="validationCustom02" placeholder="Số thẻ" required>
 
                                     <label for="validationCustom02" class="mt-3">Tên trên thẻ</label>
@@ -119,13 +126,16 @@
                                             <label for="validationCustom03">CVV</label>
                                             <input type="text" class="form-control" id="validationCustom03" placeholder="CVV" required>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
-                                <a style="width:200px; margin: 10px auto" href="./TinhTrangDonHang.html" name="" id="" class="btn btn-danger btn-lg btn-block"
+                                {{!-- <a style="width:200px; margin: 10px auto" href="./TinhTrangDonHang.html" name="" id="" class="btn btn-danger btn-lg btn-block"
                                     href="./TinhTrangDonHang.html">
                                     Thanh toán ngay
-                                </a>
+                                </a> --}}
                             </div>
+                             <form action="/pay" method="POST" >
+                                    <input type="submit" value="Thanh toán ngay" class="btn btn-danger btn-lg btn-block" style="width:200px; margin: 10px auto">
+                                </form>
                         </div>
                         <div id="menu2" class="tab-pane fade">
                             <h3>Thẻ ATM nội địa</h3>
@@ -149,10 +159,9 @@
             </div>
 
             <!-- Thanh toan don hang -->
-            <div class="col-md-3 pb-5 pt-2 mt-2 thanhtoandonhang">
+            <div class="col-lg-3 pb-5 pt-2 mt-2 thanhtoandonhang">
                 <h4>Chỉnh sửa đơn hàng</h4>
-
-                <a style="margin: 0 auto" href="./GioHang.html" name="" id="" class="btn btn-secondary btn-lg btn-block">
+                    <a style="margin: 0 auto" href="./GioHang.html" name="" id="" class="btn btn-secondary btn-lg"> 
                     Quay lại chỉnh sửa
                 </a>
 

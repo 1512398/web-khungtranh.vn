@@ -72,8 +72,23 @@ paypal.configure({
   });
 
 
+//===== Cong thanh toan Vietnam =====
+const { OnePayDomestic } = require('vn-payments');
+const { OnePayInternational } = require('vn-payments');
+const { VNPay } = require('vn-payments');
+const { SohaPay } = require('vn-payments');
+const { NganLuong } = require('vn-payments')
+
+const onepayIntl = new OnePayInternational({
+    paymentGateway: 'https://mtf.onepay.vn/vpcpay/vpcpay.op',
+    merchant: 'ONEPAY',
+    accessCode: 'D67342C2',
+    secureSecret: 'A3EFDFABA8653DF2342E8DAC29B51AF0'
+  });
+
+
 // Define your routes
-require('./routes/routes.js')(app, passport);
+require('./routes/routes.js')(app, passport, paypal);
 
 
 // Set Server Port & Start Server
