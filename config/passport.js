@@ -43,7 +43,7 @@ module.exports = function (passport, user) {
                 return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
             };
 
-            User.findOne(
+            User.findOne( 
                 { where: { email: email } }).then(function (user) {
 
                     if (user) {
@@ -55,6 +55,8 @@ module.exports = function (passport, user) {
                         var data =
                             {
                                 email: email,
+                                phoneNum: req.body.phoneNum,
+                                address: req.body.address,
                                 password: userPassword,
                                 fullName: req.body.fullname,
                             };
@@ -200,6 +202,7 @@ module.exports = function (passport, user) {
                     return done(null, false, req.flash('signinMessage', 'Email đăng nhập không đúng'));
                 }
 
+                
                 if (!isValidPassword(user.password, password)) {
 
                     return done(null, false, req.flash('signinMessage', 'Mật khẩu không đúng'));
@@ -224,6 +227,8 @@ module.exports = function (passport, user) {
 
 };
 
+// function isValidPassword  (userpass, password) {
+//     return bCrypt.compareSync(password, userpass);
+// };
 
-
-
+// module.exports = isValidPassword;

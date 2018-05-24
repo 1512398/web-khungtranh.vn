@@ -4,6 +4,8 @@ module.exports = (sequelize, DataTypes) => {
       fullName: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
+      address: DataTypes.STRING,
+      phoneNum: DataTypes.STRING,    
       facebook_email:DataTypes.STRING,
       facebook_name:DataTypes.STRING,
       facebook_id:DataTypes.STRING,

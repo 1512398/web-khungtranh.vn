@@ -60,7 +60,6 @@ app.get('/sync', function(req, res){
 
 //load passport strategies
 var user = require('./models/user')
-console.log(models.User)
 require('./config/passport.js')(passport, models.User);
 
 //===== Paypal ======
@@ -74,10 +73,6 @@ paypal.configure({
 
 //===== Cong thanh toan Vietnam =====
 const { OnePayDomestic } = require('vn-payments');
-const { OnePayInternational } = require('vn-payments');
-const { VNPay } = require('vn-payments');
-const { SohaPay } = require('vn-payments');
-const { NganLuong } = require('vn-payments')
 
 const onepayDom = new OnePayDomestic({
 	paymentGateway: 'https://mtf.onepay.vn/onecomm-pay/vpc.op',
@@ -88,8 +83,10 @@ const onepayDom = new OnePayDomestic({
 
 
 // Define your routes
-require('./routes/routes.js')(app, passport, paypal,onepayDom);
-
+require('./routes/routes.js')(app, passport);
+require('./routes/payment.js')(app,paypal,onepayDom);
+var profile = require('./routes/profile.js');
+app.use('/CapNhatThongTin',profile)
 
 // Set Server Port & Start Server
 app.set('port', (process.env.PORT || 5000));
