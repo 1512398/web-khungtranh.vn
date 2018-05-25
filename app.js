@@ -27,7 +27,12 @@ hbs.handlebars.registerHelper('notEmpty',function(text){
     else
         return false;
 });
-
+hbs.handlebars.registerHelper('linebreak',function(i){
+	return (i%3) == 0;
+})
+hbs.handlebars.registerHelper('linebreakclose',function(i){
+	return ((i+1)%3) == 0;
+})
 //Public folder
 app.use(express.static(__dirname + '/public'));
 
@@ -87,6 +92,9 @@ require('./routes/routes.js')(app, passport);
 require('./routes/payment.js')(app,paypal,onepayDom);
 var profile = require('./routes/profile.js');
 app.use('/CapNhatThongTin',profile)
+
+var products = require('./routes/product.js');
+app.use('/SanPham',products);
 
 // Set Server Port & Start Server
 app.set('port', (process.env.PORT || 5000));

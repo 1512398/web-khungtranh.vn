@@ -20,10 +20,6 @@ module.exports = function (app, passport) {
         res.render('ThanhToan');
     })
 
-    app.get('/SanPham', function (req, res) {
-        res.render('SanPham');
-    })
-
     app.get('/DangKy', function (req, res) {
         // render the page and pass in any flash data if it exists
         res.render('DangKy', { message: req.flash('signupMessage') });

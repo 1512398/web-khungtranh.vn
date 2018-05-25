@@ -1,187 +1,180 @@
+<link rel="stylesheet" href="./css/sanpham.css">
 <main class="pb-5 mb-5">
         <div class="container">
-                
+
                 <div class="row">
                         <div class="col-md-3 pl-0 mr-3">
-                            <div class="navMatHang">
-                                    <h4>Danh mục</h4>
-                                    <ul class="nav flex-column">
-                                            <li class="nav-item">
-                                              <a class="nav-link active" href="#">Khung gỗ cổ điển</a>
-                                            </li>
-                                            <li class="nav-item">
-                                              <a class="nav-link" href="#">Khung gỗ hiện đại</a>
-                                            </li>
-                                            <li class="nav-item">
-                                              <a class="nav-link" href="#">Khung composite cổ điển</a>
-                                            </li>
-                                            <li class="nav-item">
-                                              <a class="nav-link" href="#">Khung composite hiện đại</a>
-                                            </li>
-                                            <li class="nav-item">
-                                              <a class="nav-link" href="#">Khung tranh làm sẵn</a>
-                                            </li>
-                                          </ul>
-                            </div>
+                                <div class="navMatHang">
+                                        <h4>Danh mục</h4>
+                                        <ul class="nav flex-column">
+                                                <li class="nav-item">
+                                                        <a class="nav-link active" href="#">Khung gỗ cổ điển</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                        <a class="nav-link" href="#">Khung gỗ hiện đại</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                        <a class="nav-link" href="#">Khung composite cổ điển</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                        <a class="nav-link" href="#">Khung composite hiện đại</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                        <a class="nav-link" href="#">Khung tranh làm sẵn</a>
+                                                </li>
+                                        </ul>
+                                </div>
                         </div>
                         <div class="col-md-9 d-flex card-deck mathanglist">
-                                <nav aria-label="breadcrumb" style="width:100%">
-                                        <ol class="breadcrumb">
-                                          <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
-                                          <li class="breadcrumb-item"><a href="#">Khung gỗ</a></li>
-                                          <li class="breadcrumb-item active" aria-current="page">Khung gỗ cổ điển</li>
+                                <div class="row p-0" style="width:100%">
+                                        <nav aria-label="breadcrumb" style="width:100%" class="pl-1">
+                                        <ol class="breadcrumb" style="width:100%">
+                                                <li class="breadcrumb-item">
+                                                        <a href="#">Danh mục</a>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                        <a href="#">Khung gỗ</a>
+                                                </li>
+                                                <li class="breadcrumb-item active" aria-current="page">Khung gỗ cổ điển</li>
                                         </ol>
                                 </nav>
-                                <div class="row" style="width:120%">
-                                        <div class="col-md-6">
+                                </div>
+                                <div class="row p-0" style="width:120%">
+                                        <div class="col-md-6 pl-1">
                                                 <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
                                                 <div class="input-group mb-2 mr-sm-2">
-                                                  <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <a href=""><i class="fas fa-search"></i></a>
+                                                        <div class="input-group-prepend">
+                                                                <div class="input-group-text">
+                                                                        <a href="">
+                                                                                <i class="fas fa-search"></i>
+                                                                        </a>
+                                                                </div>
                                                         </div>
-                                                  </div>
-                                                  <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Nhập nội dung tìm kiếm">
+                                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Nhập nội dung tìm kiếm">
                                                 </div>
                                         </div>
-                                       
-                                        <div class="col-md-6">
+
+                                        <div class="col-md-6 pr-1">
                                                 <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
                                                 <div class="input-group mb-2 mr-sm-2">
-                                                  <div class="input-group-prepend">
-                                                    <div class="input-group-text"><i class="fas fa-sort-amount-down"></i></div>
+                                                        <div class="input-group-prepend">
+                                                                <div class="input-group-text">
+                                                                        <i class="fas fa-sort-amount-down"></i>
+                                                                </div>
+                                                        </div>
+                                                        <select class="custom-select " id="inlineFormCustomSelectPref">
+                                                                <option selected>Sắp xếp sản phẩm...</option>
+                                                                <option value="1">Giá tăng dần</option>
+                                                                <option value="2">Giá giảm dần</option>
+                                                                <option value="3">Đánh giá tăng dần</option>
+                                                                <option value="3">Đánh giá giảm dần</option>
+                                                        </select>
                                                 </div>
-                                                <select class="custom-select " id="inlineFormCustomSelectPref">
-                                                        <option selected>Sắp xếp sản phẩm...</option>
-                                                        <option value="1">Giá tăng dần</option>
-                                                        <option value="2">Giá giảm dần</option>
-                                                        <option value="3">Đánh giá tăng dần</option>
-                                                        <option value="3">Đánh giá giảm dần</option>
-                                                      </select>  
-                                                </div>
-                                                
+
                                         </div>
+                                </div>
+                                <div>
+
                                 </div>
                                 <!-- First row -->
-                                <div class="card-deck">
-                                        <div class="card" style="width: 18rem "> 
-                                                <img class="card-img-top" src="./img/thumb_ktranh1.jpg" alt="Card image cap">
-                                                <div class="card-body">
-                                                  <h5 class="card-title">Khung tranh Composite đen trơn</h5>
-                                                  <p class="card-text">Mã hàng: F5D x 3cm</p>
-                                                  <p class="card-text">Chất liệu: Composite trơn bóng</p>
-                                                  <p class="card-text">Giá bán: <span class="badge badge-dark" >120.000đ</span></p>
-                                                  <p class="card-text">Đánh giá:
-                                                    <span class="badge badge-secondary" >
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>    
-                                                    </span>
-                                                    <span class="d-inline-block"> (20)</span>
-                                                    
-                                                </p> 
+                                <div>
+                                        {{#each itemslist.Items}} 
+                                        {{#if (linebreak @index)}}
+                                        <div class="card-deck mb-2">
+                                        {{/if}}
+                                                <div class="card m-1    " style="width: 18rem ">
+                                                        <img class="card-img-top" src="{{itemImg}}" alt="Card image cap">
+                                                        <div class="card-body">
+                                                                <h5 class="card-title">{{itemName}}</h5>
+                                                                <p class="card-text">Mã hàng: {{itemId}}</p>
+                                                                <p class="card-text">Chất liệu: {{itemMaterial}}</p>
+                                                                <p class="card-text">Giá bán:
+                                                                        <span class="badge badge-dark">{{itemPrice}}</span>
+                                                                </p>
+                                                                <p class="card-text">Đánh giá:
+                                                                        <span class="badge badge-secondary">
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                                <i class="fas fa-star"></i>
+                                                                        </span>
+                                                                        <span class="d-inline-block"> {{itemCountVotes}}</span>
+
+                                                                </p>
+                                                        </div>
                                                 </div>
+                                        {{#if (linebreakclose @index)}}
                                         </div>
-                                        <div class="card" style="width: 18rem;">
-                                                <img class="card-img-top" src="./img/thumb_ktranh1.jpg" alt="Card image cap">
-                                                <div class="card-body">
-                                                  <h5 class="card-title">Khung tranh Composite đen trơn</h5>
-                                                  <p class="card-text">Mã hàng: F5D x 3cm</p>
-                                                  <p class="card-text">Chất liệu: Composite trơn bóng</p>
-                                                  <p class="card-text">Giá bán: <span class="badge badge-dark" >120.000đ</span></p>
-                                                  <p class="card-text">Đánh giá:
-                                                    <span class="badge badge-secondary" >
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>    
-                                                    </span>
-                                                    <span class="d-inline-block"> (20)</span>
-                                                </p> 
-                                                </div>
-                                        </div>
-        
-                                        <div class="card" style="width: 18rem;">
-                                                <img class="card-img-top" src="./img/thumb_ktranh1.jpg" alt="Card image cap">
-                                                <div class="card-body">
-                                                  <h5 class="card-title">Khung tranh Composite đen trơn</h5>
-                                                  <p class="card-text">Mã hàng: F5D x 3cm</p>
-                                                  <p class="card-text">Chất liệu: Composite trơn bóng</p>
-                                                  <p class="card-text">Giá bán: <span class="badge badge-dark" >120.000đ</span></p>
-                                                  <p class="card-text">Đánh giá:
-                                                    <span class="badge badge-secondary" >
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>    
-                                                    </span>
-                                                    <span class="d-inline-block"> (20)</span>
-                                                </p> 
-                                                </div>
-                                        </div>
+                                        {{/if}}
+                                        {{/each}}
                                 </div>
+
+                                        {{!-- </div> --}} {{!--
                                 <!-- Second row -->
                                 <div class="card-deck pt-3">
                                         <div class="card" style="width: 18rem;">
                                                 <img class="card-img-top" src="./img/thumb_ktranh1.jpg" alt="Card image cap">
                                                 <div class="card-body">
-                                                  <h5 class="card-title">Khung tranh Composite đen trơn</h5>
-                                                  <p class="card-text">Mã hàng: F5D x 3cm</p>
-                                                  <p class="card-text">Chất liệu: Composite trơn bóng</p>
-                                                  <p class="card-text">Giá bán: <span class="badge badge-dark" >120.000đ</span></p>
-                                                  <p class="card-text">Đánh giá:
-                                                    <span class="badge badge-secondary" >
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>    
-                                                    </span>
-                                                    <span class="d-inline-block"> (20)</span>
-                                                </p> 
+                                                        <h5 class="card-title">Khung tranh Composite đen trơn</h5>
+                                                        <p class="card-text">Mã hàng: F5D x 3cm</p>
+                                                        <p class="card-text">Chất liệu: Composite trơn bóng</p>
+                                                        <p class="card-text">Giá bán:
+                                                                <span class="badge badge-dark">120.000đ</span>
+                                                        </p>
+                                                        <p class="card-text">Đánh giá:
+                                                                <span class="badge badge-secondary">
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                </span>
+                                                                <span class="d-inline-block"> (20)</span>
+                                                        </p>
                                                 </div>
                                         </div>
                                         <div class="card" style="width: 18rem;">
                                                 <img class="card-img-top" src="./img/thumb_ktranh1.jpg" alt="Card image cap">
                                                 <div class="card-body">
-                                                  <h5 class="card-title">Khung tranh Composite đen trơn</h5>
-                                                  <p class="card-text">Mã hàng: F5D x 3cm</p>
-                                                  <p class="card-text">Chất liệu: Composite trơn bóng</p>
-                                                  <p class="card-text">Giá bán: <span class="badge badge-dark" >120.000đ</span></p>
-                                                  <p class="card-text">Đánh giá:
-                                                    <span class="badge badge-secondary" >
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>    
-                                                    </span>
-                                                    <span class="d-inline-block"> (20)</span>
-                                                </p> 
+                                                        <h5 class="card-title">Khung tranh Composite đen trơn</h5>
+                                                        <p class="card-text">Mã hàng: F5D x 3cm</p>
+                                                        <p class="card-text">Chất liệu: Composite trơn bóng</p>
+                                                        <p class="card-text">Giá bán:
+                                                                <span class="badge badge-dark">120.000đ</span>
+                                                        </p>
+                                                        <p class="card-text">Đánh giá:
+                                                                <span class="badge badge-secondary">
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                </span>
+                                                                <span class="d-inline-block"> (20)</span>
+                                                        </p>
                                                 </div>
                                         </div>
-        
+
                                         <div class="card" style="width: 18rem;">
                                                 <img class="card-img-top" src="./img/thumb_ktranh1.jpg" alt="Card image cap">
                                                 <div class="card-body">
-                                                  <h5 class="card-title">Khung tranh Composite đen trơn</h5>
-                                                  <p class="card-text">Mã hàng: F5D x 3cm</p>
-                                                  <p class="card-text">Chất liệu: Composite trơn bóng</p>
-                                                  <p class="card-text">Giá bán: <span class="badge badge-dark" >120.000đ</span></p>
-                                                  <p class="card-text">Đánh giá:
-                                                    <span class="badge badge-secondary" >
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>    
-                                                    </span>
-                                                    <span class="d-inline-block"> (20)</span>
-                                                </p> 
+                                                        <h5 class="card-title">Khung tranh Composite đen trơn</h5>
+                                                        <p class="card-text">Mã hàng: F5D x 3cm</p>
+                                                        <p class="card-text">Chất liệu: Composite trơn bóng</p>
+                                                        <p class="card-text">Giá bán:
+                                                                <span class="badge badge-dark">120.000đ</span>
+                                                        </p>
+                                                        <p class="card-text">Đánh giá:
+                                                                <span class="badge badge-secondary">
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                </span>
+                                                                <span class="d-inline-block"> (20)</span>
+                                                        </p>
                                                 </div>
                                         </div>
                                 </div>
@@ -190,59 +183,65 @@
                                         <div class="card abc" style="width: 18rem;">
                                                 <img class="card-img-top" src="./img/thumb_ktranh1.jpg" alt="Card image cap">
                                                 <div class="card-body">
-                                                  <h5 class="card-title">Khung tranh Composite đen trơn</h5>
-                                                  <p class="card-text">Mã hàng: F5D x 3cm</p>
-                                                  <p class="card-text">Chất liệu: Composite trơn bóng</p>
-                                                  <p class="card-text">Giá bán: <span class="badge badge-dark" >120.000đ</span></p>
-                                                  <p class="card-text">Đánh giá:
-                                                    <span class="badge badge-secondary" >
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>    
-                                                    </span>
-                                                    <span class="d-inline-block"> (20)</span>
-                                                </p> 
+                                                        <h5 class="card-title">Khung tranh Composite đen trơn</h5>
+                                                        <p class="card-text">Mã hàng: F5D x 3cm</p>
+                                                        <p class="card-text">Chất liệu: Composite trơn bóng</p>
+                                                        <p class="card-text">Giá bán:
+                                                                <span class="badge badge-dark">120.000đ</span>
+                                                        </p>
+                                                        <p class="card-text">Đánh giá:
+                                                                <span class="badge badge-secondary">
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                </span>
+                                                                <span class="d-inline-block"> (20)</span>
+                                                        </p>
                                                 </div>
                                         </div>
                                         <div class="card" style="width: 18rem;">
                                                 <img class="card-img-top" src="./img/thumb_ktranh1.jpg" alt="Card image cap">
                                                 <div class="card-body">
-                                                  <h5 class="card-title">Khung tranh Composite đen trơn</h5>
-                                                  <p class="card-text">Mã hàng: F5D x 3cm</p>
-                                                  <p class="card-text">Chất liệu: Composite trơn bóng</p>
-                                                  <p class="card-text">Giá bán: <span class="badge badge-dark" >120.000đ</span></p>
-                                                  <p class="card-text">Đánh giá:
-                                                    <span class="badge badge-secondary" >
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>    
-                                                    </span>
-                                                    <span class="d-inline-block"> (20)</span>
-                                                </p> 
+                                                        <h5 class="card-title">Khung tranh Composite đen trơn</h5>
+                                                        <p class="card-text">Mã hàng: F5D x 3cm</p>
+                                                        <p class="card-text">Chất liệu: Composite trơn bóng</p>
+                                                        <p class="card-text">Giá bán:
+                                                                <span class="badge badge-dark">120.000đ</span>
+                                                        </p>
+                                                        <p class="card-text">Đánh giá:
+                                                                <span class="badge badge-secondary">
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                </span>
+                                                                <span class="d-inline-block"> (20)</span>
+                                                        </p>
                                                 </div>
                                         </div>
-        
+
                                         <div class="card" style="width: 18rem;">
                                                 <img class="card-img-top" src="./img/thumb_ktranh1.jpg" alt="Card image cap">
                                                 <div class="card-body">
-                                                  <h5 class="card-title">Khung tranh Composite đen trơn</h5>
-                                                  <p class="card-text">Mã hàng: F5D x 3cm</p>
-                                                  <p class="card-text">Chất liệu: Composite trơn bóng</p>
-                                                  <p class="card-text">Giá bán: <span class="badge badge-dark" >120.000đ</span></p>
-                                                  <p class="card-text">Đánh giá:
-                                                    <span class="badge badge-secondary" >
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>    
-                                                    </span>
-                                                    <span class="d-inline-block"> (20)</span>
-                                                </p> 
+                                                        <h5 class="card-title">Khung tranh Composite đen trơn</h5>
+                                                        <p class="card-text">Mã hàng: F5D x 3cm</p>
+                                                        <p class="card-text">Chất liệu: Composite trơn bóng</p>
+                                                        <p class="card-text">Giá bán:
+                                                                <span class="badge badge-dark">120.000đ</span>
+                                                        </p>
+                                                        <p class="card-text">Đánh giá:
+                                                                <span class="badge badge-secondary">
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                </span>
+                                                                <span class="d-inline-block"> (20)</span>
+                                                        </p>
                                                 </div>
                                         </div>
                                 </div>
@@ -251,77 +250,83 @@
                                         <div class="card" style="width: 18rem;">
                                                 <img class="card-img-top" src="./img/thumb_ktranh1.jpg" alt="Card image cap">
                                                 <div class="card-body">
-                                                  <h5 class="card-title">Khung tranh Composite đen trơn</h5>
-                                                  <p class="card-text">Mã hàng: F5D x 3cm</p>
-                                                  <p class="card-text">Chất liệu: Composite trơn bóng</p>
-                                                  <p class="card-text">Giá bán: <span class="badge badge-dark" >120.000đ</span></p>
-                                                  <p class="card-text">Đánh giá:
-                                                    <span class="badge badge-secondary" >
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>    
-                                                    </span>
-                                                    <span class="d-inline-block"> (20)</span>
-                                                </p> 
+                                                        <h5 class="card-title">Khung tranh Composite đen trơn</h5>
+                                                        <p class="card-text">Mã hàng: F5D x 3cm</p>
+                                                        <p class="card-text">Chất liệu: Composite trơn bóng</p>
+                                                        <p class="card-text">Giá bán:
+                                                                <span class="badge badge-dark">120.000đ</span>
+                                                        </p>
+                                                        <p class="card-text">Đánh giá:
+                                                                <span class="badge badge-secondary">
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                </span>
+                                                                <span class="d-inline-block"> (20)</span>
+                                                        </p>
                                                 </div>
                                         </div>
                                         <div class="card" style="width: 18rem;">
                                                 <img class="card-img-top" src="./img/thumb_ktranh1.jpg" alt="Card image cap">
                                                 <div class="card-body">
-                                                  <h5 class="card-title">Khung tranh Composite đen trơn</h5>
-                                                  <p class="card-text">Mã hàng: F5D x 3cm</p>
-                                                  <p class="card-text">Chất liệu: Composite trơn bóng</p>
-                                                  <p class="card-text">Giá bán: <span class="badge badge-dark" >120.000đ</span></p>
-                                                  <p class="card-text">Đánh giá:
-                                                    <span class="badge badge-secondary" >
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>    
-                                                    </span>
-                                                    <span class="d-inline-block"> (20)</span>
-                                                </p> 
+                                                        <h5 class="card-title">Khung tranh Composite đen trơn</h5>
+                                                        <p class="card-text">Mã hàng: F5D x 3cm</p>
+                                                        <p class="card-text">Chất liệu: Composite trơn bóng</p>
+                                                        <p class="card-text">Giá bán:
+                                                                <span class="badge badge-dark">120.000đ</span>
+                                                        </p>
+                                                        <p class="card-text">Đánh giá:
+                                                                <span class="badge badge-secondary">
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                </span>
+                                                                <span class="d-inline-block"> (20)</span>
+                                                        </p>
                                                 </div>
                                         </div>
-        
+
                                         <div class="card" style="width: 18rem;">
                                                 <img class="card-img-top" src="./img/thumb_ktranh1.jpg" alt="Card image cap">
                                                 <div class="card-body">
-                                                  <h5 class="card-title">Khung tranh Composite đen trơn</h5>
-                                                  <p class="card-text">Mã hàng: F5D x 3cm</p>
-                                                  <p class="card-text">Chất liệu: Composite trơn bóng</p>
-                                                  <p class="card-text">Giá bán: <span class="badge badge-dark" >120.000đ</span></p>
-                                                  <p class="card-text">Đánh giá:
-                                                    <span class="badge badge-secondary" >
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>    
-                                                    </span>
-                                                    <span class="d-inline-block"> (20)</span>
-                                                </p> 
+                                                        <h5 class="card-title">Khung tranh Composite đen trơn</h5>
+                                                        <p class="card-text">Mã hàng: F5D x 3cm</p>
+                                                        <p class="card-text">Chất liệu: Composite trơn bóng</p>
+                                                        <p class="card-text">Giá bán:
+                                                                <span class="badge badge-dark">120.000đ</span>
+                                                        </p>
+                                                        <p class="card-text">Đánh giá:
+                                                                <span class="badge badge-secondary">
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                </span>
+                                                                <span class="d-inline-block"> (20)</span>
+                                                        </p>
                                                 </div>
                                         </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="container d-flex justify-content-center pt-3 ">
                                         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                                                 <div class="btn-group text-center" role="group" aria-label="First group">
-                                                  <button type="button" class="btn btn-light">&lt;</button>
-                                                  <button type="button" class="btn btn-light">1</button>
-                                                  <button type="button" class="btn btn-light">2</button>
-                                                  <button type="button" class="btn btn-light">3</button>
-                                                  <button type="button" class="btn btn-light">&gt;</button>
+                                                        <button type="button" class="btn btn-light">&lt;</button>
+                                                        <button type="button" class="btn btn-light">1</button>
+                                                        <button type="button" class="btn btn-light">2</button>
+                                                        <button type="button" class="btn btn-light">3</button>
+                                                        <button type="button" class="btn btn-light">&gt;</button>
                                                 </div>
                                         </div>
                                 </div>
-                            </div>
-                       
-                        
+                        </div>
+
+
                 </div>
         </div>
-    </main>
+</main>
