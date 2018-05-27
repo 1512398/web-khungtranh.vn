@@ -15,7 +15,8 @@ router.get('/', isLoggedIn, function (req, res) {
         req.session.avtImg = '/img/blank_avt.png'
     }
     var avtPath =req.session.avtImg;
-    res.render('CapNhatThongTin', {imgPath:avtPath, user: req.user, message: req.flash('updateProfileMessage'), messageSuccess: req.flash('updateSuccessful') });
+    res.render('CapNhatThongTin', {imgPath:avtPath, user: req.user, message: req.flash('updateProfileMessage'), messageSuccess: req.flash('updateSuccessful'),
+        title: 'Cap nhat thong tin',member: req.isAuthenticated() });
 })
 // Set storage engine
 const multer = require('multer');

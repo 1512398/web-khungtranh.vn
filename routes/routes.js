@@ -1,7 +1,7 @@
 module.exports = function (app, passport) {
 
     app.get('/', function (req, res) {
-        res.render('index');
+        res.render('index',{member: req.isAuthenticated()});
     })
 
     app.get('/index', function (req, res) {
@@ -20,6 +20,10 @@ module.exports = function (app, passport) {
         res.render('ThanhToan');
     })
 
+    app.get('/getprofile',function (req,res) {
+        res.json({name: String(req.user.fullName).replace(/\S* /g,''), avt: req.user.avtImg});
+      })
+
     app.get('/DangKy', function (req, res) {
         // render the page and pass in any flash data if it exists
         res.render('DangKy', { message: req.flash('signupMessage') });
@@ -27,17 +31,10 @@ module.exports = function (app, passport) {
 
     app.get('/DangNhap', function (req, res) {
         res.render('DangNhap', { message: req.flash('signinMessage') });
-        // res.render('DangNhap');
     });
-    // app.post('/DangKy', passport.authenticate('local-signup', {
-    //     successRedirect: '/CapNhatThongTin', // redirect to the secure profile section
-    //     failureRedirect: '/DangKy', // redirect back to the signup page if there is an error
-    //     failureFlash: true // allow flash messages
-    // }));
+
     app.post('/DangKy',
         function(req,res,next){
-            console.log(req.body)
-            console.log('oke')
             captcha = require('./captcha-verify.js');
             captcha(req,res,req.body['g-recaptcha-response'],function(stt){
                 if (stt)
@@ -53,7 +50,7 @@ module.exports = function (app, passport) {
             
         },
         passport.authenticate('local-signup', {
-            successRedirect: '/CapNhatThongTin', // redirect to the secure profile section
+            successRedirect: '/', // redirect to the secure profile section
             failureRedirect: '/DangKy', // redirect back to the signup page if there is an error
             failureFlash: true // allow flash messages
         })
@@ -61,7 +58,7 @@ module.exports = function (app, passport) {
 
 
     app.post('/DangNhap', passport.authenticate('local-login', {
-        successRedirect: '/CapNhatThongTin', // redirect to the secure profile section
+        successRedirect: '/', // redirect to the secure profile section
         failureRedirect: '/DangNhap', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
