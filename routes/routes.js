@@ -29,11 +29,36 @@ module.exports = function (app, passport) {
         res.render('DangNhap', { message: req.flash('signinMessage') });
         // res.render('DangNhap');
     });
-    app.post('/DangKy', passport.authenticate('local-signup', {
-        successRedirect: '/CapNhatThongTin', // redirect to the secure profile section
-        failureRedirect: '/DangKy', // redirect back to the signup page if there is an error
-        failureFlash: true // allow flash messages
-    }));
+    // app.post('/DangKy', passport.authenticate('local-signup', {
+    //     successRedirect: '/CapNhatThongTin', // redirect to the secure profile section
+    //     failureRedirect: '/DangKy', // redirect back to the signup page if there is an error
+    //     failureFlash: true // allow flash messages
+    // }));
+    app.post('/DangKy',
+        function(req,res,next){
+            console.log(req.body)
+            console.log('oke')
+            captcha = require('./captcha-verify.js');
+            captcha(req,res,req.body['g-recaptcha-response'],function(stt){
+                if (stt)
+                {
+                    return next();
+                }    
+                else
+                { 
+                    req.flash('signupMessage', 'Vui lòng kiểm tra lại mã captcha!')
+                    return res.redirect('/DangKy')
+                }
+            })
+            
+        },
+        passport.authenticate('local-signup', {
+            successRedirect: '/CapNhatThongTin', // redirect to the secure profile section
+            failureRedirect: '/DangKy', // redirect back to the signup page if there is an error
+            failureFlash: true // allow flash messages
+        })
+        );
+
 
     app.post('/DangNhap', passport.authenticate('local-login', {
         successRedirect: '/CapNhatThongTin', // redirect to the secure profile section

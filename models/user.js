@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       google_email:DataTypes.STRING,
       google_name:DataTypes.STRING,
       google_id:DataTypes.STRING,
-      google_token:DataTypes.STRING
+      google_token:DataTypes.STRING,
+      avtImg: DataTypes.STRING
   }, {});
   User.associate = function(models) {
     // associations can be defined here

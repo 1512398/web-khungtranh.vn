@@ -86,6 +86,14 @@ const onepayDom = new OnePayDomestic({
 	secureSecret: 'A3EFDFABA8653DF2342E8DAC29B51AF0',
 });
 
+// Define session
+var session = require('express-session')
+app.use(session({
+	secret: 'hthieuuuu',
+	resave: false,
+	saveUninitialized: false,
+	cookie: { secure: true, maxAge: null }
+  }))
 
 // Define your routes
 require('./routes/routes.js')(app, passport);

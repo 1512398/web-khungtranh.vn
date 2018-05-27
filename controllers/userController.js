@@ -38,6 +38,18 @@ controller.edit = function(email, password,address,phoneNum, callback){
     });
 };
 
+controller.editAvt = function(email, imgAvt, callback){
+    models.User
+    .update({
+       avtImg : imgAvt
+    },
+    {
+        where:{email:email}
+    })
+    .then(function(user){
+        callback(user);
+    });
+};
 // controller.delete = function(id, callback){
 //     models.Comment
 //     .destroy({ 
