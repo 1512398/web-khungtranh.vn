@@ -9,7 +9,9 @@ var isValidPassword = function (userpass, password) {
 }
 
 router.get('/', isLoggedIn, function (req, res) {
-    if  (req.session.avtImg === undefined){
+    req.session.avtImg = req.user.avtImg
+    console.log(req.session.avtImg)
+    if  (req.session.avtImg == undefined){
         req.session.avtImg = '/img/blank_avt.png'
     }
     var avtPath =req.session.avtImg;
@@ -33,21 +35,20 @@ const upload = multer({
 
 router.post('/update', 
     isLoggedIn, 
-    function(req,res,next){
-        console.log(req.body)
+    function(req,res,next){  
         upload(req, res, function(err){
             if ((err)||(req.file === undefined)) {
                 console.log('avt faileddd')
-                // res.redirect('/CapNhatThongTin');
+                return next();
             }
             else{
-                console.log('file: ',req.file)
-                req.session.avtImg = String(req.file.path).replace('public','');
-                // res.redirect('/CapNhatThongTin');   
+                userController.editAvt(req.user.email,String(req.file.path).replace('public',''),function(user){
+                    console.log('update avt to DB success!');
+                    return next();
+                });
             }
         })
-        console.log('oke');
-        return next();
+        // 
     },
     function (req, res) {
         console.log('oke2');

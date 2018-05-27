@@ -50,6 +50,7 @@ controller.editAvt = function(email, imgAvt, callback){
         callback(user);
     });
 };
+
 // controller.delete = function(id, callback){
 //     models.Comment
 //     .destroy({ 
