@@ -12,7 +12,7 @@
                     <p class="pt-3">Thay đổi ảnh đại diện</p>
                 </div>
             </label>
-            
+
             </div>
             <hr> {{#if (notEmpty message)}}
             <div class="alert alert-danger">{{message}}</div>
@@ -22,13 +22,13 @@
                 {{messageSuccess}}</div>
             {{/if}}
 
-            <div style="display:none">
+            {{!-- <div style="display:none">
                 <form action="/CapNhatThongTin/uploadAvt" method="POST" enctype="multipart/form-data" id="submitAvt">
-                    <input type="file" class="custom-file-input" id="customFile" name="myImg">
+                    
                 </form>
-            </div>
-            <form id="editProfile" action="/CapNhatThongTin/update" method="POST">
-
+            </div> --}}
+            <form id="editProfile" action="/CapNhatThongTin/update"  enctype="multipart/form-data"  method="POST">
+                <input type="file" class="custom-file-input" id="customFile" name="myImg">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Họ và tên</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{user.fullName}}" readonly>
