@@ -5,7 +5,6 @@ module.exports = function(req,res,captcha,callback){
         captcha === null
     ){
         callback(false)
-        // return false;
     }
     // Secret key
     const secretKey = '6LcpaVsUAAAAAPjuJwmpK4EbE14fecGdBGEPpOlT';
@@ -19,7 +18,6 @@ module.exports = function(req,res,captcha,callback){
         // if not successful
         if (body.success !== undefined && !body.success){
             callback(false)
-            // return false;
         }
         else
         {

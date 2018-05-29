@@ -7,5 +7,6 @@ module.exports = (sequelize, DataTypes) => {
   Catalog.associate = function (models) {
     Catalog.hasMany(models.Item);
   };
+  
   return Catalog;
 };

@@ -3,21 +3,29 @@ var router = express.Router();
 
 var catalogController = require('../controllers/catalogController');
 
+router.get('/', function(req,res){
+    catalogController.getAll(function(catalog){
+        res.render('SanPham',{catalogs:catalog});
+    })
+});
 
-router.get('/', function (req, res) {
+router.get('/catalog', function (req, res) {
+
     //catalogController.getById(req.params.id,page,function(article){
-    catalogController.getById(4, function (catalog) {
-        var limit = 5;
-        // res.render('Sanpham',{pagination: {
-        //     limit: limit,
-        //     page: page,       // The current page the user is on
-        //     totalRows: 12  // The total number of available pages
-        //   },
-        //   itemslist:catalog})
-        res.render('Sanpham',{itemslist: catalog});
-        // console.log(catalog);
-        
-    });
+    var limit = 5;
+    var page = parseInt(req.query.page);
+    page = isNaN(page) ? 1 : page;
+    var num_of_cmts = -1
+    catalogController.countById(req.query.catalogId,function(catalog){
+        countItems = catalog;
+        catalogController.getById(req.query.catalogId, page, function (catalog) {
+            res.json({itemslist: catalog, pagination: {
+                num_of_pages:Math.ceil(countItems/limit),
+                limit:limit
+            }});
+    
+        });
+    })
 })
 
 module.exports = router;

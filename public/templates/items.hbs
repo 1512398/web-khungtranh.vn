@@ -1,0 +1,35 @@
+ {{#each itemslist.Items}} 
+ {{#if (linebreak @index)}}
+{{!-- <div class="card-group mb-2"> --}}
+    <div class="row">
+    {{/if}} 
+    <div class="col-lg-4 p-1 col-md-8 p-0">
+        <div class="card m-0" style="height:100%">
+        <img class="card-img-top" src="{{itemImg}}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{itemName}}</h5>
+            <p class="card-text">Mã hàng: {{itemId}}</p>
+            <p class="card-text">Chất liệu: {{itemMaterial}}</p>
+            <p class="card-text">Giá bán:
+                <span class="badge badge-dark">{{itemPrice}}</span>
+            </p>
+            <p class="card-text">Đánh giá:
+                <span class="badge badge-secondary">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </span>
+                <span class="d-inline-block"> {{itemCountVotes}}</span>
+
+            </p>
+        </div>
+    </div>
+    </div>
+   
+    {{#if (linebreakclose @index)}}
+</div>
+{{/if}}
+{{/each}}
+
