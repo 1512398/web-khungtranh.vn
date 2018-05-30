@@ -36,5 +36,13 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/popper.min.js"></script>
 </body>
+<script>
+    $(document).ready(function(){
+      
+        $('nav .active').removeClass('active');
+        $('nav #{{name}}').addClass('active');
+    });
+</script>
+
 
 </html>

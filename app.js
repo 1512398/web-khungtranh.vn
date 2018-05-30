@@ -95,8 +95,13 @@ app.use(session({
 	cookie: { secure: true, maxAge: null }
   }))
 
+//JSonWebtoken
+const jwt = require('jsonwebtoken');
+//Cookie parser
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
 // Define your routes
-require('./routes/routes.js')(app, passport);
+require('./routes/routes.js')(app, passport, jwt);
 require('./routes/payment.js')(app,paypal,onepayDom);
 var profile = require('./routes/profile.js');
 app.use('/CapNhatThongTin',profile)

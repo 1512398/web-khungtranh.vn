@@ -1,7 +1,8 @@
-module.exports = function (app, passport) {
-
+module.exports = function (app, passport,jwt) {
+    
     app.get('/', function (req, res) {
-        res.render('index',{member: req.isAuthenticated()});
+        res.render('index',{member: req.isAuthenticated(),name:'trangchu', title:'Trang chủ'});
+        // renderHandler()
     })
 
     app.get('/index', function (req, res) {
@@ -9,15 +10,21 @@ module.exports = function (app, passport) {
     })
 
     app.get('/LienHe', function (req, res) {
-        res.render('LienHe');
+        res.render('LienHe',{member: req.isAuthenticated(),title:'Liên hệ',name:'lienhe'});
     })
 
     app.get('/DatHang', function (req, res) {
-        res.render('DatHang');
+        res.render('DatHang',{member: req.isAuthenticated(),name:'dathang', title:'Đặt Hàng'});
     })
 
-    app.get('/ThanhToan', function (req, res) {
-        res.render('ThanhToan');
+    app.get('/ThanhToan', verifyToken,function (req, res) {
+        jwt.verify(req.token,'hthieuhoangtrunghieu',(err,authData)=>{
+            if(err){
+                res.redirect('/DangNhap')
+            }else{
+                res.render('ThanhToan');
+            }
+        });
     })
 
     app.get('/getprofile',function (req,res) {
@@ -25,12 +32,11 @@ module.exports = function (app, passport) {
       })
 
     app.get('/DangKy', function (req, res) {
-        // render the page and pass in any flash data if it exists
         res.render('DangKy', { message: req.flash('signupMessage') });
     });
 
     app.get('/DangNhap', function (req, res) {
-        res.render('DangNhap', { message: req.flash('signinMessage') });
+        res.render('DangNhap', {title:'Đăng nhập', name:'dangnhap', message: req.flash('signinMessage') });
     });
 
     app.post('/DangKy',
@@ -50,18 +56,29 @@ module.exports = function (app, passport) {
             
         },
         passport.authenticate('local-signup', {
-            successRedirect: '/', // redirect to the secure profile section
+            successRedirect: '/jwt', // redirect to the secure profile section
             failureRedirect: '/DangKy', // redirect back to the signup page if there is an error
             failureFlash: true // allow flash messages
         })
         );
 
-
-    app.post('/DangNhap', passport.authenticate('local-login', {
-        successRedirect: '/', // redirect to the secure profile section
-        failureRedirect: '/DangNhap', // redirect back to the signup page if there is an error
-        failureFlash: true // allow flash messages
-    }));
+    
+    app.post('/DangNhap', function(req,res,next){
+        passport.authenticate('local-login', function(err, user, info) {
+            if (err) { res.redirect('/DangNhap'); }
+            if (!user) { return res.redirect('/DangNhap'); }
+            req.logIn(user, function(err) {
+                if (err) { return res.redirect('/DangNhap'); }
+                
+                jwt.sign({user:user},'hthieuhoangtrunghieu',{expiresIn:'30000s'},(err,token)=>{
+                    res.cookie('auth',token,{maxAge:60000000,httpOnly: true});
+                    console.log(token);
+                    res.redirect('/')
+                });
+            });
+          },
+        )(req, res, next);
+    });
 
     app.get('/DangXuat', function (req, res) {
         req.logout();
@@ -105,4 +122,33 @@ function isLoggedIn(req, res, next) {
 
     // if they aren't redirect them to the home page
     res.redirect('/');
+}
+
+function verifyToken(req,res,next){
+    //Get auth header
+    const bearerHeader=req.query.auth;
+    console.log(bearerHeader);
+    //check if undefine
+    if (typeof bearerHeader!=='undefined'){
+        //get token
+        const bearer=bearerHeader.split(' ');
+        const bearerToken=bearer[1];
+        //set token to req
+        req.token=bearerHeader;
+        //next middleware
+        next();
+    }else{
+        //forbidden
+        res.sendStatus(403);
+    }
+}
+
+function renderHandler(dest){
+    jwt.verify(req.token,'hthieuhoangtrunghieu',(err,authData)=>{
+        if(err){
+            res.redirect('/DangNhap')
+        }else{
+            res.render(dest,{member:true});
+        }
+    });
 }

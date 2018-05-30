@@ -10,7 +10,6 @@ var isValidPassword = function (userpass, password) {
 
 router.get('/', isLoggedIn, function (req, res) {
     req.session.avtImg = req.user.avtImg
-    console.log(req.session.avtImg)
     if  (req.session.avtImg == undefined){
         req.session.avtImg = '/img/blank_avt.png'
     }
@@ -52,15 +51,11 @@ router.post('/update',
         // 
     },
     function (req, res) {
-        console.log('oke2');
     var new_pass = '';
     if (req.body.new_password == '') // neu khong co yeu cau thay doi mat khau
         new_pass = req.user.password
     else // neu co yeu cau thay doi mat khau
     {
-        console.log('oke3')
-        console.log(req.new_password)
-        console.log(req.user.password, req.body.phoneNum);
         if (isValidPassword(req.user.password, req.body.password)) // kiem tra password hien tai co khop voi password cu
             new_pass = bCrypt.hashSync(req.body.new_password, bCrypt.genSaltSync(8), null);  // neu trung khop, chuan bi update DB
         else
@@ -70,7 +65,6 @@ router.post('/update',
                 return;
             }
     }
-    console.log('oke4')
     userController.edit(
         req.user.email,
         new_pass,

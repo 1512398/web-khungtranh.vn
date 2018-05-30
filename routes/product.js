@@ -5,7 +5,7 @@ var catalogController = require('../controllers/catalogController');
 
 router.get('/', function(req,res){
     catalogController.getAll(function(catalog){
-        res.render('SanPham',{catalogs:catalog});
+        res.render('SanPham',{catalogs:catalog, title:'Sản phẩm', name:'sanpham',member: req.isAuthenticated()});
     })
 });
 

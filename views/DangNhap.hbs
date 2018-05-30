@@ -6,7 +6,7 @@
             <hr> {{#if (notEmpty message)}}
             <div class="alert alert-danger">{{message}}</div>
             {{/if}}
-            <form action="/DangNhap" method="post">
+            <form  method="post" id="formDangNhap">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nhập địa chỉ email</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="name@example.com"
@@ -19,14 +19,7 @@
                 <p class="text-center">Quên mật khẩu?
                     <a href="./DangKy.html">Khôi phục mật khẩu</a>
                 </p>
-                <button type="submit" style="width:100%" class="btn btn-success">Đăng nhập tài khoản</button>
-                {{!--
-                <button style="width:100%" class="btn btn-danger mt-1">
-                    <i class="fab fa-google"></i>
-                    Đăng nhập với Google</button>
-                <button style="width:100%" class="btn btn-primary mt-1">
-                    <i class="fab fa-facebook"></i>
-                    Đăng nhập với Facebook</button> --}}
+                <button id="btnSubmit" type="submit" style="width:100%" class="btn btn-success">Đăng nhập tài khoản</button>
                 <hr>
             </form>
             <p class="text-center">Chưa có tài khoản?
@@ -35,3 +28,19 @@
         </div>
     </div>
 </main>
+
+<script>
+    $('#btnSubmit').on('click',function(){
+        console.log('abcs');
+        $.ajax({
+            url:'/DangNhap',
+            type: 'POST',
+            data: $('formDangNhap').serialize(),
+            complete: function(data){
+               console.log(data)
+               return false;
+            }
+        }
+        )
+    })
+</script>
