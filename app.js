@@ -103,12 +103,20 @@ app.use(cookieParser());
 // Define your routes
 require('./routes/routes.js')(app, passport, jwt);
 require('./routes/payment.js')(app,paypal,onepayDom);
+var search = require('./routes/search.js')
+app.use('/search',search);
+
 var profile = require('./routes/profile.js');
 app.use('/CapNhatThongTin',profile)
 
 var products = require('./routes/product.js');
 app.use('/SanPham',products);
 
+var design = require('./routes/design.js');
+app.use('/DatHang',design);
+
+var admin = require('./routes/admin.js');
+app.use('/admin',admin);
 // Set Server Port & Start Server
 app.set('port', (process.env.PORT || 5000));
 

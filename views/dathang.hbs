@@ -1,228 +1,31 @@
+<script src="js/jquery.twbsPagination.min.js"></script>
+<link rel="stylesheet" href="css/dathang.css">
+<link rel="stylesheet" href="./css/style.css">
 <main>
     <div class="container-fluid" id="DatHangKhungTranh">
         <div class="row pt-0">
             <!-- catalogue -->
             <div class="col-4" id="khungtranh_catalogue">
                 <h3 class="font-weight-bold pt-3">Danh mục mặt hàng</h3>
-                <div role="tablist" aria-multiselectable="true">
-                    <div class="card mb-1">
-                        <div class="card-header" role="tab" id="section1HeaderId">
-                            <h5 class="mb-0">
-                                <a data-toggle="collapse" data-parent="#ItemList" href="#section1ContentId" aria-expanded="true" aria-controls="section1ContentId">
-                                    Khung tranh composite hiện đại
-                                </a>
-                            </h5>
-                        </div>
-                        <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId">
-                            <div class="card-body p-0">
-
-                                <!-- item 1 -->
-                                <div class="d-flex flex-row p-0 dathang_item">
-                                    <div class="col-3 p-0">
-                                        <img src="./img/thumb_ktranh1.jpg" alt="">
-                                    </div>
-                                    <div class="col-9 p-0">
-                                        <h6>Khung Composite đen trơn</h6>
-                                        <p>Mã hàng: F5D x 3cm </p>
-                                        <p>Chất liệu: composite trơn bóng</p>
-
-                                        <div class="sanPhamPriceAndVote " style="font-size:0.8em">
-                                            <span class="badge badge-dark" id="sanphamPrice">120.000đ</span>
-                                            <span class="badge badge-secondary" id="sanphamStars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </span>
-                                            <span class="d-inline-block"> (20 bình chọn)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- item 2 -->
-                                <div class="d-flex flex-row p-0 dathang_item">
-                                    <div class="col-3 p-0">
-                                        <img src="./img/thumb_ktranh2.jpg" alt="">
-                                    </div>
-                                    <div class="col-9 p-0">
-                                        <h6>Khung Composite trắng ngà trơn</h6>
-                                        <p>Mã hàng: F5T x 3cm </p>
-                                        <p>Chất liệu: composite trơn bóng</p>
-
-                                        <div class="sanPhamPriceAndVote " style="font-size:0.8em">
-                                            <span class="badge badge-dark" id="sanphamPrice">120.000đ</span>
-                                            <span class="badge badge-secondary" id="sanphamStars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </span>
-                                            <span class="d-inline-block"> (20 bình chọn)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- item 3 -->
-                                <div class="d-flex flex-row p-0 dathang_item">
-                                    <div class="col-3 p-0">
-                                        <img src="./img/thumb_ktranh3.jpg" alt="">
-                                    </div>
-                                    <div class="col-9 p-0">
-                                        <h6>Khung Composite xanh lục trơn</h6>
-                                        <p>Mã hàng: F5X x 3cm </p>
-                                        <p>Chất liệu: composite trơn bóng</p>
-
-                                        <div class="sanPhamPriceAndVote " style="font-size:0.8em">
-                                            <span class="badge badge-dark" id="sanphamPrice">120.000đ</span>
-                                            <span class="badge badge-secondary" id="sanphamStars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </span>
-                                            <span class="d-inline-block"> (20 bình chọn)</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <!-- item 4 -->
-                                <div class="d-flex flex-row p-0 dathang_item">
-                                    <div class="col-3 p-0">
-                                        <img src="./img/thumb_ktranh4.jpg" alt="">
-                                    </div>
-                                    <div class="col-9 p-0">
-                                        <h6>Khung Composite hồng trơn</h6>
-                                        <p>Mã hàng: F5H x 3cm </p>
-                                        <p>Chất liệu: composite trơn bóng</p>
-
-                                        <div class="sanPhamPriceAndVote " style="font-size:0.8em">
-                                            <span class="badge badge-dark" id="sanphamPrice">120.000đ</span>
-                                            <span class="badge badge-secondary" id="sanphamStars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </span>
-                                            <span class="d-inline-block"> (20 bình chọn)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <select class="form-control" id="pickCatalog">
+                    {{#each catalog}}
+                    <option value="{{id}}">{{title}}</option>
+                    {{/each}}
+                </select>
+                <div class="row pb-1">
+                    <div class="col-5">
+                        <ul id="pagination-demo" class="pagination pt-4"></ul>
                     </div>
+                    <div class="col-7 p-2">
+                        <p style="color:white">Tổng số mặt hàng: </p>
+                        <p style="color:white" id="count"></p>
+                    </div>
+                    
+                </div>
+                
+                <div role="tablist" aria-multiselectable="true">
+                    <div id="items" style="background-color:#eee">
 
-
-                    <div class="card">
-                        <div class="card-header" role="tab" id="section2HeaderId">
-                            <h5 class="mb-0">
-                                <a data-toggle="collapse" data-parent="#ItemList" href="#section2ContentId" aria-expanded="true" aria-controls="section2ContentId">
-                                    Khung tranh composite cổ điển
-                                </a>
-                            </h5>
-                        </div>
-                        <div id="section2ContentId" class="collapse in" role="tabpanel" aria-labelledby="section2HeaderId">
-                            <div class="card-body p-0">
-                                <!-- item 1 -->
-                                <div class="d-flex flex-row p-0 dathang_item">
-                                    <div class="col-3 p-0">
-                                        <img src="./img/thumb_ktranh1.jpg" alt="">
-                                    </div>
-                                    <div class="col-9 p-0">
-                                        <h6>Khung Composite đen trơn</h6>
-                                        <p>Mã hàng: F5D x 3cm </p>
-                                        <p>Chất liệu: composite trơn bóng</p>
-
-                                        <div class="sanPhamPriceAndVote " style="font-size:0.8em">
-                                            <span class="badge badge-dark" id="sanphamPrice">120.000đ</span>
-                                            <span class="badge badge-secondary" id="sanphamStars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </span>
-                                            <span class="d-inline-block"> (20 bình chọn)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- item 2 -->
-                                <div class="d-flex flex-row p-0 dathang_item">
-                                    <div class="col-3 p-0">
-                                        <img src="./img/thumb_ktranh2.jpg" alt="">
-                                    </div>
-                                    <div class="col-9 p-0">
-                                        <h6>Khung Composite trắng ngà trơn</h6>
-                                        <p>Mã hàng: F5T x 3cm </p>
-                                        <p>Chất liệu: composite trơn bóng</p>
-
-                                        <div class="sanPhamPriceAndVote " style="font-size:0.8em">
-                                            <span class="badge badge-dark" id="sanphamPrice">120.000đ</span>
-                                            <span class="badge badge-secondary" id="sanphamStars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </span>
-                                            <span class="d-inline-block"> (20 bình chọn)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- item 3 -->
-                                <div class="d-flex flex-row p-0 dathang_item">
-                                    <div class="col-3 p-0">
-                                        <img src="./img/thumb_ktranh3.jpg" alt="">
-                                    </div>
-                                    <div class="col-9 p-0">
-                                        <h6>Khung Composite xanh lục trơn</h6>
-                                        <p>Mã hàng: F5X x 3cm </p>
-                                        <p>Chất liệu: composite trơn bóng</p>
-
-                                        <div class="sanPhamPriceAndVote " style="font-size:0.8em">
-                                            <span class="badge badge-dark" id="sanphamPrice">120.000đ</span>
-                                            <span class="badge badge-secondary" id="sanphamStars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </span>
-                                            <span class="d-inline-block"> (20 bình chọn)</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <!-- item 4 -->
-                                <div class="d-flex flex-row p-0 dathang_item">
-                                    <div class="col-3 p-0">
-                                        <img src="./img/thumb_ktranh4.jpg" alt="">
-                                    </div>
-                                    <div class="col-9 p-0">
-                                        <h6>Khung Composite hồng trơn</h6>
-                                        <p>Mã hàng: F5H x 3cm </p>
-                                        <p>Chất liệu: composite trơn bóng</p>
-
-                                        <div class="sanPhamPriceAndVote " style="font-size:0.8em">
-                                            <span class="badge badge-dark" id="sanphamPrice">120.000đ</span>
-                                            <span class="badge badge-secondary" id="sanphamStars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </span>
-                                            <span class="d-inline-block"> (20 bình chọn)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -326,3 +129,57 @@
 
 
 </main>
+
+<script>
+    var id = 1;
+    var num_of_pages = 0;
+    function loadItems(page) {
+        var url = '/SanPham/catalog?catalogId=' + id + '&page=' + page;
+        console.log(url)
+        $.ajax({
+            url: url,
+            cache: true,
+            success: function (data) {
+                if (num_of_pages != data.pagination.num_of_pages) {
+                    num_of_pages = data.pagination.num_of_pages;
+                    $('#pagination-demo').twbsPagination('destroy');
+                    $('#pagination-demo').twbsPagination({
+                        totalPages: num_of_pages,
+                        visiblePages: 3,
+                        next: '>',
+                        prev: '<',
+                        onPageClick: function (event, page) {
+                            loadItems(page)
+                        }
+                    });
+                    
+                }
+
+                getTemplateAjax('/templates/items_row.hbs', '#items', data)
+            }
+        })
+    }
+    function getTemplateAjax(path, target, jsonData) {
+        var source;
+        var template;
+
+        $.ajax({
+            url: path,
+            cache: false,
+            success: function (data) {
+                source = data;
+                template = Handlebars.compile(source);
+                $(target).html(template(jsonData));
+            }
+        })
+    }
+    $('#pickCatalog').on('change', function () {
+        id = this.value;
+        loadItems(1);
+    })
+
+    $(document).ready(function () {
+        id = 4;
+        loadItems(1);
+    });
+</script>

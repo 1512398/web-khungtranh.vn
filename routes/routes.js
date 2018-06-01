@@ -12,11 +12,6 @@ module.exports = function (app, passport,jwt) {
     app.get('/LienHe', function (req, res) {
         res.render('LienHe',{member: req.isAuthenticated(),title:'Liên hệ',name:'lienhe'});
     })
-
-    app.get('/DatHang', function (req, res) {
-        res.render('DatHang',{member: req.isAuthenticated(),name:'dathang', title:'Đặt Hàng'});
-    })
-
     app.get('/ThanhToan', verifyToken,function (req, res) {
         jwt.verify(req.token,'hthieuhoangtrunghieu',(err,authData)=>{
             if(err){
@@ -56,7 +51,7 @@ module.exports = function (app, passport,jwt) {
             
         },
         passport.authenticate('local-signup', {
-            successRedirect: '/jwt', // redirect to the secure profile section
+            successRedirect: '/', // redirect to the secure profile section
             failureRedirect: '/DangKy', // redirect back to the signup page if there is an error
             failureFlash: true // allow flash messages
         })

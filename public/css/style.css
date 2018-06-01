@@ -210,15 +210,15 @@ footer{
     border-top-left-radius: 0;
     height: 100%;
 }
-#DatHangTrucTuyen .row{
+/* #DatHangTrucTuyen .row{
     padding-bottom: 2px;
-}
+} */
 
 #DatHangTrucTuyen .row .col-md-3, .col-sm-12{
     padding: 0;
 }
 
-#DatHangTrucTuyen .row h2{
+/* #DatHangTrucTuyen .row h2{
     display: inline-block;
     border-radius: 100%;
     border-bottom-left-radius: 0;
@@ -230,7 +230,7 @@ footer{
     color: #03899c;
     margin: 0;
     margin-left: 3px;
-}
+} */
 
 #btnDatHang{
     background-color:tomato;
@@ -360,7 +360,7 @@ footer p{
     background-color: #eee;
 }
 
-#khungtranh_catalogue>div{
+#khungtranh_catalogue #items{
     border: white dashed 3px;
     height: 650px;
     overflow-y: scroll;

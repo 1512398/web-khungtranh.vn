@@ -53,7 +53,10 @@
         $.ajax({
             url: '/getprofile',
             success: function (data) {
-                $('#avt').attr('src',data.avt);
+                if (data.avt === null)
+                    $('#avt').attr('src','/img/blank_avt.png');
+                else
+                    $('#avt').attr('src',data.avt);
                 $('#username').html(data.name)
             }
         })

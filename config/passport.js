@@ -61,6 +61,7 @@ module.exports = function (passport, user) {
                                 address: req.body.address,
                                 password: userPassword,
                                 fullName: req.body.fullname,
+                                status: true,
                             };
 
 
@@ -204,7 +205,9 @@ module.exports = function (passport, user) {
                     return done(null, false, req.flash('signinMessage', 'Email đăng nhập không đúng'));
                 }
 
-                
+                if (!user.status){
+                    return done(null, false, req.flash('signinMessage', 'Tài khoản của bạn đã bị khóa bởi quản trị viên!'));   
+                }
                 if (!isValidPassword(user.password, password)) {
 
                     return done(null, false, req.flash('signinMessage', 'Mật khẩu không đúng'));

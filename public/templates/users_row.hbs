@@ -1,0 +1,52 @@
+{{#each users}}
+<tr>
+    <td class="mcenter">{{id}} {{#if status}}
+        <p class="pt-4" style="display: block">
+            <i class="fas fa-check" style="color:green"></i>
+        </p>
+        {{else}}
+        <p class="pt-4" style="display: block">
+            <i class="fas fa-ban" style="color:red"></i>
+        </p>
+        {{/if}}
+    </td>
+    <td class="mcenter">
+        {{#if avtImg}}
+        <img src="{{avtImg}}" alt="..." style="width:50px;text-align: center;"> {{else}}
+        <img src="/img/blank_avt.png" alt="..." style="width:50px;text-align: center;"> {{/if}}
+    </td>
+    <td class="mcenter">
+        {{fullName}} </td>
+    <td class="mcenter">
+        {{email}}
+    </td>
+    <td class="mcenter">
+        {{phoneNum}}
+    </td>
+    <td class="mcenter">
+        {{address}}
+    </td>
+    <td class="mcenter" style="color: gray">{{createdAt}}</td>
+    <td class="mcenter">
+        {{#if status}}
+        <a href="" class="btn btn-danger btn-md" data-toggle="tooltip" data-placement="top" title="Khóa người dùng" onClick="statusUser({{id}},false); return false;">
+            <i class="fas fa-lock"></i>
+        </a>
+        {{else}}
+         <a href="" class="btn btn-success btn-md" data-toggle="tooltip" data-placement="top" title="Mở khóa người dùng" onClick="statusUser({{id}},true); return false;">
+           <i class="fas fa-lock-open"></i></i>
+        </a>
+        {{/if}} {{!--
+        <a href="" class="btn btn-primary btn-md" data-toggle="tooltip modal" data-target="viewModal" data-placement="top"
+            title="View profile">
+            <i class="fa fa-folder"></i>
+        </a>
+        <a href="" class="btn btn-info btn-md" data-toggle="tooltip" data-placement="top" title="Edit">
+            <i class="fa fa-pencil"></i>
+        </a>
+        <a href="" class="btn btn-danger btn-md" data-toggle="tooltip" data-placement="top" title="Ban account" onClick="banUser({{id}})">
+            <i class="fa fa-trash-o"></i>
+        </a> --}}
+    </td>
+</tr>
+{{/each}}

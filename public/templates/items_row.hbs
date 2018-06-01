@@ -1,0 +1,24 @@
+ {{#each itemslist.Items}}
+<div class="d-flex flex-row p-0 dathang_item">
+    <div class="col-3 p-0">
+        <img src="{{itemImg}}" alt="" style="width:100%; height:100%">
+    </div>
+    <div class="col-9 p-0">
+        <h6>{{itemName}}</h6>
+        <p>Mã hàng: {{itemId}} </p>
+        <p>Chất liệu: {{itemMaterial}}</p>
+
+        <div class="sanPhamPriceAndVote " style="font-size:0.8em">
+            <span class="badge badge-dark" id="sanphamPrice">{{itemPrice}}</span>
+            <span class="badge badge-secondary" id="sanphamStars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </span>
+            <span class="d-inline-block"> ( {{itemCountVotes}} bình chọn)</span>
+        </div>
+    </div>
+</div>
+{{/each}}

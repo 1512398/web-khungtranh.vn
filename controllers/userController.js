@@ -51,15 +51,40 @@ controller.editAvt = function(email, imgAvt, callback){
     });
 };
 
-// controller.delete = function(id, callback){
-//     models.Comment
-//     .destroy({ 
-//         where: {id: id},
-//     })
-//     .then(function(comment){
-//         callback(comment);
-//     });
-// };
+const itemsPerPage = 5;
+controller.getAll = function (page, callback) {
+    models.User
+        .findAll({
+            limit: itemsPerPage, offset: (page - 1) * itemsPerPage,
+            order: [['id','ASC']]
+        })
+        .then(function (catalog) {
+            callback(catalog);
+        })
+};
+
+controller.banUser = function(userId, action, callback){
+    models.User
+    .update({
+       status : action
+    },
+    {
+        where:{id:userId}
+    })
+    .then(function(user){
+        callback(user);
+    });
+};
+
+controller.countUser = function (callback) {
+    models.User.
+    findAndCountAll({
+       
+    })
+    .then(function (catalog) {
+        callback(catalog);
+    });
+  }
 
 
 controller.create
