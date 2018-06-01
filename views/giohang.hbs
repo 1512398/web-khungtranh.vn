@@ -1,0 +1,275 @@
+
+    <main class="pb-5 mb-5">
+    <div class="container">
+        <div class="row">
+           
+            <div class="col-md-9">
+                 <!-- Hinh thuc giao hang -->
+                <div class="row pr-2 pl-2">
+                    <!--Giao hang tiet kiem -->
+                    <div class="col-md-6 col-sm-12 p-2">
+                        <div class="hinhthucgiaohang flex-row d-flex">
+                            <div class="col-10">
+                                <h5> <i class="fas fa-truck"></i>  Giao hàng tiết kiệm</h5>
+                                <p>Nhận hàng vào 21-27 tháng 4, 2018</p>
+                                <p>150.000 đ</p>
+                            </div>
+                            <div class="col-2 text-center" style="margin:auto">
+                                <div>
+                                    <i style = "visibility: hidden; color:tomato; font-size:2em; margin:auto" class="fas fa-check" id = "tick"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Giao hang tieu chuan -->
+                    <div class="col-md-6 p-2 col-sm-12">
+                            <div class="hinhthucgiaohang flex-row d-flex activehinhthucgiaohang">
+                                <div class="col-10">
+                                    <h5> <i class="fas fa-shipping-fast"></i></i>  Giao hàng tiêu chuẩn</h5>
+                                    <p>Nhận hàng vào 20-23 tháng 4, 2018</p>
+                                    <p>230.000 đ</p>
+                                </div>
+                                <div class="col-2 text-center" style="margin:auto">
+                                    <div>
+                                        <i style = "visibility: hidden; color:tomato; font-size:2em; margin:auto" class="fas fa-check" id = "tick"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div> 
+
+                <!-- Danh sach don hang -->
+                <div class="chitietdonhang">
+                    <table class="table table-striped table-responsive" style="table-layout: auto">
+                        <thead class="">
+                            <tr style=>
+                                <th style="width:6%">#</th>
+                                <th style="width:45%" >Sản phẩm</th>
+                                <th style="width:15%">Kích thước</th>
+                                <th style="width:10%">Giá</th>
+                                <th style="width:15%">Số lượng</th>
+                            </tr>
+                            </thead>
+                            <tbody id="loadItems">
+                                {{#each items}}
+                                <tr class = "giohang_item">
+                                    <td scope="row"> #{{item.id}}
+                                    <i class="fas fa-trash-alt trashbin"></i>
+                                    </td>
+                                    <td class="pr-0 " style="min-width: 200px;">
+                                        <div class="d-flex flex-row">
+                                            <div class="col-3 p-0">
+                                                <img src="./img/thumb_ktranh2.jpg" alt="">
+                                            </div>
+                                            
+                                            <div class="col-9 p-2 pr-0" >
+                                                <h6>{{item.itemName}}</h6>
+                                                <p>Mã hàng: {{item.itemId}}</p>
+                                                <p>Chất liệu: {{item.itemMaterial}}</p>
+                                            </div>
+                                    </td>
+                                    <td>{{item.itemHeightSize}}x{{item.itemWidthSize}}</td>
+                                    <td>{{item.itemPrice}}vnđ</td>
+                                    <td>
+                                        <div class="soluong">
+                                        <div class="btn-group"> 
+                                            <button type="button" class="btn btn-secondary btnInc" onclick="add_cart_item({{item.id}})">+</button>
+                                            <input type="text" class="form-control tbSoluong" value="{{count}}" onchange="change_cart_item({{item.id}})">
+                                            <button type="button" class="btn btn-secondary btnDec" onclick="delete_cart_item({{item.id}})">-</button>
+                                        </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{/each}}  
+                            </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                </div>
+            </div>
+
+            <!-- Thanh toan don hang -->
+            <div class="col-md-3 pb-5 pt-2 mt-2 thanhtoandonhang">
+                <h4>Địa điểm giao hàng</h4>
+                <select class="form-control form-control-sm">
+                        <option>Hồ Chí Minh</option>
+                        <option>Hà Nội</option>
+                        <option>Đà Nẵng</option>
+                        <option>Nha Trang</option>
+                        <option>Cần Thơ</option>
+                        <option>Đắc Lắc</option>
+                </select>
+                <hr>
+                <!-- Thong tin don hang - thanh toan -->
+                <h4>Thông tin đơn hàng</h4>
+                <div class="row">
+                        <div class="col">
+                            <p>Tổng số lượng: </p>
+                        </div>
+                        <div class="col">
+                            <p class="tongsoluong">{{countAll}}</p>
+                        </div>
+                    </div>
+                       
+                    <div class="row">
+                        <div class="col">
+                            <p>Đơn giá: </p>
+                        </div>
+                        <div class="col">
+                            <p>120.000</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                            <div class="col">
+                                <p>Phí in hình: </p>
+                            </div>
+                            <div class="col">
+                                <p>100.000</p>
+                            </div>
+                    </div>
+                    <hr style="margin:0; border-color:#888; width: 230px;">
+                    <div class="row pt-2">
+                            <div class="col">
+                                <p style="font-weight:bold; font-size:1.2em">Tổng tiền: </p>
+                            </div>
+                            <div class="col" style="color:tomato; font-size:1.4em; font-weight:bold">
+                                <p>{{priceAll}}</p>
+                            </div>
+                    </div>    
+                    <div class="text-right pr-3">
+                            <p class=" font-italic">Đã bao gồm thuế VAT</p>
+                    </div>
+                <div class="pt-3 pr-2">
+                    
+                    <a href="./ThanhToan"  name="" id="" class="btn btn-danger btn-lg btn-block">
+                        Thanh toán đơn hàng
+                    </a>
+                </div>     
+                    
+            </di>
+        </div>
+
+        <!-- Chi tiết đơn hàng -->
+    </div>
+    </main>
+<script>
+    //add 
+    var add_cart_item = (id) => {
+        console.log(id)
+        $.ajax({
+            url:'/SanPham/add_cart_item?id=' +id, 
+            cache: true,
+            success: (data)=> {
+                    console.log(data)
+            }
+        })
+    }
+    var delete_cart_item = (id) => {
+        console.log(id)
+        $.ajax({
+            url: '/SanPham/delete_cart_item?id=' +id,
+            cache: true,
+            success: (data)=>{
+                console.log(data)
+            }
+        })
+    }
+    var change_cart_item = (id) => {
+        console.log(id)
+    }
+     // read data cart from cookie
+    var obj= {
+            id: "001", 
+            name: "Mẫu Composite Trắng Ngà Đơn", 
+            size: { width: 300, height: 200}, 
+            cost: 120000,
+            count: 1, 
+            code: "F5T x 3cm",
+            material: "composite trơn bóng" 
+        }
+    function getCount() {
+        var res = 1;
+        var temp = document.cookie;
+        if(temp != null) {
+            var x = temp.split(';');
+            var y = x[x.length-1].split('=');
+            var z = y[0].split('_');
+            var w = parseInt(z[z.length-1]) + 1;
+            res = w;
+        }
+        return res.toString();
+    }
+    var addCookie = (data) => {
+        count = getCount();
+        var val = JSON.stringify(obj);
+
+        //create cookie
+        var add = "items_" + count + "=" +val;
+        document.cookie = add;
+    }
+    var changeCost = (data) => {
+        var res = "";
+        var cur = data.toString();
+        count = 1;
+        for(var i = cur.length-1; i > 0;i--) {
+            if(3 == count) {
+                count = 1;
+                res = '.' + cur[i]+ res;
+            } 
+            else { 
+                count += 1;
+                res = cur[i] + res;
+            }
+        }
+        res = cur[0] + res; 
+        return res;
+    }
+    var loadItemsCart = (data) => {
+        var temp = document.cookie;
+        var listItems = new Array();
+        // list Items
+        var keyFound = 'items';
+        var x = temp.split(';');
+        x.forEach((e) => {
+            console.log(e)
+            var y = e.split('=')
+            if (y[0].indexOf(keyFound) > -1) {
+                listItems.push(JSON.parse(y[1]));
+            }
+        })
+        // -- 
+        console.log(listItems)
+        let r = "";
+        for(var e in listItems) {
+            r += '<tr class ="giohang_item">';
+            r += '<td scope="row">';
+            r += '#';
+            r +=  listItems[e].id + '<i class="fas fa-trash-alt trashbin"></i></td>';
+            r += '<td class="pr-0 " style="min-width: 200px;">';
+            r += '<div class="d-flex flex-row">';
+            r += '<div class="col-3 p-0">';
+            r += '<img src="./img/thumb_ktranh2.jpg" alt="">';
+            r += '</div>'
+            r += '<div class="col-9 p-2 pr-0" >'
+            r += '<h6>' + listItems[e].name + '</h6>'
+            r += '<p>Mã hàng: ' + listItems[e].code + '</p>'
+            r += '<p>Chất liệu: ' + listItems[e].material + '</p>'
+            r += '</div>'
+            r += '</td>'
+            r += '<td>' + listItems[e].size.height + 'x' + listItems[e].size.width + '</td>'
+            r += '<td>' + changeCost(listItems[e].cost) + 'đ</td>'
+            r += '<td>'
+            r += '<div class="soluong">'
+            r += '<div class="btn-group">'
+            r += '<button type="button" class="btn btn-secondary btnInc">+</button>'
+            r += '<input type="text" class="form-control tbSoluong" value="' + listItems[e].count +'">'   
+            r += '<button type="button" class="btn btn-secondary btnDec">-</button>'
+            r += '</div>'
+            r += '</div>' 
+            r += '</td>'
+            r += '</tr>'
+        }
+        document.getElementById('loadItems').innerHTML = r;
+    } 
+</script> 
