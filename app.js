@@ -86,12 +86,21 @@ const onepayDom = new OnePayDomestic({
 	secureSecret: 'A3EFDFABA8653DF2342E8DAC29B51AF0',
 });
 
+// load item cart
+var items = require('./routes/cart_item');
+app.use('/GioHang', items);
+///add item to cart
+
 // Define session
-var session = require('express-session')
+var session = require('express-session');
 app.use(session({
-	secret: 'hthieuuuu',
+	secret: process.env.FOO_COOKIE_SECRET,
 	resave: false,
 	saveUninitialized: false,
+	store: new(require('connect-pg-simple')(session))({
+		conString: 'pg://' + "postgres" + ':' + "123456" + "@" + "127.0.0.1" + '/' + "DB_KhungTranh.vn",
+		tableName: 'session'
+	}),
 	cookie: { secure: true, maxAge: null }
   }))
 
