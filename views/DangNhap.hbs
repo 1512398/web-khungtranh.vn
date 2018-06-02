@@ -31,13 +31,11 @@
 
 <script>
     $('#btnSubmit').on('click',function(){
-        console.log('abcs');
         $.ajax({
             url:'/DangNhap',
             type: 'POST',
             data: $('formDangNhap').serialize(),
             complete: function(data){
-               console.log(data)
                return false;
             }
         }
