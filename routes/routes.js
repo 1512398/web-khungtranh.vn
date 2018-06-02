@@ -12,14 +12,16 @@ module.exports = function (app, passport,jwt) {
     app.get('/LienHe', function (req, res) {
         res.render('LienHe',{member: req.isAuthenticated(),title:'Liên hệ',name:'lienhe'});
     })
-    app.get('/ThanhToan', verifyToken,function (req, res) {
-        jwt.verify(req.token,'hthieuhoangtrunghieu',(err,authData)=>{
+    app.get('/ThanhToan', function (req, res) {
+        /*jwt.verify(req.token,'hthieuhoangtrunghieu',(err,authData)=>{
             if(err){
                 res.redirect('/DangNhap')
             }else{
                 res.render('ThanhToan', {price: req.session.cart.priceAll, count: req.session.cart.countAll});
             }
         });
+    }   */
+        res.render('ThanhToan', {price: req.session.cart.priceAll, count: req.session.cart.countAll});
     })
 
     app.get('/getprofile',function (req,res) {

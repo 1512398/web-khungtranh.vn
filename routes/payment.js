@@ -1,6 +1,8 @@
 module.exports = function (app, paypal, onepayDom) {
     // Paypal 
     app.post('/paypal', function (req, res) {
+        console.log("Cart: TP");
+        console.log(req.session.cart)
         const create_payment_json = {
             "intent": "sale",
             "payer": {
