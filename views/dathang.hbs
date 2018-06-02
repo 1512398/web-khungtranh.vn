@@ -32,9 +32,7 @@
 
             <!-- dat hang main -->
             <div class="col-6 flex-column d-flex align-content-center align-items-center" id="dathang_main">
-
                 <h2 class=" font-weight-bold pt-2" style="font-weight:bold">Xem trước khung tranh</h2>
-
                 <div id="frame_main" style="clear: both;">
                     <img src="./img/ktranh_1.png" alt="" style="z-index:20" id="frame">
                     <img src="./img/hinh_nguoi_dung_1.jpg" alt="" id="pic">
@@ -48,7 +46,7 @@
                             <div id="frame_btn">
                                 <i class="fas fa-search-minus"></i>
                             </div>
-                            <div id="frame_btn">
+                            <div id="frame_btn" onclick="handlerCrop()">
                                 <i class="fas fa-crop"></i>
                             </div>
                             <div id="frame_btn">
@@ -68,18 +66,21 @@
                             <div class="form-row">
                                 <div class="col">
                                     <label for="width">Dài (cm)</label>
-                                    <input type="text" class="form-control" placeholder="Chiều dài" id="width">
+                                    <input type="number" class="form-control" placeholder="Chiều dài" id="width" value="200">
                                 </div>
 
                                 <div class="col">
                                     <label for="height">Rộng (cm)</label>
-                                    <input type="text" class="form-control" placeholder="Chiều rộng" id="height">
+                                    <input type="number" class="form-control" placeholder="Chiều rộng" id="height" value="300">
                                 </div>
                             </div>
 
-                            <div class="form-row pt-2 pl-1 pr-1">
-                                <a style="width:100%" name="" id="" class="btn btn-danger align-self-center" href="./GioHang" role="button">
+                            <div class="form-row pt-2 pl-1 pr-1" >
+                                <a style="width:80%" name="" id="" class="btn btn-danger align-self-center" role="button" onclick="add_cart_item()">
                                     Thêm vào giỏ
+                                    <i class="fas fa-shopping-cart"></i>
+                                </a>
+                                <a style="width:20%" name="" id="" class="btn btn-success align-self-center" href="./GioHang" role="button">
                                     <i class="fas fa-shopping-cart"></i>
                                 </a>
                             </div>
@@ -131,6 +132,53 @@
 </main>
 
 <script>
+    var saveIdChoose = -1;
+    // add_item
+    
+    // handlers
+    var yourChoose = (id) => {
+        saveIdChoose = id;
+    }
+    //degisn
+    var c = document.getElementById('pic')
+    var getSrcImg = function() {
+        var width = document.getElementById('width').value;
+        var height = document.getElementById('height').value;
+        if(width != "" & height != "") {
+            try {
+                _width = parseInt(width)
+                _height = parseInt(height)
+                return {
+                    width: _width,
+                    height: _height
+                }
+            }
+            catch(err) {
+                throw err;
+                return null
+            }
+        }        
+        else {
+            return null
+        }
+    } 
+    var handlerCrop = (data) => {
+        console.log(getSrcImg())
+    }
+    // ---
+    var add_cart_item = () => {
+        id = saveIdChoose;
+        var k = getSrcImg()
+        url:
+        $.ajax({
+                url:'/GioHang/add_cart_item?id=' + id + '&width='+ k.width +'&height='+ k.height, 
+                cache: true,
+                success: (data)=> {
+                        console.log(data)
+                }
+        })
+    }
+    // ---
     var id = 1;
     var num_of_pages = 0;
     function loadItems(page) {
@@ -151,10 +199,8 @@
                         onPageClick: function (event, page) {
                             loadItems(page)
                         }
-                    });
-                    
+                    });   
                 }
-
                 getTemplateAjax('/templates/items_row.hbs', '#items', data)
             }
         })

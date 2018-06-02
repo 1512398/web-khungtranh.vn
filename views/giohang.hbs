@@ -158,7 +158,7 @@
     var add_cart_item = (id) => {
         console.log(id)
         $.ajax({
-            url:'/SanPham/add_cart_item?id=' +id, 
+            url:'/GioHang/add_cart_item?id=' +id, 
             cache: true,
             success: (data)=> {
                     console.log(data)
@@ -168,7 +168,7 @@
     var delete_cart_item = (id) => {
         console.log(id)
         $.ajax({
-            url: '/SanPham/delete_cart_item?id=' +id,
+            url: '/GioHang/delete_cart_item?id=' +id,
             cache: true,
             success: (data)=>{
                 console.log(data)
