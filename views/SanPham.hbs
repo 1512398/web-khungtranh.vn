@@ -67,6 +67,17 @@
         </div>
 </main>
 <script>
+        var add_cart_item = (id) => {
+                console.log(id)
+                url:
+                $.ajax({
+                        url:'/SanPham/add_cart_item?id=' +id, 
+                        cache: true,
+                        success: (data)=> {
+                                console.log(data)
+                        }
+                })
+        }
         var id = 1;
         var num_of_pages = 0;
          {{#each catalogs}}

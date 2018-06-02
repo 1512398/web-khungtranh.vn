@@ -17,7 +17,7 @@ module.exports = function (app, passport,jwt) {
             if(err){
                 res.redirect('/DangNhap')
             }else{
-                res.render('ThanhToan');
+                res.render('ThanhToan', {price: req.session.cart.priceAll, count: req.session.cart.countAll});
             }
         });
     })
