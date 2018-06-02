@@ -1,0 +1,17 @@
+{{#each itemslist.Items}}
+<tr>
+    <td>{{itemId}}</td>
+    <td> <img src="{{itemImg}}" alt="" style="width:60px; height:60px"></td>
+    <td>{{itemName}}</td>
+    <td>{{itemMaterial}}</td>
+    <td>{{itemPrice}}</td>
+    <td>
+        <a href="" class="btn btn-info btn-md" data-toggle="tooltip" data-placement="top" title="Chỉnh sửa thông tin mặt hàng" onClick = "editItem({{id}}); return false;">
+            <i class="fa fa-pencil"></i>
+        </a>
+        <a href="" class="btn btn-danger btn-md" data-toggle="tooltip" data-placement="top" title="Xóa mặt hàng" onClick="deleteItem({{id}}); return false;">
+            <i class="fa fa-trash-o"></i>
+        </a>
+    </td>
+</tr>
+{{/each}}

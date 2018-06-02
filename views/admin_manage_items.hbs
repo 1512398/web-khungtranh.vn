@@ -1,167 +1,194 @@
+<script src="/js/jquery.twbsPagination.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 <!-- page main -->
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
-            <div class="title_left">
-                <h3> Add/Edit
-                    <small> item </small>
-                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">
-                        <span class="fa fa-edit"></span>
-                    </button>
-                </h3>
-            </div>
             <!-- modal new product -->
-            <!-- Modal new-->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+            <!-- Modal new catalog-->
+            <div class="modal fade" id="newCatalogModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLabel">New product </h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <h4 class="modal-title" id="exampleModalLabel">Thêm mới danh mục </h4>
                         </div>
                         <div class="modal-body">
                             <div id="testmodal" style="padding: 5px 20px;">
-                                <form id="antoform" class="form-horizontal calender" role="form">
+                                <form id="newCatForm" class="form-horizontal calender" role="form">
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Name</label>
+                                        <label class="col-sm-3 control-label">Tên danh mục*</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="name" name="name">
+                                            <input type="text" class="form-control" id="name" name="title" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Description</label>
+                                        <label class="col-sm-3 control-label">Mô tả</label>
                                         <div class="col-sm-9">
-                                            <textarea class="form-control" style="height:55px;" id="descr" name="descr"></textarea>
+                                            <textarea class="form-control" style="height:55px;" id="descr" name="summary"></textarea>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary" id="addCatalog">Thêm mới</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
+            {{!-- Modal new Item --}}
+            <div class="modal fade" id="newItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="newItemModalLabel">Thêm mới mặt hàng </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="modal2" style="padding: 5px 10px;">
+
+                                <form id="newItemForm" action="/admin/newItem" class="form-horizontal calender" role="form" method="POST" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Tên mặt hàng mới*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" value="123" id="itemName" name="itemName" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Tên danh mục*</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" id="catalogId" required value="123" name="catalogId"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Mã mặt hàng*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="itemId" name="itemId" value="123" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Chất liệu*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="itemMaterial" name="itemMaterial" value="123" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Giá bán*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="itemPrice" name="itemPrice" value="123" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3  control-label" for="exampleInputFile">Hình sản phẩm</label>
+                                        <div class="col-sm-9">
+                                            <input type="file" name="itemImg" class="form-control-file" id="itemImg" aria-describedby="fileHelp">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3  control-label" for="exampleInputFile2">Hình demo sản phẩm</label>
+                                        <div class="col-sm-9">
+                                            <input type="file" name="itemDemo" class="form-control-file" id="exampleInputFile2" aria-describedby="fileHelp">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Chiều ngang tối đa: *</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="itemWidthSize" class="form-control" id="itemWidthSize" value="123" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Chiều dọc tối đa: *</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="itemHeightSize" class="form-control" id="itemHeightSize" value="123" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Mô tả</label>
+                                        <div class="col-sm-9">
+                                            <textarea class="form-control" style="height:55px;" id="itemInfo" name="itemInfo"></textarea>
+                                        </div>
+                                    </div>
+                                    <input type="text" name="id" class="form-control" id="id" style="display:none">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="addNewItem">Thêm mới</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="editItem" style="display:none">Lưu các thay đổi</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="clearfix"></div>
+            {{!-- Modal edit Catalog --}}
+            <div class="modal fade" id="editCatalogModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLabel">Chỉnh sửa danh mục </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="testmodal" style="padding: 5px 20px;">
+                                <form id="editCatForm" class="form-horizontal calender" role="form">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Tên danh mục*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="edittitle" name="title" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Mô tả</label>
+                                        <div class="col-sm-9">
+                                            <textarea class="form-control" style="height:55px;" id="editsummary" name="summary"></textarea>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="editCatalogId" style="display:none" name="id">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="editCatalog">Lưu những thay đổi</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- group product -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2> Quản lý danh mục
-                                <small> item </small>
-                            </h2>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h2> Quản lý danh mục
+                                    </h2>  
+                                </div>
+                                <div class="col-md-3 text-right">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newCatalogModal">
+                                         Thêm danh mục mới
+                                    <i class="fas fa-plus"></i> 
+                                    </button>
+                                </div>
+                            </div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <div class="row">
-                                <p> Style 1 </p>
-                                <!-- 1 product -->
-                                <div class="col-md-5">
-                                    <div class="thumbnail">
-                                        <div class="image view view-first">
-                                            <img style="width: 100%; display: block;" src="image/frame7.jpg" alt="..." />
-                                            <div class="mask">
-                                                <p> 1 item remaining </p>
-                                                <div class="tools tools-bottom">
-                                                    <a href="#">
-                                                        <i class="fa fa-pencil" data-toggle="modal" data-target="#editModal"></i>
-                                                    </a>
-                                                    <a href="#">
-                                                        <i class="fa fa-times"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="caption">
-                                            <p> Skin frame by gold </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /1 prodcut -->
-                                <div class="col-md-55">
-                                    <div class="thumbnail">
-                                        <div class="image view view-first">
-                                            <img style="width: 100%; display: block;" src="image/frame7.jpg" alt="..." />
-                                            <div class="mask">
-                                                <p> 1 item remaining </p>
-                                                <div class="tools tools-bottom">
-                                                    <a href="#">
-                                                        <i class="fa fa-pencil" data-toggle="modal" data-target="#editModal"></i>
-                                                    </a>
-                                                    <a href="#">
-                                                        <i class="fa fa-times"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="caption">
-                                            <p> Skin frame by gold </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- -->
-                                <div class="col-md-55">
-                                    <div class="thumbnail">
-                                        <div class="image view view-first">
-                                            <img style="width: 100%; display: block;" src="image/frame7.jpg" alt="..." />
-                                            <div class="mask">
-                                                <p> 1 item remaining </p>
-                                                <div class="tools tools-bottom">
-                                                    <a href="#">
-                                                        <i class="fa fa-pencil" data-toggle="modal" data-target="#editModal"></i>
-                                                    </a>
-                                                    <a href="#">
-                                                        <i class="fa fa-times"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="caption">
-                                            <p> Skin frame by gold </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- -->
-                                <div class="col-md-55">
-                                    <div class="thumbnail">
-                                        <div class="image view view-first">
-                                            <img style="width: 100%; display: block;" src="image/frame7.jpg" alt="..." />
-                                            <div class="mask">
-                                                <p> 1 item remaining </p>
-                                                <div class="tools tools-bottom">
-                                                    <a href="#">
-                                                        <i class="fa fa-pencil" data-toggle="modal" data-target="#editModal"></i>
-                                                    </a>
-                                                    <a href="#">
-                                                        <i class="fa fa-times"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="caption">
-                                            <p> Skin frame by gold </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- -->
-                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tên danh mục</th>
+                                        <th>Số lượng sản phẩm</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="catalog">
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -174,128 +201,83 @@
             <div class="col-md-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2> Frame picture
-                            <small> item </small>
-                        </h2>
+                        <div class="row">
+                            <div class="col-md-9">
+                                 <h2> Quản lý chi tiết mặt hàng </h2>
+                            </div>
+                            <div class="col-md-3 text-right">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newItemModal">
+                                Thêm mặt hàng mới
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            </div>
+                        </div>
+                       
+                        <div>
+                            
+                        </div>
+                        <br>
+                        <div class="row" style="margin-top:5px">
+                            <div class="col-md-6 ">
+                            
+                             <label for="catalogSelect">Danh mục</label>
+                                <select class="form-control" id="catalogSelect"></select>
+                            </div>
+                            
+                            <div class="col-md-6 " >
+                            
+                                <label for="search">Tìm kiếm</label>
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="search" placeholder="Tìm kiếm">
+                                </div>
 
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <label for="fromDate">Từ ngày</label>
+                                <input class="form-control" type="date" value="" id="fromDate">
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="toDate">Đến ngày</label>
+                                <input class="form-control" type="date" value="" id="toDate">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="fromDate">Giá bán từ</label>
+                                <input class="form-control" type="number" value="" id="fromDate">
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="toDate">Đến giá</label>
+                                <input class="form-control" type="number" value="" id="toDate">
+                            </div>
+
+                        </div>
                         <div class="clearfix"></div>
                     </div>
 
                     <div class="x_content">
-                        <div class="row">
-                            <p> Style 2 </p>
-                            <!-- 1 product -->
-                            <div class="col-md-55">
-                                <div class="thumbnail">
-                                    <div class="image view view-first">
-                                        <img style="width: 100%; display: block;" src="image/frame7.jpg" alt="..." />
-                                        <div class="mask">
-                                            <p> 1 item remaining </p>
-                                            <div class="tools tools-bottom">
-                                                <a href="#">
-                                                    <i class="fa fa-pencil" data-toggle="modal" data-target="#editModal"></i>
-                                                </a>
-                                                <a href="#">
-                                                    <i class="fa fa-times"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="caption">
-                                        <p> Skin frame by Silver </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /1 prodcut -->
-                            <div class="col-md-55">
-                                <div class="thumbnail">
-                                    <div class="image view view-first">
-                                        <img style="width: 100%; display: block;" src="image/frame7.jpg" alt="..." />
-                                        <div class="mask">
-                                            <p> 1 item remaining </p>
-                                            <div class="tools tools-bottom">
-                                                <a href="#">
-                                                    <i class="fa fa-pencil" data-toggle="modal" data-target="#editModal"></i>
-                                                </a>
-                                                <a href="#">
-                                                    <i class="fa fa-times"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="caption">
-                                        <p> Skin frame by Silver </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- -->
-                            <div class="col-md-55">
-                                <div class="thumbnail">
-                                    <div class="image view view-first">
-                                        <img style="width: 100%; display: block;" src="image/frame7.jpg" alt="..." />
-                                        <div class="mask">
-                                            <p> 1 item remaining </p>
-                                            <div class="tools tools-bottom">
-                                                <a href="#">
-                                                    <i class="fa fa-pencil" data-toggle="modal" data-target="#editModal"></i>
-                                                </a>
-                                                <a href="#">
-                                                    <i class="fa fa-times"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="caption">
-                                        <p> Skin frame by Silver </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- -->
-                            <div class="col-md-55">
-                                <div class="thumbnail">
-                                    <div class="image view view-first">
-                                        <img style="width: 100%; display: block;" src="image/frame7.jpg" alt="..." />
-                                        <div class="mask">
-                                            <p> 1 item remaining </p>
-                                            <div class="tools tools-bottom">
-                                                <a href="#">
-                                                    <i class="fa fa-pencil" data-toggle="modal" data-target="#editModal"></i>
-                                                </a>
-                                                <a href="#">
-                                                    <i class="fa fa-times"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="caption">
-                                        <p> Skin frame by Silver </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- -->
-                            <div class="col-md-55">
-                                <div class="thumbnail">
-                                    <div class="image view view-first">
-                                        <img style="width: 100%; display: block;" src="image/frame7.jpg" alt="..." />
-                                        <div class="mask">
-                                            <p> 1 item remaining </p>
-                                            <div class="tools tools-bottom">
-                                                <a href="#">
-                                                    <i class="fa fa-pencil" data-toggle="modal" data-target="#editModal"></i>
-                                                </a>
-                                                <a href="#">
-                                                    <i class="fa fa-times"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="caption">
-                                        <p> Skin frame by Silver </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- -->
-                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Mã hàng</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Tên hàng</th>
+                                    <th>Chất liệu</th>
+                                    <th>Giá bán</th>
+                                    <th>Chỉnh sửa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="items">
+
+                            </tbody>
+                        </table>
+                        <ul id="pagination-demo" class="pagination pt-4"></ul>
                     </div>
                 </div>
             </div>
@@ -303,3 +285,193 @@
     </div>
 </div>
 <!-- /page main-->
+
+<script>
+    var id = 1;
+    var num_of_pages = 0;
+    var cur_page = -1;
+    var catalog_info = {};
+    var item_info = {}
+    function loadCatalog() {
+        var url = '/admin/getCatalogInfo';
+        $.ajax({
+            url: url,
+            cache: true,
+            success: function (data) {
+                catalog_info = data;
+                getTemplateAjax('/templates/catalog_row.hbs', '#catalog', data);
+                getTemplateAjax('/templates/catalog_select.hbs', '#catalogSelect', data);
+                getTemplateAjax('/templates/catalog_select.hbs', '#catalogId', data);
+                getTemplateAjax('/templates/catalog_select.hbs', '#chooseCatalog', data)
+            }
+        })
+    }
+    $('#catalogSelect').on('change', function () {
+        id = this.value;
+        loadItems(1);
+    })
+    $('#addCatalog').on('click', function () {
+        if ($('#newCatForm').valid()) {
+            $.ajax({
+                url: "/admin/newCatalog",
+                type: "POST",
+                data: $('#newCatForm').serialize(),
+                success: function (data) {
+                    loadCatalog();
+                    $('#newCatalogModal').modal('hide');
+                }
+            })
+        }
+    })
+
+    $('#editCatalog').on('click', function () {
+        if ($('#editCatForm').valid()) {
+            $.ajax({
+                url: "/admin/editCatalog",
+                type: "POST",
+                data: $('#editCatForm').serialize(),
+                success: function (data) {
+                    loadCatalog();
+                    $('#editCatalogModal').modal('hide');
+                }
+            })
+        }
+    })
+
+    $('#addNewItem').on('click', function () {
+        if (true) {
+            var form = $('#newItemForm')[0];
+            var data = new FormData(form);
+            data.append('img2', $('#newItemForm')[1])
+            $.ajax({
+                url: "/admin/newItem",
+                type: "POST",
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (data) {
+                    loadItems(cur_page)
+                    $('#newItemModal').modal('hide');
+                }
+            })
+        }
+    })
+
+    $('#editItem').on('click', function () {
+        if (true) {
+            var form = $('#newItemForm')[0];
+            var data = new FormData(form);
+            data.append('img2', $('#newItemForm')[1])
+            $.ajax({
+                url: "/admin/editItem",
+                type: "POST",
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (data) {
+                    loadItems(cur_page)
+                    $('#newItemModal').modal('hide');
+                }
+            })
+        }
+    })
+
+    function loadItems(page) {
+        var url = '/SanPham/catalog?catalogId=' + id + '&page=' + page;
+        console.log(url)
+        $.ajax({
+            url: url,
+            cache: true,
+            success: function (data) {
+                cur_page = page;
+                if (num_of_pages != data.pagination.num_of_pages) {
+                    num_of_pages = data.pagination.num_of_pages;
+                    $('#pagination-demo').twbsPagination('destroy');
+                    $('#pagination-demo').twbsPagination({
+                        totalPages: num_of_pages,
+                        visiblePages: 3,
+                        next: '>',
+                        prev: '<',
+                        onPageClick: function (event, page) {
+                            loadItems(page)
+                        }
+                    });
+
+                }
+                item_info = data;
+                getTemplateAjax('/templates/catalog_items_row.hbs', '#items', data)
+            }
+        })
+    }
+    function editCatalog(id) {
+        catalog_info.catalogs.forEach(function (catalog) {
+            if (catalog.id == id) {
+                $('#edittitle').val(catalog.title);
+                $('#editsummary').val(catalog.summary);
+                $('#editCatalogId').val(id);
+                $('#editCatalogModal').modal('show');
+            }
+        });
+    }
+    function deleteCatalog(id) {
+        r = confirm("Bạn có chắc chắn muốn xóa catalog id = " + id + "?");
+        if (r == true) {
+            $.ajax({
+                url: "/admin/deleteCatalog",
+                type: "POST",
+                data: { id: id },
+                success: function (data) {
+                    loadCatalog();
+                }
+            })
+        }
+        return;
+    }
+    function deleteItem(id) {
+        r = confirm("Bạn có chắc chắn muốn xóa sản phẩm id = " + id + "?");
+        if (r == true) {
+            $.ajax({
+                url: "/admin/deleteItem",
+                type: "POST",
+                data: { id: id },
+                success: function (data) {
+                    loadItems(cur_page);
+                }
+            })
+        }
+        return;
+    }
+    $('#newCatForm').on('keyup keypress', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    function editItem(id) {
+        item_info.itemslist.Items.forEach(function (item) {
+            if (item.id == id) {
+                $('#itemName').val(item.itemName);
+                $('#itemId').val(item.itemId);
+                $('#catalogId').val(item.CatalogId);
+                $('#itemMaterial').val(item.itemMaterial);
+                $('#itemPrice').val(item.itemPrice);
+                $('#itemWidthSize').val(item.itemWidthSize);
+                $('#itemHeightSize').val(item.itemHeightSize);
+                $('#itemInfo').val(item.itemInfo);
+                $('#addNewItem').css('display', 'none');
+                $('#editItem').css('display', 'inline');
+                $('#id').val(id);
+                $('#newItemModal').modal('show');
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        loadCatalog();
+        loadItems(1);
+    })
+</script>
