@@ -6,4 +6,4 @@ npm install --save express body-parser express-handlebars express-handlebars-pag
 
 Create database:
 node_modules/.bin/sequelize init
-node_modules/.bin/sequelize model:generate --name User --attributes email:string`
+node_modules/.bin/sequelize model:generate --name User --attributes email:string
