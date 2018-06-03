@@ -33,6 +33,9 @@ hbs.handlebars.registerHelper('linebreak',function(i){
 hbs.handlebars.registerHelper('linebreakclose',function(i){
 	return ((i+1)%3) == 0;
 })
+hbs.handlebars.registerHelper('countCart', (count) => {
+	return count > 0;
+})
 //Public folder
 app.use(express.static(__dirname + '/public'));
 

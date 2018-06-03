@@ -54,7 +54,7 @@
                                 {{#each items}}
                                 <tr class = "giohang_item">
                                     <td scope="row"> #{{item.id}}
-                                    <i class="fas fa-trash-alt trashbin"></i>
+                                    <i class="fas fa-trash-alt trashbin" onclick="remove_cart_item({{item.id}})"></i>
                                     </td>
                                     <td class="pr-0 " style="min-width: 200px;">
                                         <div class="d-flex flex-row">
@@ -161,7 +161,7 @@
             url:'/GioHang/add_cart_item?id=' +id, 
             cache: true,
             success: (data)=> {
-                    console.log(data)
+                location.reload();
             }
         })
     }
@@ -171,12 +171,21 @@
             url: '/GioHang/delete_cart_item?id=' +id,
             cache: true,
             success: (data)=>{
-                console.log(data)
+                location.reload();
             }
         })
     }
     var change_cart_item = (id) => {
         console.log(id)
+    }
+    var remove_cart_item = (id) => {
+        $.ajax({
+            url: '/GioHang/remove_cart_item?id=' +id,
+            cache: true,
+            success: (data)=>{
+                location.reload();
+            }
+        })
     }
      // read data cart from cookie
     var obj= {
