@@ -54,6 +54,7 @@
             url: url,
             cache: true,
             success: function (data) {
+                cur_page = page;
                  if (num_of_pages != data.pagination.num_of_pages) {
                     num_of_pages = data.pagination.num_of_pages;
                     $('#pagination-demo').twbsPagination('destroy');
@@ -66,7 +67,6 @@
                             loadItems(page)
                         }
                     });
-                    cur_page = page;
                 } 
                 getTemplateAjax('/templates/users_row.hbs', '#users', data)
             }
@@ -91,6 +91,7 @@
             type: 'GET',
             data: {userId:userID,action:action},
             success: function(data){ 
+                loadItems(cur_page);
             },
             complete: function(data){
                 loadItems(cur_page);
