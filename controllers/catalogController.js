@@ -15,6 +15,17 @@ controller.getAll = function (callback) {
         })
 };
 
+controller.getById = function (catalogId, page, callback) {
+    models.Catalog
+        .findOne({
+            where: { id: catalogId },
+            include: [{ model: models.Item, limit: itemsPerPage, offset: (page - 1) * itemsPerPage }]
+        })
+        .then(function (catalog) {
+            callback(catalog);
+        });
+};
+
 controller.add = function(new_title,new_summary, callback){
     models.Catalog
     .create({
@@ -40,17 +51,6 @@ controller.update = function(id,new_title,new_summary, callback){
     });
 };
 
-controller.getById = function (catalogId, page, callback) {
-    models.Catalog
-        .findOne({
-            where: { id: catalogId },
-            include: [{ model: models.Item, limit: itemsPerPage, offset: (page - 1) * itemsPerPage }],
-            // order: [['Items.itemName','ASC']]
-        })
-        .then(function (catalog) {
-            callback(catalog);
-        });
-};
 
 controller.countById = function (catalogId, callback) {
     models.Catalog.

@@ -1,8 +1,6 @@
 module.exports = function (app, paypal, onepayDom) {
     // Paypal 
     app.post('/paypal', function (req, res) {
-        console.log("Cart: TP");
-        console.log(req.session.cart)
         const create_payment_json = {
             "intent": "sale",
             "payer": {
@@ -13,15 +11,6 @@ module.exports = function (app, paypal, onepayDom) {
                 "cancel_url": "http://localhost:5000/cancle"
             },
             "transactions": [{
-                "item_list": {
-                    "items": [{
-                        "name": "item",
-                        "sku": "item",
-                        "price": "1.00",
-                        "currency": "USD",
-                        "quantity": 1
-                    }]
-                },
                 "amount": {
                     "currency": "USD",
                     "total": "1.00"
@@ -29,6 +18,8 @@ module.exports = function (app, paypal, onepayDom) {
                 "description": "This is the payment description."
             }]
         };
+        create_payment_json.transactions[0].amount.total = req.session.cart.priceAll;
+        
         paypal.payment.create(create_payment_json, function (error, payment) {
             if (error) {
                 throw error;
@@ -57,10 +48,8 @@ module.exports = function (app, paypal, onepayDom) {
         };
         paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
             if (error) {
-                console.log(error.response);
                 throw error;
             } else {
-                console.log(JSON.stringify(payment));
                 res.send('Success')
             }
         });
@@ -79,7 +68,7 @@ module.exports = function (app, paypal, onepayDom) {
             req.socket.remoteAddress ||
             (req.connection.socket ? req.connection.socket.remoteAddress : null);
 
-        const amount = parseInt('200000'.replace(/,/g, ''), 10);
+        const amount = req.session.cart.priceAll;
         const now = new Date();
 
         // NOTE: only set the common required fields and optional fields from all gateways here, redundant fields will invalidate the payload schema checker

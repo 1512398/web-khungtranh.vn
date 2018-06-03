@@ -52,14 +52,11 @@ router.get('/banUser', function (req, res) {
 var catalogController = require('../controllers/catalogController');
 router.get('/getCatalogInfo', function (req, res) {
     catalogController.getAll(function (catalog) {
-        // console.log(catalog);
         var arr_catalog = [];
         catalog.forEach(element => {
             arr_catalog.push({ id: element.id, title: element.title, summary: element.summary, count: element.Items.length });
-            // console.log(element.Items.length)
         });
         res.json({ catalogs: arr_catalog });
-        // console.log(catalog.Items.length)
     })
 })
 
@@ -173,4 +170,5 @@ router.post('/editItem',
                 res.send('done');
             })
         });
+
 module.exports = router;

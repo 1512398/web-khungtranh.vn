@@ -114,8 +114,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="addNewItem">Thêm mới</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="editItem" style="display:none">Lưu các thay đổi</button>
+                            <button type="button" class="btn btn-primary"  id="addNewItem">Thêm mới</button>
+                            <button type="button" class="btn btn-primary"  id="editItem" style="display:none">Lưu các thay đổi</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
 
                         </div>
@@ -164,12 +164,12 @@
                             <div class="row">
                                 <div class="col-md-9">
                                     <h2> Quản lý danh mục
-                                    </h2>  
+                                    </h2>
                                 </div>
                                 <div class="col-md-3 text-right">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newCatalogModal">
-                                         Thêm danh mục mới
-                                    <i class="fas fa-plus"></i> 
+                                        Thêm danh mục mới
+                                        <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
@@ -203,29 +203,29 @@
                     <div class="x_title">
                         <div class="row">
                             <div class="col-md-9">
-                                 <h2> Quản lý chi tiết mặt hàng </h2>
+                                <h2> Quản lý chi tiết mặt hàng </h2>
                             </div>
                             <div class="col-md-3 text-right">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newItemModal">
-                                Thêm mặt hàng mới
-                                <i class="fas fa-plus"></i>
-                            </button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" id="newItemButton">
+                                    Thêm mặt hàng mới
+                                    <i class="fas fa-plus"></i>
+                                </button>
                             </div>
                         </div>
-                       
+
                         <div>
-                            
+
                         </div>
                         <br>
                         <div class="row" style="margin-top:5px">
-                            <div class="col-md-6 ">
-                            
-                             <label for="catalogSelect">Danh mục</label>
+                            <div class="col-md-5 ">
+
+                                <label for="catalogSelect">Danh mục</label>
                                 <select class="form-control" id="catalogSelect"></select>
                             </div>
-                            
-                            <div class="col-md-6 " >
-                            
+
+                            <div class="col-md-6 ">
+
                                 <label for="search">Tìm kiếm</label>
                                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <div class="input-group-addon">
@@ -235,31 +235,38 @@
                                 </div>
 
                             </div>
+                            <div class="col-md-1 align-content-center text-center ">
+                                <label for="search"> Tìm/lọc
+                                    <br>
+                                </label>
+                                <button class="btn btn-primary align-bottom" id="search_filter">Tìm</button>
+                            </div>
                         </div>
                         <div class="row">
 
                             <div class="col-md-3">
                                 <label for="fromDate">Từ ngày</label>
-                                <input class="form-control" type="date" value="" id="fromDate">
+                                <input class="form-control" type="date" min="0" value="" id="fromDate">
                             </div>
 
                             <div class="col-md-3">
                                 <label for="toDate">Đến ngày</label>
-                                <input class="form-control" type="date" value="" id="toDate">
+                                <input class="form-control" type="date" min="0" value="" id="toDate">
                             </div>
                             <div class="col-md-3">
                                 <label for="fromDate">Giá bán từ</label>
-                                <input class="form-control" type="number" value="" id="fromDate">
+                                <input class="form-control" type="number" value="" id="fromPrice">
                             </div>
 
                             <div class="col-md-3">
                                 <label for="toDate">Đến giá</label>
-                                <input class="form-control" type="number" value="" id="toDate">
+                                <input class="form-control" type="number" value="" id="toPrice">
                             </div>
 
                         </div>
-                        <div class="clearfix"></div>
-                    </div>
+                        <div class="row" style="padding:10px; padding-left:15px; padding-bottom: 0px">
+                                 <p style="color:green; font-style:italic" id="countRows"></p>
+                        </div>
 
                     <div class="x_content">
                         <table class="table">
@@ -273,21 +280,29 @@
                                     <th>Chỉnh sửa</th>
                                 </tr>
                             </thead>
+
                             <tbody id="items">
 
                             </tbody>
                         </table>
+                        <div id="noItem" style="display:none">
+                            Không có sản phẩm nào
+                        </div>
+
                         <ul id="pagination-demo" class="pagination pt-4"></ul>
+
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
 <!-- /page main-->
 
 <script>
-    var id = 1;
+    var id = 4;
     var num_of_pages = 0;
     var cur_page = -1;
     var catalog_info = {};
@@ -300,7 +315,7 @@
             success: function (data) {
                 catalog_info = data;
                 getTemplateAjax('/templates/catalog_row.hbs', '#catalog', data);
-                getTemplateAjax('/templates/catalog_select.hbs', '#catalogSelect', data);
+                getTemplateAjax('/templates/catalog_select_s.hbs', '#catalogSelect', data);
                 getTemplateAjax('/templates/catalog_select.hbs', '#catalogId', data);
                 getTemplateAjax('/templates/catalog_select.hbs', '#chooseCatalog', data)
             }
@@ -308,7 +323,7 @@
     }
     $('#catalogSelect').on('change', function () {
         id = this.value;
-        loadItems(1);
+        executeSearch(1);
     })
     $('#addCatalog').on('click', function () {
         if ($('#newCatForm').valid()) {
@@ -339,7 +354,7 @@
     })
 
     $('#addNewItem').on('click', function () {
-        if (true) {
+         if ($('#newItemForm').valid()) {
             var form = $('#newItemForm')[0];
             var data = new FormData(form);
             data.append('img2', $('#newItemForm')[1])
@@ -351,7 +366,7 @@
                 contentType: false,
                 cache: false,
                 success: function (data) {
-                    loadItems(cur_page)
+                    {{!-- loadItems(cur_page) --}}
                     $('#newItemModal').modal('hide');
                 }
             })
@@ -359,7 +374,7 @@
     })
 
     $('#editItem').on('click', function () {
-        if (true) {
+        if ($('#newItemForm').valid()) {
             var form = $('#newItemForm')[0];
             var data = new FormData(form);
             data.append('img2', $('#newItemForm')[1])
@@ -371,14 +386,15 @@
                 contentType: false,
                 cache: false,
                 success: function (data) {
-                    loadItems(cur_page)
+                    console.log(cur_page) 
+                    executeSearch(cur_page)
                     $('#newItemModal').modal('hide');
                 }
             })
         }
     })
 
-    function loadItems(page) {
+    {{!-- function loadItems(page) {
         var url = '/SanPham/catalog?catalogId=' + id + '&page=' + page;
         console.log(url)
         $.ajax({
@@ -388,23 +404,29 @@
                 cur_page = page;
                 if (num_of_pages != data.pagination.num_of_pages) {
                     num_of_pages = data.pagination.num_of_pages;
-                    $('#pagination-demo').twbsPagination('destroy');
-                    $('#pagination-demo').twbsPagination({
-                        totalPages: num_of_pages,
-                        visiblePages: 3,
-                        next: '>',
-                        prev: '<',
-                        onPageClick: function (event, page) {
-                            loadItems(page)
-                        }
-                    });
-
+                    if (num_of_pages == 0) {
+                        $('#noItem').css('display', 'inline');
+                        $('#pagination-demo').twbsPagination('destroy');
+                    }
+                    else {
+                        $('#pagination-demo').twbsPagination('destroy');
+                        $('#pagination-demo').twbsPagination({
+                            totalPages: num_of_pages,
+                            visiblePages: 3,
+                            next: '>',
+                            prev: '<',
+                            onPageClick: function (event, page) {
+                                loadItems(page)
+                            }
+                        });
+                    }
                 }
                 item_info = data;
                 getTemplateAjax('/templates/catalog_items_row.hbs', '#items', data)
             }
         })
-    }
+    } --}}
+    
     function editCatalog(id) {
         catalog_info.catalogs.forEach(function (catalog) {
             if (catalog.id == id) {
@@ -437,7 +459,7 @@
                 type: "POST",
                 data: { id: id },
                 success: function (data) {
-                    loadItems(cur_page);
+                    executeSearch(cur_page);
                 }
             })
         }
@@ -451,8 +473,25 @@
         }
     });
 
+    function newItem() {
+                $('#itemName').val('');
+                $('#itemId').val('');
+                $('#catalogId').val('');
+                $('#itemMaterial').val('');
+                $('#itemPrice').val('');
+                $('#itemWidthSize').val('');
+                $('#itemHeightSize').val('');
+                $('#itemInfo').val('');
+                $('#addNewItem').css('display', 'inline');
+                $('#editItem').css('display', 'none');
+                $('#newItemModal').modal('show'); 
+    }
+
+    $('#newItemButton').on('click',function(){
+        newItem();
+    })
     function editItem(id) {
-        item_info.itemslist.Items.forEach(function (item) {
+        item_info.itemsList.rows.forEach(function (item) {
             if (item.id == id) {
                 $('#itemName').val(item.itemName);
                 $('#itemId').val(item.itemId);
@@ -469,9 +508,59 @@
             }
         });
     }
-
+    function executeSearch(page) {
+        var fromDate = $('#fromDate').val();
+        var toDate = $('#toDate').val();
+        var fromPrice = $('#fromPrice').val();
+        var toPrice = $('#toPrice').val();
+        var searchQuery = $('#search').val();
+        var CatalogId = $('#catalogSelect').val();
+        $.ajax({
+            url: '/SanPham/catalog',
+            type: 'GET',
+            data: {
+                page:page,
+                CatalogId: CatalogId,
+                fromDate: fromDate,
+                toDate: toDate,
+                fromPrice: fromPrice,
+                toPrice: toPrice,
+                searchString: searchQuery
+            },
+            success: function (data) {
+                cur_page = page;
+               
+                $('#countRows').text('Có tổng cộng '+data.itemsList.count+' sản phẩm được tìm thấy');
+                if (num_of_pages != data.pagination.num_of_pages) {
+                    num_of_pages = data.pagination.num_of_pages;
+                    if (num_of_pages == 0) {
+                        $('#noItem').css('display', 'inline');
+                        $('#pagination-demo').twbsPagination('destroy');
+                    }
+                    else {
+                        $('#pagination-demo').twbsPagination('destroy');
+                        $('#pagination-demo').twbsPagination({
+                            totalPages: num_of_pages,
+                            visiblePages: 3,
+                            next: '>',
+                            prev: '<',
+                            onPageClick: function (event, page) {
+                                executeSearch(page)
+                            }
+                        });
+                    }
+                }
+                item_info = data;
+                getTemplateAjax('/templates/catalog_items_row.hbs', '#items', data)
+            }
+        })
+    }
+    $('#search_filter').on('click', function () {
+        executeSearch(1)
+    });
     $(document).ready(function () {
         loadCatalog();
-        loadItems(1);
+      
+
     })
 </script>
