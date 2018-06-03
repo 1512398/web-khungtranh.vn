@@ -23,7 +23,7 @@ router.get('/catalog', function (req, res) {
     searchQuery.fromDate = req.query.fromDate;
     searchQuery.toDate = req.query.toDate;
     searchQuery.findString= req.query.searchString;
-
+    console.log('search query: ',searchQuery);
     itemController.search(searchQuery,limit,offset,function(items){
         res.json({
             itemsList: items,

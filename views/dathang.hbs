@@ -132,6 +132,7 @@
 </main>
 
 <script>
+   
     var saveIdChoose = -1;
     // add_item
     
@@ -182,24 +183,25 @@
     var id = 1;
     var num_of_pages = 0;
     function loadItems(page) {
-        var url = '/SanPham/catalog?catalogId=' + id + '&page=' + page;
+        var url = '/SanPham/catalog'
         console.log(url)
         $.ajax({
-            url: url,
-            cache: true,
+            url: '/SanPham/catalog',
+            type: 'GET',
+            data: {
+                page:page,
+                CatalogId: id,
+                {{!-- fromDate: fromDate,
+                toDate: toDate,
+                fromPrice: fromPrice,
+                toPrice: toPrice,
+                searchString: searchQuery --}}
+            },
             success: function (data) {
                 if (num_of_pages != data.pagination.num_of_pages) {
                     num_of_pages = data.pagination.num_of_pages;
-                    $('#pagination-demo').twbsPagination('destroy');
-                    $('#pagination-demo').twbsPagination({
-                        totalPages: num_of_pages,
-                        visiblePages: 3,
-                        next: '>',
-                        prev: '<',
-                        onPageClick: function (event, page) {
-                            loadItems(page)
-                        }
-                    });   
+                    handlePagination(num_of_pages); 
+                   
                 }
                 getTemplateAjax('/templates/items_row.hbs', '#items', data)
             }

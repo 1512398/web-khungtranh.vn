@@ -67,6 +67,23 @@
         </div>
 </main>
 <script>
+        function handlePagination(num_of_pages){
+    if (num_of_pages == 0){
+                     $('#pagination-demo').twbsPagination('destroy');
+                }
+                else {
+                     $('#pagination-demo').twbsPagination('destroy');
+                $('#pagination-demo').twbsPagination({
+                    totalPages: num_of_pages,
+                    visiblePages: 3,
+                    next: '>',
+                    prev: '<',
+                    onPageClick: function (event, page) {
+                        loadItems(page)
+                    }
+                });   
+                }
+}
         var add_cart_item = (id) => {
                 console.log(id)
                 url:
@@ -89,29 +106,29 @@
         })
         {{/each}}
         function loadItems(page) {
-                var url = '/SanPham/catalog?catalogId=' + id + '&page=' + page;
-                console.log(url)
-                $.ajax({
-                        url: url,
-                        cache: true,
-                        success: function (data) {
-                                if (num_of_pages != data.pagination.num_of_pages){
-                                        num_of_pages = data.pagination.num_of_pages;
-                                        $('#pagination-demo').twbsPagination('destroy');
-                                        $('#pagination-demo').twbsPagination({
-                                        totalPages: num_of_pages,
-                                        visiblePages: 3,
-                                        onPageClick: function (event, page) {
-                                                loadItems(page)
-                                        }
-                                       
-
-                                }); 
-                                }
-                                
-                                getTemplateAjax('/templates/items.hbs', '#items', data)
-                        }
-                })
+                var url = '/SanPham/catalog'
+        console.log(url)
+        $.ajax({
+            url: '/SanPham/catalog',
+            type: 'GET',
+            data: {
+                page:page,
+                CatalogId: id,
+                {{!-- fromDate: fromDate,
+                toDate: toDate,
+                fromPrice: fromPrice,
+                toPrice: toPrice,
+                searchString: searchQuery --}}
+            },
+            success: function (data) {
+                if (num_of_pages != data.pagination.num_of_pages) {
+                    num_of_pages = data.pagination.num_of_pages;
+                    handlePagination(num_of_pages); 
+                   
+                }
+                getTemplateAjax('/templates/items_row.hbs', '#items', data)
+            }
+        })
         }
         function getTemplateAjax(path, target, jsonData) {
                 var source;
