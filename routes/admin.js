@@ -123,6 +123,7 @@ router.post('/newItem',
             req.body.itemWidthSize,
             req.body.itemHeightSize,
             req.body.catalogId,
+            req.body.itemStatus,
             function (item) {
             res.send(req.body);
         })
@@ -166,6 +167,7 @@ router.post('/editItem',
                 req.body.itemWidthSize,
                 req.body.itemHeightSize,
                 req.body.catalogId,
+                req.body.itemStatus,
                 function (item) {
                 res.send('done');
             })

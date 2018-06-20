@@ -1,4 +1,5 @@
 <script src="/js/jquery.twbsPagination.min.js"></script>
+<script src="/js/search.js"></script>
 <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 <!-- page main -->
 <div class="right_col" role="main">
@@ -67,6 +68,26 @@
                                             <input type="text" class="form-control" id="itemId" name="itemId" value="123" required>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Loại sản phẩm</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" id="itemTypeSelect" required value="123" name="itemType">
+                                                <option value="Khung đặt làm">Khung đặt làm</option>
+                                                <option value="Khung làm sẵn">Khung làm sẵn</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Trạng thái</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" id="itemStatusSelect" required value="123" name="itemStatus">
+                                                <option value="1">Còn hàng</option>
+                                                <option value="2">Tạm hết hàng</option>
+                                                <option value="3">Ngưng kinh doanh</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                  
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Chất liệu*</label>
                                         <div class="col-sm-9">
@@ -216,14 +237,15 @@
 
                         </div>
                         <br>
+                        {{!-- Tim kiem, sap xep --}}
                         <div class="row" style="margin-top:5px">
-                            <div class="col-md-5 ">
+                            <div class="col-md-4 ">
 
                                 <label for="catalogSelect">Danh mục</label>
                                 <select class="form-control" id="catalogSelect"></select>
                             </div>
 
-                            <div class="col-md-6 ">
+                            <div class="col-md-5 ">
 
                                 <label for="search">Tìm kiếm</label>
                                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
@@ -234,13 +256,27 @@
                                 </div>
 
                             </div>
+                            <div class="col-md-2">
+                                <label for="sortBy"> Sắp xếp
+                                    <br>
+                                </label>
+                                      <select class="form-control" id="sortBy">
+                                        <option value="1">Tên từ A - Z</option>
+                                        <option value="2">Tên từ Z - A</option>
+                                        <option value="3">Giá tăng dần</option>
+                                        <option value="4">Giá giảm dần</option>
+                                    </select>
+                            </div>
                             <div class="col-md-1 align-content-center text-center ">
                                 <label for="search"> Tìm/lọc
                                     <br>
                                 </label>
-                                <button class="btn btn-primary align-bottom" id="search_filter">Tìm</button>
+                                <button class="btn btn-primary align-bottom" id="search_filter" style="width:100%">Tìm</button>
                             </div>
+                            
+                            
                         </div>
+                        {{!-- Filter/bo loc --}}
                         <div class="row">
 
                             <div class="col-md-3">
@@ -276,6 +312,7 @@
                                     <th>Tên hàng</th>
                                     <th>Chất liệu</th>
                                     <th>Giá bán</th>
+                                    <th>Tình trạng</th>
                                     <th>Chỉnh sửa</th>
                                 </tr>
                             </thead>
@@ -307,6 +344,7 @@
     var cur_page = -1;
     var catalog_info = {};
     var item_info = {}
+    var templateLink = '/templates/catalog_items_row.hbs'
     function loadCatalog() {
         var url = '/admin/getCatalogInfo';
         $.ajax({
@@ -323,7 +361,7 @@
     }
     $('#catalogSelect').on('change', function () {
         id = this.value;
-        executeSearch(1);
+        executeSearch(1,templateLink);
     })
     $('#addCatalog').on('click', function () {
         if ($('#newCatForm').valid()) {
@@ -366,7 +404,6 @@
                 contentType: false,
                 cache: false,
                 success: function (data) {
-                    {{!-- loadItems(cur_page) --}}
                     $('#newItemModal').modal('hide');
                 }
             })
@@ -386,47 +423,14 @@
                 contentType: false,
                 cache: false,
                 success: function (data) {
-                    console.log(cur_page) 
-                    executeSearch(cur_page)
+                    executeSearch(cur_page,templateLink)
                     $('#newItemModal').modal('hide');
                 }
             })
         }
     })
 
-    {{!-- function loadItems(page) {
-        var url = '/SanPham/catalog?catalogId=' + id + '&page=' + page;
-        console.log(url)
-        $.ajax({
-            url: url,
-            cache: true,
-            success: function (data) {
-                cur_page = page;
-                if (num_of_pages != data.pagination.num_of_pages) {
-                    num_of_pages = data.pagination.num_of_pages;
-                    if (num_of_pages == 0) {
-                        $('#noItem').css('display', 'inline');
-                        $('#pagination-demo').twbsPagination('destroy');
-                    }
-                    else {
-                        $('#pagination-demo').twbsPagination('destroy');
-                        $('#pagination-demo').twbsPagination({
-                            totalPages: num_of_pages,
-                            visiblePages: 3,
-                            next: '>',
-                            prev: '<',
-                            onPageClick: function (event, page) {
-                                loadItems(page)
-                            }
-                        });
-                    }
-                }
-                item_info = data;
-                getTemplateAjax('/templates/catalog_items_row.hbs', '#items', data)
-            }
-        })
-    } --}}
-    
+
     function editCatalog(id) {
         catalog_info.catalogs.forEach(function (catalog) {
             if (catalog.id == id) {
@@ -437,8 +441,8 @@
             }
         });
     }
-    function deleteCatalog(id) {
-        r = confirm("Bạn có chắc chắn muốn xóa catalog id = " + id + "?");
+    function deleteCatalog(id,name) {
+        r = confirm("Bạn có chắc chắn muốn xóa catalog " + name + "?");
         if (r == true) {
             $.ajax({
                 url: "/admin/deleteCatalog",
@@ -451,15 +455,15 @@
         }
         return;
     }
-    function deleteItem(id) {
-        r = confirm("Bạn có chắc chắn muốn xóa sản phẩm id = " + id + "?");
+    function deleteItem(id,name) {
+        r = confirm("Bạn có chắc chắn muốn xóa sản phẩm" + name + "?");
         if (r == true) {
             $.ajax({
                 url: "/admin/deleteItem",
                 type: "POST",
                 data: { id: id },
                 success: function (data) {
-                    executeSearch(cur_page);
+                    executeSearch(cur_page,templateLink);
                 }
             })
         }
@@ -504,63 +508,34 @@
                 $('#addNewItem').css('display', 'none');
                 $('#editItem').css('display', 'inline');
                 $('#id').val(id);
+                $('#newItemModalLabel').text("Cập nhật thông tin mặt hàng");
                 $('#newItemModal').modal('show');
             }
         });
     }
-    function executeSearch(page) {
-        var fromDate = $('#fromDate').val();
-        var toDate = $('#toDate').val();
-        var fromPrice = $('#fromPrice').val();
-        var toPrice = $('#toPrice').val();
-        var searchQuery = $('#search').val();
-        var CatalogId = $('#catalogSelect').val();
-        $.ajax({
-            url: '/SanPham/catalog',
-            type: 'GET',
-            data: {
-                page:page,
-                CatalogId: CatalogId,
-                fromDate: fromDate,
-                toDate: toDate,
-                fromPrice: fromPrice,
-                toPrice: toPrice,
-                searchString: searchQuery
-            },
-            success: function (data) {
-                cur_page = page;
-               
-                $('#countRows').text('Có tổng cộng '+data.itemsList.count+' sản phẩm được tìm thấy');
-                if (num_of_pages != data.pagination.num_of_pages) {
-                    num_of_pages = data.pagination.num_of_pages;
-                    if (num_of_pages == 0) {
-                        $('#noItem').css('display', 'inline');
-                        $('#pagination-demo').twbsPagination('destroy');
-                    }
-                    else {
-                        $('#pagination-demo').twbsPagination('destroy');
-                        $('#pagination-demo').twbsPagination({
-                            totalPages: num_of_pages,
-                            visiblePages: 3,
-                            next: '>',
-                            prev: '<',
-                            onPageClick: function (event, page) {
-                                executeSearch(page)
-                            }
-                        });
-                    }
-                }
-                item_info = data;
-                getTemplateAjax('/templates/catalog_items_row.hbs', '#items', data)
-            }
-        })
-    }
+    
     $('#search_filter').on('click', function () {
-        executeSearch(1)
+        executeSearch(1,templateLink)
     });
     $(document).ready(function () {
         loadCatalog();
-      
+        Handlebars.registerHelper( "compare", function( v1, op, v2, options ) {
+
+  var c = {
+    "eq": function( v1, v2 ) {
+      return v1 == v2;
+    },
+    "neq": function( v1, v2 ) {
+      return v1 != v2;
+    },
+
+  }
+
+  if( Object.prototype.hasOwnProperty.call( c, op ) ) {
+    return c[ op ].call( this, v1, v2 ) ? options.fn( this ) : options.inverse( this );
+  }
+  return options.inverse( this );
+} );
 
     })
 </script>

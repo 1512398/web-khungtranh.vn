@@ -1,8 +1,73 @@
 <script src="js/jquery.twbsPagination.min.js"></script>
+<script src="/js/search.js"></script>
 <link rel="stylesheet" href="./css/sanpham.css">
 <main class="pb-5 mb-5">
         <div class="container">
+                 {{!-- Tim kiem, sap xep --}}
+                        <div class="row" style="margin-top:5px">
+                            <div class="col-md-4 ">
 
+                                <label for="catalogSelect">Danh mục</label>
+                                <select class="form-control" id="catalogSelect"></select>
+                            </div>
+
+                            <div class="col-md-5 ">
+                                
+                                <label for="search">Tìm kiếm</label>
+                                <div class="input-group mb-2 mr-sm-2">
+                                        <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                        <a onclick=" $('#search').submit()">
+                                                                <i class="fas fa-search"></i>
+                                                        </a>
+                                                </div>
+                                        </div>                                 
+                                        <input type="text" class="form-control" id="search" placeholder="Nhập nội dung tìm kiếm" name="searchquery">
+                                </div>  
+                            </div>
+                            <div class="col-md-2">
+                                <label for="sortBy"> Sắp xếp
+                                    <br>
+                                </label>
+                                      <select class="form-control" id="sortBy">
+                                        <option value="1">Tên từ A - Z</option>
+                                        <option value="2">Tên từ Z - A</option>
+                                        <option value="3">Giá tăng dần</option>
+                                        <option value="4">Giá giảm dần</option>
+                                    </select>
+                            </div>
+                            <div class="col-md-1 align-content-center text-center ">
+                                <label for="search"> Tìm/lọc
+                                    <br>
+                                </label>
+                                <button class="btn btn-primary align-bottom" id="search_filter" style="width:100%">Tìm</button>
+                            </div>
+                            
+                            
+                        </div>
+                {{!-- Filter/bo loc --}}
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <label for="fromDate">Từ ngày</label>
+                                <input class="form-control" type="date" min="0" value="" id="fromDate">
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="toDate">Đến ngày</label>
+                                <input class="form-control" type="date" min="0" value="" id="toDate">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="fromDate">Giá bán từ</label>
+                                <input class="form-control" type="number" value="" id="fromPrice">
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="toDate">Đến giá</label>
+                                <input class="form-control" type="number" value="" id="toPrice">
+                            </div>
+
+                        </div>
                 <div class="row">
                         <div class="col-md-3 pl-0 mr-3">
                                 <div class="navMatHang">
@@ -19,37 +84,7 @@
                         <div class="col-md-9 d-flex card-deck mathanglist   justify-content-center">
                                 <div class="row p-0 pt-4" style="width:120%">
                                         <div class="col-lg-6 col-md-12">
-                                                <form action="/search" id="search">
-                                                <div class="input-group mb-2 mr-sm-2">
-                                                        <div class="input-group-prepend">
-                                                                <div class="input-group-text">
-                                                                        <a onclick=" $('#search').submit()">
-                                                                                <i class="fas fa-search"></i>
-                                                                        </a>
-                                                                </div>
-                                                        </div>
-                                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Nhập nội dung tìm kiếm" name="searchquery">
-                                                </div>
-                                                </form>
-                                        </div>
-
-                                        <div class="col-lg-6 col-md-12">
-                                                <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
-                                                <div class="input-group mb-2 mr-sm-2">
-                                                        <div class="input-group-prepend">
-                                                                <div class="input-group-text">
-                                                                        <i class="fas fa-sort-amount-down"></i>
-                                                                </div>
-                                                        </div>
-                                                        <select class="custom-select " id="inlineFormCustomSelectPref">
-                                                                <option selected>Sắp xếp sản phẩm...</option>
-                                                                <option value="1">Giá tăng dần</option>
-                                                                <option value="2">Giá giảm dần</option>
-                                                                <option value="3">Đánh giá tăng dần</option>
-                                                                <option value="3">Đánh giá giảm dần</option>
-                                                        </select>
-                                                </div>
-
+                                                
                                         </div>
                                 </div>
                                 <div>
@@ -58,7 +93,6 @@
                                 <!-- First row -->
                                 <div id="items">
                                 </div>
-
                                 <ul id="pagination-demo" class="pagination pt-4"></ul>
 
                         </div>
@@ -152,9 +186,23 @@
                         }
                 })
         }
-
+        $('#search_filter').on('click', function () {
+                executeSearch(1,'/templates/items.hbs')
+        });
+        function loadCatalog() {
+        var url = '/admin/getCatalogInfo';
+        $.ajax({
+            url: url,
+            cache: true,
+            success: function (data) {
+                catalog_info = data;
+                getTemplateAjax('/templates/catalog_select_s.hbs', '#catalogSelect', data);
+            }
+        })
+    }
         $(document).ready(function () {
+                loadCatalog();
                 $('.mypagination li').addClass('page-item');
                 $('.mypagination li a').addClass('page-link');
-        });    
+        });  
 </script>

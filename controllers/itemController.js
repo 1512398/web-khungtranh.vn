@@ -7,7 +7,7 @@ function nullToEmpty(name) {
         return (name)
 }
 var models = require('../models');
-controller.updateText = function (id, itemId, itemName, itemInfo, itemMaterial, itemPrice, itemWidthSize, itemHeightSize, catalogId, callback) {
+controller.updateText = function (id, itemId, itemName, itemInfo, itemMaterial, itemPrice, itemWidthSize, itemHeightSize, catalogId, itemStatus,callback) {
     models.Item
         .update({
             itemId: itemId,
@@ -17,7 +17,8 @@ controller.updateText = function (id, itemId, itemName, itemInfo, itemMaterial, 
             itemPrice: itemPrice,
             itemWidthSize: itemWidthSize,
             itemHeightSize: itemHeightSize,
-            CatalogId: catalogId
+            CatalogId: catalogId,
+            itemStatus:itemStatus
         },
             { where: { id: id } })
         .then(function (catalog) {
@@ -48,7 +49,7 @@ controller.updateItemDemo = function (id, itemImg, itemImgDemo, callback) {
 };
 
 
-controller.add = function (itemId, itemName, itemImg, itemImgDemo, itemInfo, itemMaterial, itemPrice, itemWidthSize, itemHeightSize, catalogId, callback) {
+controller.add = function (itemId, itemName, itemImg, itemImgDemo, itemInfo, itemMaterial, itemPrice, itemWidthSize, itemHeightSize, catalogId, itemStatus, callback) {
     models.Item
         .create({
             itemId: itemId,
@@ -60,7 +61,8 @@ controller.add = function (itemId, itemName, itemImg, itemImgDemo, itemInfo, ite
             itemPrice: itemPrice,
             itemWidthSize: itemWidthSize,
             itemHeightSize: itemHeightSize,
-            CatalogId: catalogId
+            CatalogId: catalogId,
+            itemStatus:itemStatus
         })
         .then(function (catalog) {
             callback(catalog);
@@ -81,6 +83,7 @@ const sequelize = require('sequelize');
 const Op = sequelize.Op;
 controller.search = function (searchQuery, limit, offset, callback) {
     var whereJson = {};
+    var sortBy = [];
     if ((searchQuery.CatalogId != undefined) && (searchQuery.CatalogId != '')) {
         whereJson.CatalogId = searchQuery.CatalogId;
     }
@@ -110,6 +113,24 @@ controller.search = function (searchQuery, limit, offset, callback) {
         var myDate = new Date(tmp[2], tmp[0] - 1, tmp[1]);
         whereJson.createdAt.lte = myDate;
     }
+    if ((searchQuery.sortBy != undefined) && (searchQuery.sortBy != '')) {
+        switch (searchQuery.sortBy) {
+            case "1":
+                sortBy = [['itemName','ASC']]
+                break;
+            case "2":
+                sortBy = [['itemName','DESC']]
+                break;
+            case "3":
+                sortBy = [['itemPrice','ASC']]
+                break;
+            case "4":
+                sortBy = [['itemPrice','DESC']]
+                break;
+            default:
+                break;
+        }
+    }
 
     if ((searchQuery.findString != undefined) && (searchQuery.findString != '')) {
         var tmp = String(searchQuery.findString).split(' ')
@@ -125,12 +146,12 @@ controller.search = function (searchQuery, limit, offset, callback) {
             }
         }
     }
-    // console.log(whereJson);
     models.Item.
         findAndCountAll({
             where: whereJson,
             limit:limit,
-            offset:offset
+            offset:offset,
+            order:sortBy
         }
         )
         .then(function (catalog) {

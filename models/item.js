@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     itemHeightSize: DataTypes.INTEGER,
     itemType: DataTypes.STRING,
     itemSizeInfo: DataTypes.STRING,
-    catalogId: DataTypes.INTEGER
-
+    catalogId: DataTypes.INTEGER,
+    itemStatus: DataTypes.INTEGER
   }, {});
   Item.associate = function (models) {
     Item.belongsTo(models.Catalog);
