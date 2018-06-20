@@ -2,9 +2,13 @@
 <script src="/js/search.js"></script>
 <link rel="stylesheet" href="./css/sanpham.css">
 <main class="pb-5 mb-5">
-        <div class="container">
-                 {{!-- Tim kiem, sap xep --}}
-                        <div class="row" style="margin-top:5px">
+      
+        <div class="container p-0">
+                {{!-- Tools collapse --}}
+               
+                <div class="collapse" id="collapseExample">
+                         {{!-- Tim kiem, sap xep --}}
+                        <div class="row" style="margin-top:5px" >
                             <div class="col-md-4 ">
 
                                 <label for="catalogSelect">Danh mục</label>
@@ -43,7 +47,6 @@
                                 <button class="btn btn-primary align-bottom" id="search_filter" style="width:100%">Tìm</button>
                             </div>
                             
-                            
                         </div>
                 {{!-- Filter/bo loc --}}
                         <div class="row">
@@ -68,8 +71,11 @@
                             </div>
 
                         </div>
+                <p style="color:green; font-style:italic " id="countRows"></p> 
+                </div>
+                
                 <div class="row">
-                        <div class="col-md-3 pl-0 mr-3">
+                        <div class="col-md-3 mt-2">
                                 <div class="navMatHang">
                                         <h4>Danh mục</h4>
                                         <ul class="nav flex-column">
@@ -79,25 +85,29 @@
                                                         </li>
                                                 {{/each}}
                                         </ul>
+                                        <h4 class="mt-2">Tìm kiếm</h4>
+                                        <div class="text-center">
+                                                <a class="btn btn-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                <i class="fas fa-search"></i>
+                                                Công cụ tìm kiếm
+                                                </a>
+                                             
+                                        </div> 
+                                        
+                                
                                 </div>
                         </div>
-                        <div class="col-md-9 d-flex card-deck mathanglist   justify-content-center">
-                                <div class="row p-0 pt-4" style="width:120%">
-                                        <div class="col-lg-6 col-md-12">
-                                                
-                                        </div>
-                                </div>
-                                <div>
-
-                                </div>
+                        <div class="col-md-9 d-flex card-deck mathanglist justify-content-center">
+                               
                                 <!-- First row -->
-                                <div id="items">
+                                <div id="items" class="p-2">
                                 </div>
                                 <ul id="pagination-demo" class="pagination pt-4"></ul>
 
                         </div>
 
                 </div>
+                
         </div>
 </main>
 <script>
@@ -180,7 +190,6 @@
                                 Handlebars.registerHelper('linebreakclose', function (i) {
                                         return ((i + 1) % 3) == 0;
                                 });
-
                                 template = Handlebars.compile(source);
                                 $(target).html(template(jsonData));
                         }
@@ -204,5 +213,22 @@
                 loadCatalog();
                 $('.mypagination li').addClass('page-item');
                 $('.mypagination li a').addClass('page-link');
+                        Handlebars.registerHelper( "compare", function( v1, op, v2, options ) {
+
+        var c = {
+            "eq": function( v1, v2 ) {
+            return v1 == v2;
+            },
+            "neq": function( v1, v2 ) {
+            return v1 != v2;
+            },
+
+        }
+
+        if( Object.prototype.hasOwnProperty.call( c, op ) ) {
+            return c[ op ].call( this, v1, v2 ) ? options.fn( this ) : options.inverse( this );
+        }
+        return options.inverse( this );
+        } );
         });  
 </script>
