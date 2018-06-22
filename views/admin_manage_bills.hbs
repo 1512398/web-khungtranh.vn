@@ -1,73 +1,193 @@
 <!-- page main -->
 <div class="right_col" role="main">
-    <div class="">
-        <div class="page-title">
-            <div class="title_left">
-                <h3> Manage Bill </h3>
-            </div>
-            <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
+    <div class="row tile_count">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                <h2>Hệ thống quản lý đơn hàng</h2>
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Nhập từ khóa...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">Tìm</button>
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="clearfix"></div>
-            <div id="row">
-                <div class="col-md-12">
-                    <div id="x_panel">
-                        <div class="x_title">
-                            <h2> Information </h2>
-                            <div id="clearfix"></div>
-                        </div>
-                        <div id="x_content">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th style="width:5%" class="mcenter">ID</th>
-                                        <th style="width:15%" class="mcenter"> Product </th>
-                                        <th style="width:10%" class="mcenter"> DateTime </th>
-                                        <th style="width:10%" class="mcenter"> User </th>
-                                        <th style="width:20%" class="mcenter"> Status </th>
-                                        <th style="width:10%" class="mcenter"> Edit </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="mcenter">
-                                            00108042018
-                                        </td>
-                                        <td class="mcenter">
-                                            <img src="image/frame1.png" alt="..." style="width:50px"> Frame by gold
-                                        </td>
-                                        <td class="mcenter" style="color:gray">
-                                            Friday, April 8th 2018
-                                        </td>
-                                        <td class="mcenter">
-                                            <strong>Thanh Phong</strong> Do</td>
-                                        <td class="mcenter" style=" color:green"> Paied by Credit Card</td>
-                                        <td class="mcenter">
-                                            <a href="javascript:;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#viewModal">
-                                                <i class="fa fa-folder" data-toggle="tooltip" data-placement="top" title="View bill"></i>
-                                            </a>
-                                            <a href="javascript:;" class="btn btn-info btn-md" data-toggle="modal" data-target="#editModal">
-                                                <i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i>
-                                            </a>
-                                            <a href="javascript:;" class="btn btn-danger btn-md">
-                                                <i class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="Move to system bin"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width:5%" class="mcenter">Mã số đơn hàng</th>
+                                <th style="width:15%" class="mcenter"> Tên Mặt hàng </th>
+                                <th style="width:10%" class="mcenter"> Thời gian </th>
+                                <th style="width:10%" class="mcenter"> Người dùng </th>
+                                <th style="width:10%" class="mcenter"> Giá </th>
+                                <th style="width:10%" class="mcenter"> Trạng Thái </th>
+                                <th style="width:10%" class="mcenter"> Chỉnh sửa </th>
+                            </tr>
+                        </thead>
+                        <tbody id="bills">
+                            <div></div>
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        <ul id="pagination-demo" class="pagination pt-4"></ul>
+                    </div>            
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel"> Hoá Đơn </h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" >
+            <div id="testmodal" style="padding: 5px 10px;">
+                <div id="listItemBill"></div>
+                <!-- <div class="row">
+                    <div class="col-xs-4">
+                        <div id="prodcut-image">
+                            <img src="/image/frame2.jpg" alt="..." style="text-align: center">
+                        </div>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="row">
+                            <div class="col-md-3"> Tên khung </div>
+                            <strong class="col-md-8"> OHKOKDOSKDSODK</strong>
+                        </div>       
+                        <div class="row">
+                            <div class="col-md-3"> Thông tin </div>
+                            <div class="col-md-8"> Phong cách sang trọng phù hợp cho mọi không gian trang trí </div>
+                        </div>  
+                        <div class="row">
+                            <div class="col-md-3"> Chất liệu </div>
+                            <div class="col-md-8"> Composite trơn bóng -màu đen </div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-md-3"> Kích thước </div>
+                            <div class="col-md-8"> 240 x 350</div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-md-3"> Số lượng </div>
+                            <div class="col-md-8"> 1 </div>
+                        </div> 
+                    </div>
+                </div> -->
+            </div>
+            <br/>
+            <div class="row">
+                <div class="profile-product-tilte row-md-4">  
+                    <label class="col-md-5 "> Người dùng </label>
+                    <strong class="col-md-7" id="nameBill"></strong>
+                </div>
+                <div class="profile-product-tilte row-md-4">
+                    <label class="col-md-5 "> Thời gian </label>
+                    <small class="col-md-7" id="dateBill">	</small>
+                </div>
+                <div class="profile-product-tilte row-md-4">
+                    <label class="col-md-5 "> Trạng Thái </label>
+                    <small class="col-md-7" style="color:green" id="statusBill"> </small>
+                </div>
+                <div class="profile-product-tilte row-md-4">
+                        <label class="col-md-5 "> Số điện thoại</label>
+                        <small class="col-md-7" style="color:black" id="telBill"></small>
+                    </div>
+                <div class="profile-product-tilte row-md-4">
+                    <label class="col-md-5 "> Địa chỉ </label>
+                    <small class="col-md-7" style="color:black" id="addressBill"> </small>
+                </div>
+                <div class="profile-product-tilte row-md-4">
+                    <label class="col-md-5 "> Giá </label>
+                    <small class="col-md-7"> <label id="costBill"> </label> <label class="pull-right"><span class="fa fa-angle-up"></span>10% VAT</label></small>
+                </div>
+            </div>  
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="loads()">Loads</button>
+            <button type="button" class="btn btn-danger" id="exportBill" onclick="exports()">Xuất hóa đơn</button>
+        </div>
+        </div>
+    </div>
+</div>
+    
 <!-- /page main-->
+<script src="/js/jquery.twbsPagination.min.js"></script>
+<script>
+    var id = 1;
+    var num_of_pages = 0;
+    var cur_page = -1;
+    function loadItems(page) {
+        var url = '/admin/getBillInfo?page=' + page; 
+        $.ajax({
+            url: url,
+            cache: true,
+            success: function (data) {
+                cur_page = page;
+                 if (num_of_pages != data.pagination.num_of_pages) {
+                    num_of_pages = data.pagination.num_of_pages;
+                    $('#pagination-demo').twbsPagination('destroy');
+                    $('#pagination-demo').twbsPagination({
+                        totalPages: num_of_pages,
+                        visiblePages: 3,
+                        next: '>',
+                        prev: '<',
+                        onPageClick: function (event, page) {
+                            loadItems(page)
+                        }
+                    });
+                } 
+                getTemplateAjax('/templates/bills_row.hbs', '#bills', data)
+            }
+        })
+    }
+    function getTemplateAjax(path, target, jsonData) {
+        var source;
+        var template;
+        $.ajax({
+            url: path,
+            cache: false,
+            success: function (data) {
+                source = data;
+                template = Handlebars.compile(source);
+                $(target).html(template(jsonData));
+            }
+        })
+    }
+    $(document).ready(function(){
+         loadItems(1);
+    })
+    var loads = function() {
+        console.log(DataBillView);
+        document.getElementById('nameBill').innerText = DataBillView.user;
+        document.getElementById('dateBill').innerText = DataBillView.date;
+        document.getElementById('costBill').innerText = DataBillView.cost;
+        document.getElementById('statusBill').innerText = DataBillView.status;
+        document.getElementById('addressBill').innerText = DataBillView.addressBill;
+        document.getElementById('telBill').innerText = DataBillView.telBill;
+        document.getElementById('listItemBill').innerHTML = listItem;
+    }
+
+    var doc = new jsPDF('lanscape', 'pt');
+    $('#exportBill').click(function () {   
+        doc.fromHTML($('#viewModal').html(), 15, 15, {});
+        doc.setProperties({
+            title: 'Hoá đơn - '+DataBillView.user,
+            subject: 'Khungtranh.vn',
+            author: 'Thanh Phong Đỗ',
+            keywords: 'khungtranh.vn',
+            creator: 'F4'
+        });
+        doc.save('sample-file.pdf');
+    });
+</script>

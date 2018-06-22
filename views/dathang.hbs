@@ -1,7 +1,81 @@
 <script src="js/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="css/dathang.css">
 <link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="lib/croppie/croppie.css"/>
+<style>
+/* The Modal (background) */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto !important;
+    display: block !important;
+    width: 80% !important;
+    max-width: 700px !important;
+}
+
+/* Add Animation */
+.modal-content {    
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+
+}
+.dropzone {
+    position: relative;
+    width:100px;
+    height: 100px;
+    border:2px dashed #ccc;
+    color: #ccc;
+    line-height: 20px;
+    text-align: center;
+}
+.dropzone.dragover {
+    border-color: #000;
+    color: #000;
+}
+</style>
 <main>
+    
     <div class="container-fluid" id="DatHangKhungTranh">
         <div class="row pt-0">
             <!-- catalogue -->
@@ -34,22 +108,22 @@
             <div class="col-6 flex-column d-flex align-content-center align-items-center" id="dathang_main">
                 <h2 class=" font-weight-bold pt-2" style="font-weight:bold">Xem trước khung tranh</h2>
                 <div id="frame_main" style="clear: both;">
-                    <img src="./img/ktranh_1.png" alt="" style="z-index:20" id="frame">
-                    <img src="./img/hinh_nguoi_dung_1.jpg" alt="" id="pic">
+                    <img src="./img/hinh_nguoi_dung_1.jpg" alt="" id="pic" style="display:none">
                 </div>
                 <div class="row p-3 mt-4" style="width:90%" id="dathang_controlpanel">
                     <div class="col-6">
                         <div class="align-items-center text-center p-0 " id="abs" style="font-size:3em">
-                            <div id="frame_btn">
-                                <i id="abc" class="fas fa-search-plus"></i>
+                            <div id="frame_btn" onclick="rotate(-90)">
+                                <i id="abc" class="fas fa-undo"></i>
                             </div>
-                            <div id="frame_btn">
-                                <i class="fas fa-search-minus"></i>
+                            <div id="frame_btn" onclick="rotate(90)">
+                                <i class="fas fa-redo"></i>
                             </div>
-                            <div id="frame_btn" onclick="handlerCrop()">
-                                <i class="fas fa-crop"></i>
+                            <!--data-toggle="modal" data-target="#reviewImg" onclick="review()"-->
+                            <div id="frame_btn" id="ireview" onclick="ireview()">
+                                <i class="fas fa-search" ></i>
                             </div>
-                            <div id="frame_btn">
+                            <div id="frame_btn" onclick="saveImg()">
                                 <i class="far fa-save"></i>
                             </div>
                         </div>
@@ -95,47 +169,42 @@
             <!-- hinh nguoi dung upload -->
             <div class="col-2" id="HinhNguoiDung">
                 <div class="AddHinhNguoiDungItem p-3 align-content-center text-center align-items-center justify-content-center d-flex flex-column">
-                    <i class="fas fa-camera" style="font-size:2em;"></i>
-                    <p class="m-0" style="font-size:1em">Tải ảnh lên</p>
+                    <span class="fas fa-camera" style="font-size:3em;"></span>
+                    <p class="m-0" style="font-size:1em"></p>
+                    <div id="uploads"></div>
+                    <div id="dropzone" class="dropzone m-0" style="color:#000">Tải ảnh lên</div>
                 </div>
+                
                 <hr>
                 <ul id="listHinhNguoiDung">
-                    <li>
-                        <div class="HinhNguoiDungItem">
-                            <img src="./img/hinh_nguoi_dung_1.jpg" alt="">
-                        </div>
-                    </li>
-                    <li>
-                        <div class="HinhNguoiDungItem">
-                            <img src="./img/hinh_nguoi_dung_2.jpg" alt="">
-                        </div>
-                    </li>
-                    <li>
-                        <div class="HinhNguoiDungItem">
-                            <img src="./img/hinh_nguoi_dung_3.jpg" alt="">
-                        </div>
-                    </li>
-                    <li>
-                        <div class="HinhNguoiDungItem">
-                            <img src="./img/hinh_nguoi_dung_4.jpg" alt="">
-                        </div>
-                    </li>
+                    
                 </ul>
+                <div class="align-content-center text-center align-items-center justify-content-center d-flex flex-column">
+                    <button class="btn btn-primary" onclick="deletelist()"> Xóa hết </button>
+                </div>
             </div>
         </div>
     </div>
-
-
+<di id="myModal" class="modal">
+  <button class="btn btn-primary" style="float:right;" onclick="creview()">Đóng</button>
+  <div id="reviewImage">
+      <img src="" alt="" class="modal-content" id="img01">
+      <canvas id="canvas-id"></canvas>
+  </div>
 </main>
+<script src="lib/croppie/croppie.js"></script>
 
 <script>
    
     var saveIdChoose = -1;
+    var srcSaveImg = "";
+    var src_final_edit = "";
     // add_item
     
     // handlers
-    var yourChoose = (id) => {
+    var yourChoose = (id, src) => {
         saveIdChoose = id;
+        srcSaveImg = src;
     }
     //degisn
     var c = document.getElementById('pic')
@@ -167,7 +236,9 @@
     var add_cart_item = () => {
         id = saveIdChoose;
         var k = getSrcImg()
-        url:
+        data = {
+            src: src_final_edit
+        }
         $.ajax({
                 url:'/GioHang/add_cart_item?id=' + id + '&width='+ k.width +'&height='+ k.height, 
                 cache: true,
@@ -198,7 +269,6 @@
                 if (num_of_pages != data.pagination.num_of_pages) {
                     num_of_pages = data.pagination.num_of_pages;
                     handlePagination(num_of_pages); 
-                   
                 }
                 getTemplateAjax('/templates/items_row.hbs', '#items', data)
             }
@@ -227,4 +297,146 @@
         id = 4;
         loadItems(1);
     });
+
+    // process crop
+    var frame = document.getElementById('pic');
+    var croppie = new Croppie(frame, {
+        viewport: {
+            width: 200,
+            height: 200
+        },
+        boundary: {
+            width: document.getElementById('frame_main').clientWidth, 
+            height: document.getElementById('frame_main').clientHeight
+        },
+        showZoomer: true, 
+        enableOrientation: true,
+        enableResize: true,
+        mouseWheelZoom: 'ctrl',
+        enforceBoundary:true
+    })
+    croppie.bind({
+        url: document.getElementById('pic').src, 
+        orientation: 1,
+        zoom:0
+    })
+    croppie.result('blob').then(function(blob) {
+        // do something with cropped blob
+    });
+    var review = (data) => {
+        
+    }
+    var rotate = (i) => {
+        croppie.rotate(i);
+    }
+
+    // review
+    // updatelist
+    var updateList = function(id) {
+        var url = 'data:image;base64,' + listImageNguoiDungUpdate[id];
+        croppie.bind({
+        url:  url,
+        orientation: 1,
+        zoom:0
+    })
+    }
+    var deletelist = function() {
+        document.getElementById('listHinhNguoiDung').innerHTML = "";
+        saveList = "";
+        listImageNguoiDungUpdate = [];
+    }
+    
+    // Get the modal
+    var modal = document.getElementById('myModal');
+    var modalImg = document.getElementById("img01");
+    var ireview = function(){
+        croppie.result('base64').then(src => {
+            var tmp = src.toString();
+            var img01 = document.getElementById('img01');
+            //img01.src = tmp.toString();
+            // megre 2 image
+            var canvas = document.createElement('canvas');
+            var ctx;       
+            if(srcSaveImg != "") {
+                canvas.width = 300;
+                canvas.height = 200;
+                ctx = canvas.getContext("2d");
+                var imageFrame = new Image(); //imageframe
+                imageFrame.src = srcSaveImg;
+                ctx.drawImage(imageFrame, 0, 0, canvas.width, canvas.height);
+                var imageContent = new Image();
+                imageContent.src = tmp.toString();
+                var alphax = 10;
+                var alphay = 10;
+                ctx.drawImage(imageContent, alphax, alphay, canvas.width-20, canvas.height-20);
+                var _img = canvas.toDataURL('image/png');
+                setTimeout(function(){ 
+                    img01.src = _img;
+                    modal.style.display = "block";
+                    src_final_edit = _img;
+                }, 3000);
+                
+            } else {
+                img01.src = tmp.toString();
+                modal.style.display = "block";
+                src_final_edit = tmp.toString();
+            }
+        })
+    }
+    var creview = function() { 
+        modal.style.display = "none";
+    }
+    // save list default
+    var saveList = "";
+    //
+    var listImageNguoiDungUpdate = [];
+    // drag drop file
+    (async function(){
+        var TriggerUpload = (file) => {
+            var reader = new FileReader();
+            reader.readAsBinaryString(file);
+            reader.onloadend = async function() {
+                var tmp64 = btoa(reader.result);
+                listImageNguoiDungUpdate.push(tmp64);
+            }
+        }
+        
+        var update = function() {
+            var add = "";
+            if(listImageNguoiDungUpdate.length >= 0)
+            for(var i = 0; i<listImageNguoiDungUpdate.length;i++){
+                e = listImageNguoiDungUpdate[i];
+                add += "<li>" + "<div class='HinhNguoiDungItem' onclick='updateList("+i+")'>" + "<img src='data:image/png;base64,"+ e +"' alt=''>" + "</div>" + "</li>";
+            }
+            if(add != "")
+                document.getElementById('listHinhNguoiDung').innerHTML = add;
+        }
+        setInterval(update, 2000);
+
+        var dropzone = document.getElementById('dropzone');
+        dropzone.ondrop = async function(e) {
+            e.preventDefault();
+            this.className = 'dropzone';
+            if(e.dataTransfer.files.length == 1) {
+                TriggerUpload(e.dataTransfer.files[0]);
+            }
+            else {
+                for(var i = 0; i<e.dataTransfer.files.length;i++)
+                TriggerUpload(e.dataTransfer.files[i]);
+            }
+        }
+        dropzone.ondragover = function(){
+            this.className = 'dropzone dragover';
+            return false;
+        }
+        dropzone.ondragleave = function() {
+            this.className = 'dropzone';
+            return false;
+        }
+    }());
+    // save img edit
+    var saveImg = async function() {
+        var a = await ireview()
+        await console.log(src_final_edit);
+    }
 </script>

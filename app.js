@@ -101,7 +101,7 @@ app.use(session({
 	resave: false,
 	saveUninitialized: false,
 	store: new(require('connect-pg-simple')(session))({
-		conString: 'pg://' + "postgres" + ':' + "123456" + "@" + "127.0.0.1" + '/' + "DB_KhungTranh.vn",
+		conString: 'pg://' + "postgres" + ':' + "123456" + "@" + "127.0.0.1" + '/' + "DB",
 		tableName: 'session'
 	}),
 	cookie: { secure: true, maxAge: null }
@@ -115,6 +115,8 @@ app.use(cookieParser());
 // Define your routes
 require('./routes/routes.js')(app, passport, jwt);
 require('./routes/payment.js')(app,paypal,onepayDom);
+require('./routes/bill.js')(app);
+require('./routes/tinhtrangdonhang.js')(app);
 var search = require('./routes/search.js')
 app.use('/search',search);
 

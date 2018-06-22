@@ -142,19 +142,72 @@
                     </div>
                 <div class="pt-3 pr-2">
                     
-                    <a href="./ThanhToan"  name="" id="" class="btn btn-danger btn-lg btn-block">
+                    <a href="/ThanhToan" name="" id="" class="btn btn-danger btn-lg btn-block" <!--onclick="tmp()"--> >
                         Thanh toán đơn hàng
                     </a>
-                </div>     
+                </div>     `
                     
             </di>
         </div>
-
         <!-- Chi tiết đơn hàng -->
     </div>
     </main>
 <script>
+    // tạm thời test add bill
+    var tmp = function() {
+        var list = [];
+        {{#each items}}
+            var idata = {
+                id: {{item.id}},
+                price: {{item.itemPrice}},
+                count: {{count}}
+            }
+            list.push(idata);
+        {{/each}}
+        console.log("okokok");
+        var uID = function() {
+            var value;
+            //get userID
+            value = 1;
+            return value;
+        }
+        var iID = function(){
+            var value = list;
+            // get listID
+            return value;
+        }
+        var count = function() {
+            var value = list[0];
+            // value = {{countAll}}
+            return {{countAll}};
+        }
+        var price = function() {
+            var value = list[0];
+            // value = {{priceAll}}
+            return {{priceAll}};
+        }
+        
+        var data = {
+            userId: uID(),
+            itemId : iID(),
+            count: count(),
+            price: price()
+        }
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url: '/bill_pay_done', 
+            cache: true,
+            data: JSON.stringify(data), 
+            contentType: 'application/json',
+            success: (data)=> {
+                console.log(data);
+            }
+        })
+    }
+    
     //add 
+    
     var add_cart_item = (id) => {
         console.log(id)
         $.ajax({

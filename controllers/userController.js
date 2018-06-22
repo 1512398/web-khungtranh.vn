@@ -79,14 +79,20 @@ controller.banUser = function(userId, action, callback){
 controller.countUser = function (callback) {
     models.User.
     findAndCountAll({
-       
     })
     .then(function (catalog) {
         callback(catalog);
     });
   }
 
-
-
+controller.findOne = function(id, callback) {
+    models.User
+    .findOne({
+        where: {id:id}
+    })
+    .then(function(user) {
+        callback(user)
+    })
+}
 controller.create
 module.exports = controller;

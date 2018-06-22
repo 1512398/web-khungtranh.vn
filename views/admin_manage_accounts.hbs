@@ -1,5 +1,52 @@
 
 <!-- page main -->
+<div class="right_col" role="main">
+    <div class="row tile_count">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                <h2>Hệ thống quản lý tài khoản</h2>
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Nhập từ khóa ...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">Tìm</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                        <table class="table table-striped">
+                            <thead>
+                                <!-- header table -->
+                                <tr>
+                                    <th style="width:1%">ID</th>
+                                    <th style="width:5%;" class="mcenter">Ảnh</th>
+                                    <th style="width:15%;" class="mcenter">Tên người dùng</th>
+                                    <th style="width:15%" class="mcenter"> Email </th>
+                                    <th style="width:10%" class="mcenter"> Số ĐT </th>
+                                    <th style="width:25%" class="mcenter"> Địa chỉ</th>
+                                    <th style="width:10%;" class="mcenter">Ngày tạo TK</th>
+                                    <th class="mcenter">Quản lý</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users">
+                                <!-- Information an account -->
+                                <div ></div>
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            <ul id="pagination-demo" class="pagination pt-4"></ul>
+                        </div>           
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
 <div class="right_col mt-2" role="main">
     <div class="p">
         <div class="page-title">
@@ -15,7 +62,7 @@
                         <div id="x_content" style="height:450px">
                             <table class="table table-striped">
                                 <thead>
-                                    <!-- header table -->
+                                     header table 
                                     <tr>
                                         <th style="width:1%">ID</th>
                                         <th style="width:5%;" class="mcenter">Ảnh</th>
@@ -28,7 +75,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="users">
-                                    <!-- Information an account -->
+                                     Information an account
                                     <div ></div>
                                 </tbody>
                             </table>
@@ -43,6 +90,7 @@
         </div>
     </div>
 </div>
+-->
 <script src="/js/jquery.twbsPagination.min.js"></script>
 <script>
     var id = 1;

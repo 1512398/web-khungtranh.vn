@@ -15,10 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     itemType: DataTypes.STRING,
     itemSizeInfo: DataTypes.STRING,
     catalogId: DataTypes.INTEGER
-
   }, {});
   Item.associate = function (models) {
     Item.belongsTo(models.Catalog);
+    Item.belongsTo(models.Bill);
   };
   return Item;
 };
