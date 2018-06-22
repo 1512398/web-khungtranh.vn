@@ -21,11 +21,10 @@ router.get('/', async (req, res) => {
     if(req.session.cart!=null){
         var tmp = req.session.cart;
         console.log(req.session.cart.items)
-        res.render('GioHang', {title: "Giỏ Hàng", items: req.session.cart.items, countAll: req.session.cart.countAll, priceAll: req.session.cart.priceAll})
+        res.render('GioHang', {member: req.isAuthenticated(), title: "Giỏ Hàng", items: req.session.cart.items, countAll: req.session.cart.countAll, priceAll: req.session.cart.priceAll})
     }
     else {
-        res.render('GioHang', {title: "Giỏ Hàng",countAll: 0, priceAll: 0})
-            
+        res.render('GioHang', {member: req.isAuthenticated(), title: "Giỏ Hàng",countAll: 0, priceAll: 0})
     }
 })
 
@@ -80,6 +79,7 @@ function Cart(_this) {
 }
 
 router.get('/add_cart_item', (req, res)=> {
+    console.log(req.body);
     var sessionCart = req.session;
     let cartItem = new Cart(sessionCart.cart? sessionCart.cart:{})
     listItems.getbyId(req.query.id, (item)=>{

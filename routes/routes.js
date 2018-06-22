@@ -13,6 +13,7 @@ module.exports = function (app, passport,jwt) {
         res.render('LienHe',{member: req.isAuthenticated(),title:'Liên hệ',name:'lienhe'});
     })
     app.get('/ThanhToan', function (req, res) {
+        
         /*jwt.verify(req.token,'hthieuhoangtrunghieu',(err,authData)=>{
             if(err){
                 res.redirect('/DangNhap')
@@ -21,7 +22,7 @@ module.exports = function (app, passport,jwt) {
             }
         });
     }   */
-        res.render('ThanhToan', {price: req.session.cart.priceAll, count: req.session.cart.countAll});
+        res.render('ThanhToan', {member: req.isAuthenticated(), price: req.session.cart.priceAll, count: req.session.cart.countAll});
     })
 
     app.get('/getprofile',function (req,res) {

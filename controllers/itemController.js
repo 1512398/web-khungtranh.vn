@@ -7,7 +7,16 @@ function nullToEmpty(name) {
         return (name)
 }
 var models = require('../models');
-controller.updateText = function (id, itemId, itemName, itemInfo, itemMaterial, itemPrice, itemWidthSize, itemHeightSize, catalogId, itemStatus,callback) {
+controller.findOne = function(id, callback) {
+    models.Item
+    .findOne({
+        where: {id:id}
+    })
+    .then(function(item) {
+        callback(item);
+    })
+}
+controller.updateText = function (id, itemId, itemName, itemInfo, itemMaterial, itemPrice, itemWidthSize, itemHeightSize, catalogId, callback) {
     models.Item
         .update({
             itemId: itemId,

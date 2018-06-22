@@ -1,0 +1,150 @@
+{{#each bills}}
+<tr>
+    <td class="mcenter">
+        {{id}}
+    </td>
+    <td class="mcenter">
+        <img src="image/frame1.png" alt="No Image" style="width:50px" id="avatarItem{{id}}"/>
+        <div id="nameitem{{id}}"></div>
+    </td>
+    <td class="mcenter" style="color:gray">
+        {{date}}
+    </td>
+    <td class="mcenter" >
+        <strong id="nameuser{{id}}"></strong></td>
+    <td class="mcenter" id="price{{id}}"></td>
+    <td class="mcenter" style=" color:green"> {{status}}</td>
+    <td class="mcenter">
+        <a class="btn btn-primary btn-md" data-toggle="modal" data-target="#viewModal" onclick="viewBill({{id}}, '{{date}}', '{{status}}')">
+            <i class="fa fa-folder" data-toggle="tooltip" data-placement="top" title="View bill"></i>
+        </a>
+        <a href="javascript:;" class="btn btn-info btn-md" data-toggle="modal" data-target="#editModal">
+            <i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i>
+        </a>
+        <a href="javascript:;" class="btn btn-danger btn-md">
+            <i class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="Move to system bin"></i>
+        </a>
+    </td>
+</tr>
+{{/each}}
+<!-- modal view -->
+<script>
+    var DataBillView = {};  
+    var listItem;  
+    var viewBill = function(id, date, status) {
+        var data = {
+            id: id
+        } 
+        $.ajax({
+            type: "POST", 
+            url: '/admin/manage_bill/billitem',
+            cache: true, 
+            data : JSON.stringify(data),
+            contentType: 'application/json',
+            success: (src)=> {
+                console.log(src);
+                listItem = "";
+                src.rows.forEach(e=>{
+                    console.log(e.itemId);
+                    // get info each item
+                    var data1 = {
+                        itemId: e.itemId
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: '/admin/manage_bill/item', 
+                        cache: true,
+                        data: JSON.stringify(data1), 
+                        contentType: 'application/json',
+                        success: (src)=> {
+                            listItem += "<div class='row'>" + "<div class='col-xs-4'>"+"<div id='prodcut-image'>" +
+                                        "<img src='"
+                                        + src.itemImgDemo
+                                        +"' alt='...'' style='width:100%;text-align: center'>" +
+                                        "</div>" + "</div>" + "<div class='col-xs-8'>"+
+                                        '<div class="row">'+
+                                        '<div class="col-md-3"> Tên khung </div>'+
+                                        '<strong class="col-md-9">' +src.itemName+'</strong>'+
+                                        '</div>'+
+                                        '<div class="row">'+
+                                        '<div class="col-md-3"> Thông tin </div>'+
+                                        '<strong class="col-md-9">' +src.itemInfo+ '</strong>'+
+                                        '</div>'+
+                                        '<div class="row">'+
+                                        '<div class="col-md-3"> Chất liệu </div>'+
+                                        '<strong class="col-md-9">' +src.itemMaterial+ '</strong>'+
+                                        '</div>'+ 
+                                        '<div class="row">'+
+                                        '<div class="col-md-3"> Kích thước </div>'+
+                                        '<strong class="col-md-9">' +src.itemWidthSize+'x'+src.itemHeightSize+ '</strong>'+
+                                        '</div>'+
+                                        '<div class="row">'+
+                                        '<div class="col-md-3"> Loại </div>'+
+                                        '<strong class="col-md-9">' +src.itemType+ '</strong>'+
+                                        '</div>'+ 
+                                        '<div class="row">'+
+                                        '<div class="col-md-3"> Giá </div>'+
+                                        '<strong class="col-md-9">' +src.itemPrice+ '</strong>'+
+                                        '</div>'+   
+                                        '<div class="row">'+
+                                        '<div class="col-md-3"> Số lượng </div>'+
+                                        '<strong class="col-md-9">' +e.count+ '</strong>'+
+                                        '</div>'+   
+                                         "</div>" + "</div>"+'<hr>';                        
+                            document.getElementById('listItemBill').innerHTML = listItem;    
+                        }
+                    })
+                })
+            }
+        }) 
+        var nameitem = 'nameitem' + id.toString();
+        var nameuser = 'nameuser' + id.toString();
+        var priceid = 'price' + id.toString();
+        DataBillView.user = document.getElementById(nameuser).innerText;
+        DataBillView.date = date;
+        DataBillView.status = status;
+        DataBillView.cost = document.getElementById(priceid).innerText;
+        document.getElementById('nameBill').innerText = DataBillView.user;
+        document.getElementById('dateBill').innerText = DataBillView.date;
+        document.getElementById('costBill').innerText = DataBillView.cost;
+        document.getElementById('statusBill').innerText = DataBillView.status;
+        //document.getElementById('addressBill').innerText = DataBillView.addressBill;
+        //document.getElementById('telBill').innerText = DataBillView.telBill;
+    }
+
+    {{#each bills}}
+        data = {
+            userId: {{userId}}, 
+            itemId: {{itemId}}
+        }
+        $.ajax({
+            type: "POST",
+            url: '/admin/manage_bill/item', 
+            cache: true,
+            data: JSON.stringify(data), 
+            contentType: 'application/json',
+            success: (src)=> {
+                var nameitem = 'nameitem' + '{{id}}';
+                document.getElementById(nameitem).innerText = src.itemName;
+                // price
+                var price = '{{price}} vnđ';
+                var priceid = 'price' + '{{id}}';
+                document.getElementById(priceid).innerText = price;
+                var avatar = 'avatarItem'+ '{{id}}';
+                document.getElementById(avatar).src = src.itemImgDemo;
+            }
+        })
+        $.ajax({
+            type: "POST",
+            url: '/admin/manage_bill/user', 
+            cache: true,
+            data: JSON.stringify(data), 
+            contentType: 'application/json',
+            success: (src)=> {
+                var nameuser = 'nameuser' + '{{id}}';
+                document.getElementById(nameuser).innerText = src.fullName;
+                console.log(src.fullName);
+            }
+        })
+    {{/each}}
+</script>

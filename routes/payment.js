@@ -1,3 +1,6 @@
+billCtr = require('../controllers/billController');
+billDetailCtr = require('../controllers/billDetailController');
+
 module.exports = function (app, paypal, onepayDom) {
     // Paypal 
     app.post('/paypal', function (req, res) {
@@ -50,7 +53,35 @@ module.exports = function (app, paypal, onepayDom) {
             if (error) {
                 throw error;
             } else {
+                console.log(req.user);
+                var list = [];
+                // add item to bill database
+                for(var key in req.session.cart.items){
+                    list.push(req.session.cart.items[key]);
+                }
+                var data1 = {
+                    userId: req.user.id,
+                    itemId: list,
+                    count: req.session.cart.countAll,
+                    price: req.session.cart.priceAll
+                }
+                console.log(data1);
+                billCtr.add(data1, function(data){
+                    data1.itemId.forEach(element => {
+                        var Json = {
+                            billId: data.id,
+                            itemId: element.id,
+                            count: element.count, 
+                            price: element.count*element.price
+                        }
+                        billDetailCtr.add(Json, function(data){
+                            console.log('done');
+                        })
+                    });
+                });
                 res.send('Success')
+                // getID
+                // add
             }
         });
     });

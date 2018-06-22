@@ -20,7 +20,7 @@ router.get('/manage_item', function (req, res) {
 })
 
 router.get('/mail_inbox', function (req, res) {
-    res.render('admin_manage_items', { layout: 'layout_admin' })
+    res.render('admin_mail_box', { layout: 'layout_admin' })
 })
 var userController = require('../controllers/userController');
 router.get('/getUserInfo', function (req, res) {
@@ -38,6 +38,25 @@ router.get('/getUserInfo', function (req, res) {
                 }
             });
 
+        });
+    })
+})
+
+BillsCtr = require('../controllers/billController');
+router.get('/getBillInfo', function (req, res) {
+    var limit = 5;
+    var page = parseInt(req.query.page);
+    page = isNaN(page) ? 1 : page;
+    BillsCtr.countBill(function (count) {
+        countBills = count.count;
+        BillsCtr.getAll(page, function (bills) {
+            res.json({
+                bills: bills, pagination: {
+                    num_of_pages: Math.ceil(countBills / limit),
+                    limit: limit,
+                    num_of_items: countBills
+                }
+            });
         });
     })
 })
@@ -87,6 +106,26 @@ router.post('/deleteItem', function (req, res) {
     })
 })
 
+router.post('/manage_bill/item', function(req, res) {
+    itemController.findOne(req.body.itemId, function(data) {
+        res.send(data);
+    })
+    
+})
+
+router.post('/manage_bill/user', function(req, res) {
+    userController.findOne(req.body.userId, function(data) {
+        res.send(data);
+    })
+})
+
+billDetailCtr = require('../controllers/billDetailController')
+router.post('/manage_bill/billitem', function(req, res){
+    billDetailCtr.getAll(req.body.id, function(src){
+        res.send(src);
+    })
+})
+
 router.post('/newItem',
     function (req, res, next) {
        
@@ -98,7 +137,6 @@ router.post('/newItem',
             }
             else {
                 console.log('success!')
-              
                 return next();
             }
         })
