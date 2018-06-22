@@ -53,7 +53,6 @@ module.exports = function (app, paypal, onepayDom) {
             if (error) {
                 throw error;
             } else {
-                console.log(req.user);
                 var list = [];
                 // add item to bill database
                 for(var key in req.session.cart.items){
@@ -65,23 +64,20 @@ module.exports = function (app, paypal, onepayDom) {
                     count: req.session.cart.countAll,
                     price: req.session.cart.priceAll
                 }
-                console.log(data1);
                 billCtr.add(data1, function(data){
                     data1.itemId.forEach(element => {
                         var Json = {
                             billId: data.id,
-                            itemId: element.id,
+                            itemId: element.item.id,
                             count: element.count, 
                             price: element.count*element.price
                         }
                         billDetailCtr.add(Json, function(data){
-                            console.log('done');
+                            console.log(req.user.id + 'da thanh toan thanh cong');
                         })
                     });
                 });
-                res.send('Success')
-                // getID
-                // add
+                res.render('index',{member: req.isAuthenticated(),name:'trangchu', title:'Trang chủ'});
             }
         });
     });

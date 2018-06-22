@@ -1,0 +1,110 @@
+<div class="right_col" role="main">
+    <div class="row tile_count">
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-3 mb-2 bg-success text-white" >
+        <span class="count_top"><i class="fa fa-user"></i> Người dùng truy cập và mua</span>
+        <div class="count">30</div>
+        <span class="count_bottom" ><i class="green">Hôm nay </i>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-3 mb-2 bg-info text-white">
+        <span class="count_top"><i class="fa fa-clock-o"></i> Thời gian trung bình kết nối</span>
+        <div class="count">123.50</div>
+        <span class="count_bottom"> Hôm nay </span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-3 mb-2 bg-primary text-white">
+        <span class="count_top"><i class="fa fa-user"></i> Tổng hóa đơn</span>
+        <div class="count green">62</div>
+        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> So với tuần trước`</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-3 mb-2 bg-danger text-white">
+        <span class="count_top"><i class="fa fa-user"></i> Tổng sản phẩm</span>
+        <div class="count">32</div>
+        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> So với tuần trước</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-3 mb-2 bg-warning text-white">
+        <span class="count_top"><i class="fa fa-user"></i>Tổng kết nối</span>
+        <div class="count">601</div>
+        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> So với tuần trước</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-3 mb-2 bg-dark text-white">
+        <span class="count_top"><i class="fa fa fa-envelope"></i> Thư góp ý</span>
+        <div class="count">12</div>
+        <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> So với tháng trước </span>
+        </div>
+    </div>
+    <div class="row tile_count">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                <h2>Biểu đồ thống kê 6 tháng năm <strong>2018</strong></h2>
+                <div class="title_right">
+                </div>
+                <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <canvas id="myChart"></canvas>       
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+var data =  {
+        labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
+        datasets: [{
+            label: 'Tài khoản người dùng',
+            data: [12, 50, 100, 156, 200, 295],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)'
+            ],
+            borderWidth: 1
+        },{
+            label: 'Hóa đơn thanh toán',
+            data: [11, 12, 39, 15, 41, 61],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        },{
+            label: 'Sản phẩm bán ra',
+            data: [60, 50, 10, 19, 10, 31],
+            backgroundColor: [
+                'rgba(255, 206, 86, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 206, 86, 1)'
+            ],
+            borderWidth: 1
+        },{
+            label: 'Thư góp ý gửi về',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(75, 192, 192, 0.2)'
+            ],
+            borderColor: [
+                'rgba(75, 192, 192, 1)'
+            ],
+            borderWidth: 1
+        }]
+    }
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>

@@ -29,7 +29,7 @@
                         <a class="dropdown-item" href="/GioHang">
                             <i class="fas fa-shopping-cart"></i>
                             Giỏ hàng
-                            <span class="badge badge-danger">2</span>
+                            <span class="badge badge-danger" id="countItemInCart"></span>
                         </a>
 
                         <a class="dropdown-item" href="/TinhTrangDonHang">
@@ -55,9 +55,11 @@
             success: function (data) {
                 if (data.avt === null)
                     $('#avt').attr('src','/img/blank_avt.png');
-                else
+                else 
                     $('#avt').attr('src',data.avt);
-                $('#username').html(data.name)
+                $('#username').html(data.name);
+                if (data.cItem != null)
+                    $('#countItemInCart').html(data.cItem);
             }
         })
     }

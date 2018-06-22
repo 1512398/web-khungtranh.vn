@@ -19,4 +19,8 @@ module.exports = (app) => {
             });
         });
     })
+    app.post('/getCountItemInCart', function(req, res){
+        console.log('tao day');
+        console.log();
+    })
 }

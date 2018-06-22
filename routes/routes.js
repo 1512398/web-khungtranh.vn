@@ -13,7 +13,6 @@ module.exports = function (app, passport,jwt) {
         res.render('LienHe',{member: req.isAuthenticated(),title:'Liên hệ',name:'lienhe'});
     })
     app.get('/ThanhToan', function (req, res) {
-        
         /*jwt.verify(req.token,'hthieuhoangtrunghieu',(err,authData)=>{
             if(err){
                 res.redirect('/DangNhap')
@@ -26,7 +25,11 @@ module.exports = function (app, passport,jwt) {
     })
 
     app.get('/getprofile',function (req,res) {
-        res.json({name: String(req.user.fullName).replace(/\S* /g,''), avt: req.user.avtImg});
+        if(req.session.cart == null) 
+            temp = 0;
+        else
+            temp = req.session.cart.countAll;
+        res.json({name: String(req.user.fullName).replace(/\S* /g,''), avt: req.user.avtImg, cItem:temp});
       })
 
     app.get('/DangKy', function (req, res) {
