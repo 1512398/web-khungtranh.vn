@@ -22,6 +22,7 @@ router.get('/catalog', function (req, res) {
     searchQuery.toPrice = req.query.toPrice;
     searchQuery.fromDate = req.query.fromDate;
     searchQuery.toDate = req.query.toDate;
+    searchQuery.sortBy = req.query.sortBy;
     searchQuery.findString= req.query.searchString;
     console.log('search query: ',searchQuery);
     itemController.search(searchQuery,limit,offset,function(items){
@@ -36,12 +37,12 @@ router.get('/catalog', function (req, res) {
 itemController = require('../controllers/itemController');
 router.get('/search',function (req,res){
     var searchQuery = {};
-    searchQuery.CatalogId = 4;
-    searchQuery.fromPrice = 2300;
-    searchQuery.fromDate = '06/01/2018'
+    // searchQuery.CatalogId = 4;
+    // searchQuery.fromPrice = 2300;
+    // searchQuery.fromDate = '06/01/2018'
     // searchQuery.toDate = '06/01/2018'
     // searchQuery.findString= 'hieu hoang'
-    searchQuery.toPrice = 140000;
+    // searchQuery.toPrice = 140000;
     itemController.search(searchQuery,function(items){
         res.json(items);
     })

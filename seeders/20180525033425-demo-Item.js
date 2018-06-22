@@ -16,6 +16,7 @@ module.exports = {
       itemWidthSize: 240,
       itemHeightSize: 120,
       itemType: "Khung đặt làm",
+      itemStatus:1,
       itemSizeInfo: "Không được đặt khung có kích thước quá kích thước tối đa",
       createdAt: Sequelize.literal('NOW()'),
       updatedAt: Sequelize.literal('NOW()')
@@ -34,6 +35,7 @@ module.exports = {
       itemWidthSize: 240,
       itemHeightSize: 120,
       itemType: "Khung đặt làm",
+      itemStatus:1,
       itemSizeInfo: "Không được đặt khung có kích thước quá kích thước tối đa",
       createdAt: Sequelize.literal('NOW()'),
       updatedAt: Sequelize.literal('NOW()')
@@ -52,6 +54,7 @@ module.exports = {
       itemWidthSize: 240,
       itemHeightSize: 120,
       itemType: "Khung đặt làm",
+      itemStatus:1,
       itemSizeInfo: "Không được đặt khung có kích thước quá kích thước tối đa",
       createdAt: Sequelize.literal('NOW()'),
       updatedAt: Sequelize.literal('NOW()')
@@ -70,6 +73,7 @@ module.exports = {
       itemWidthSize: 240,
       itemHeightSize: 120,
       itemType: "Khung đặt làm",
+      itemStatus:1,
       itemSizeInfo: "Không được đặt khung có kích thước quá kích thước tối đa",
       createdAt: Sequelize.literal('NOW()'),
       updatedAt: Sequelize.literal('NOW()')
@@ -88,6 +92,7 @@ module.exports = {
       itemWidthSize: 240,
       itemHeightSize: 120,
       itemType: "Khung đặt làm",
+      itemStatus:1,
       itemSizeInfo: "Không được đặt khung có kích thước quá kích thước tối đa",
       createdAt: Sequelize.literal('NOW()'),
       updatedAt: Sequelize.literal('NOW()')
@@ -106,6 +111,7 @@ module.exports = {
       itemWidthSize: 240,
       itemHeightSize: 120,
       itemType: "Khung đặt làm",
+      itemStatus:1,
       itemSizeInfo: "Không được đặt khung có kích thước quá kích thước tối đa",
       createdAt: Sequelize.literal('NOW()'),
       updatedAt: Sequelize.literal('NOW()')
@@ -124,6 +130,7 @@ module.exports = {
       itemWidthSize: 240,
       itemHeightSize: 120,
       itemType: "Khung đặt làm",
+      itemStatus:1,
       itemSizeInfo: "Không được đặt khung có kích thước quá kích thước tối đa",
       createdAt: Sequelize.literal('NOW()'),
       updatedAt: Sequelize.literal('NOW()')
@@ -142,6 +149,7 @@ module.exports = {
       itemWidthSize: 240,
       itemHeightSize: 120,
       itemType: "Khung đặt làm",
+      itemStatus:1,
       itemSizeInfo: "Không được đặt khung có kích thước quá kích thước tối đa",
       createdAt: Sequelize.literal('NOW()'),
       updatedAt: Sequelize.literal('NOW()')
@@ -160,6 +168,7 @@ module.exports = {
       itemWidthSize: 240,
       itemHeightSize: 120,
       itemType: "Khung đặt làm",
+      itemStatus:1,
       itemSizeInfo: "Không được đặt khung có kích thước quá kích thước tối đa",
       createdAt: Sequelize.literal('NOW()'),
       updatedAt: Sequelize.literal('NOW()')
@@ -178,6 +187,7 @@ module.exports = {
       itemWidthSize: 240,
       itemHeightSize: 120,
       itemType: "Khung đặt làm",
+      itemStatus:1,
       itemSizeInfo: "Không được đặt khung có kích thước quá kích thước tối đa",
       createdAt: Sequelize.literal('NOW()'),
       updatedAt: Sequelize.literal('NOW()')
@@ -196,6 +206,7 @@ module.exports = {
       itemWidthSize: 240,
       itemHeightSize: 120,
       itemType: "Khung đặt làm",
+      itemStatus:1,
       itemSizeInfo: "Không được đặt khung có kích thước quá kích thước tối đa",
       createdAt: Sequelize.literal('NOW()'),
       updatedAt: Sequelize.literal('NOW()')
@@ -214,6 +225,7 @@ module.exports = {
       itemWidthSize: 240,
       itemHeightSize: 120,
       itemType: "Khung đặt làm",
+      itemStatus:1,
       itemSizeInfo: "Không được đặt khung có kích thước quá kích thước tối đa",
       createdAt: Sequelize.literal('NOW()'),
       updatedAt: Sequelize.literal('NOW()')

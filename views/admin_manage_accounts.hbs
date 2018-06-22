@@ -134,6 +134,18 @@
         })
     }
     function statusUser(userID,action){
+        if (!action){
+            r = confirm('Bạn có muốn khóa tài khoản người dùng id = ' + userID)
+            if (!r){
+                return;
+            }
+        } else{
+            r = confirm('Bạn có muốn mở khóa tài khoản người dùng id = ' + userID)
+            if (!r){
+                return;
+            }
+        }
+        
         $.ajax({
             url: '/admin/banUser',
             type: 'GET',
