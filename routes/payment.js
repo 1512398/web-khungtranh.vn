@@ -77,13 +77,14 @@ module.exports = function (app, paypal, onepayDom) {
                         })
                     });
                 });
+                // res.redirect('/TinhTrangDonHang')
                 res.render('index',{member: req.isAuthenticated(),name:'trangchu', title:'Trang chủ'});
             }
         });
     });
 
     app.get('/cancle', function (req, res) {
-        res.send('cancled!')
+        res.render('index',{member: req.isAuthenticated(),name:'trangchu', title:'Trang chủ'});
     })
 
     app.post('/payment/checkout', (req, res) => {

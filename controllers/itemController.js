@@ -16,7 +16,7 @@ controller.findOne = function(id, callback) {
         callback(item);
     })
 }
-controller.updateText = function (id, itemId, itemName, itemInfo, itemMaterial, itemPrice, itemWidthSize, itemHeightSize, catalogId, callback) {
+controller.updateText = function (id, itemId, itemName, itemInfo, itemMaterial, itemPrice, itemWidthSize, itemHeightSize, catalogId, itemStatus, callback) {
     models.Item
         .update({
             itemId: itemId,
@@ -35,7 +35,7 @@ controller.updateText = function (id, itemId, itemName, itemInfo, itemMaterial, 
         });
 };
 
-controller.updateItemImg = function (id, itemImg, itemImgDemo, callback) {
+controller.updateItemImg = function (id, itemImg, callback) {
     models.Item
         .update({
             itemImg: nullToEmpty(itemImg)
@@ -46,7 +46,7 @@ controller.updateItemImg = function (id, itemImg, itemImgDemo, callback) {
         });
 };
 
-controller.updateItemDemo = function (id, itemImg, itemImgDemo, callback) {
+controller.updateItemDemo = function (id, itemImgDemo, callback) {
     models.Item
         .update({
             itemImgDemo: nullToEmpty(itemImgDemo),

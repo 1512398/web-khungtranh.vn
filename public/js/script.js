@@ -120,6 +120,6 @@ $(document).scroll(function() {
     $('#DatHangTrucTuyen').show("slide", { direction: "left" }, 2000);
   
     } else {
-    $('#DatHangTrucTuyen').hide("fade", 2000);
+    // $('#DatHangTrucTuyen').hide("fade", 2000);
     }
   });

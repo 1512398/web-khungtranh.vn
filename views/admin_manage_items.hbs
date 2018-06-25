@@ -29,6 +29,7 @@
                                             <textarea class="form-control" style="height:55px;" id="descr" name="summary"></textarea>
                                         </div>
                                     </div>
+                                    <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
                                 </form>
                             </div>
                         </div>
@@ -130,6 +131,7 @@
                                             <textarea class="form-control" style="height:55px;" id="itemInfo" name="itemInfo"></textarea>
                                         </div>
                                     </div>
+                                    <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
                                     <input type="text" name="id" class="form-control" id="id" style="display:none">
                                 </form>
                             </div>
@@ -166,6 +168,7 @@
                                         </div>
                                     </div>
                                     <input type="text" id="editCatalogId" style="display:none" name="id">
+                                    <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
                                 </form>
                             </div>
                         </div>
@@ -307,13 +310,13 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Mã hàng</th>
-                                    <th>Hình ảnh</th>
-                                    <th>Tên hàng</th>
-                                    <th>Chất liệu</th>
-                                    <th>Giá bán</th>
-                                    <th>Tình trạng</th>
-                                    <th>Chỉnh sửa</th>
+                                    <th style="width:10%">Mã hàng</th>
+                                    <th style="width:10%">Hình ảnh</th>
+                                    <th style="width:25%">Tên hàng</th>
+                                    <th style="width:25%">Chất liệu</th>
+                                    <th style="width:10%">Giá bán</t>
+                                    <th style="width:10%">Tình trạng</th>
+                                    <th style="width:10%">Chỉnh sửa</th>
                                 </tr>
                             </thead>
 
@@ -445,7 +448,7 @@
             $.ajax({
                 url: "/admin/deleteCatalog",
                 type: "POST",
-                data: { id: id },
+                data: { id: id, _csrf:'{{csrfToken}}' },
                 success: function (data) {
                     loadCatalog();
                 }
@@ -459,7 +462,7 @@
             $.ajax({
                 url: "/admin/deleteItem",
                 type: "POST",
-                data: { id: id },
+                data: { id: id, _csrf:'{{csrfToken}}' },
                 success: function (data) {
                     executeSearch(cur_page,templateLink);
                 }

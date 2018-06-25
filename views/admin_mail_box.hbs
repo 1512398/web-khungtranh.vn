@@ -1,18 +1,9 @@
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
-        <div class="title_left">
-            <h3> Hộp Thư </h3>
-        </div>
 
         <div class="title_right">
             <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Nhập từ khóa ...">
-                <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Tìm</button>
-                </span>
-            </div>
             </div>
         </div>
         </div>
@@ -23,42 +14,33 @@
             <div class="col-md-12">
                 <div class="x_panel">
                 <div class="x_title">
-                    <h2>support@khungtranh.vn <small> non-reply </small></h2>
+                    <h2>Thông tin phản hồi người dùng <small> </small></h2>
                     
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                     <div class="row">
                     <!-- LIST -->
-                    <div class="col-sm-3 mail_list_column">
-                        <a href="#">
-                        <div class="mail_list" class="left_mail">
-                            <div class="left">
-                            <i class="fa fa-star"></i>
-                            </div>
-                            <div class="right">
-                            <h3><strong>Phong</strong> Do <small>3.00 PM</small></h3>
-                            <p> Lorem ...</p>
-                            </div>
-                        </div>
-                        </a>
-                        <a href="#">
-                        <div class="mail_list">
-                            <div class="left">
-                            <i class="fa fa-star"></i>
-                            </div>
-                            <div class="right">
-                            <h3>Hieu Hoang <small>4.09 PM</small></h3>
-                            <p>Lorem ...</p>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
                     <!-- /MAIL LIST -->
-
+                    <table class="table table-striped">
+                            <thead>
+                                <!-- header table -->
+                                <tr>
+                                    <th style="width:20%">Người gửi</th>
+                                    <th style="width:60%">Nội dung</th>
+                                    <th style="width:20%">Thời gian</th>
+                                </tr>
+                            </thead>
+                            <tbody id="feedbacks">
+                                <!-- Information an account -->
+                            </tbody>
+                        </table>
                     <!-- CONTENT MAIL -->
                     <div class="col-sm-9">
-                        <div class="">
+                          <div class="text-center">
+                            <ul id="pagination-demo" class="pagination pt-4"></ul>
+                        </div>    
+                        {{!-- <div class="">
                         <div class="row">
                             <div class="col-md-8">
                             <div class="btn-group">
@@ -79,7 +61,7 @@
                             <div class="row">
                             <div class="col-md-12">
                                 <strong>Thanh Phong </strong> Do
-                                <span>(dtphong0811@gmail.com)</span>
+                                <span>(dtphong0811gmail.com/span>
                                 <a class="sender-dropdown"><i class="fa fa-chevron-down"></i></a>
                             </div>
                             </div>
@@ -91,9 +73,9 @@
                                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                             <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>  
-                        </div>
+                        </div> 
                         
-                        </div>
+                        </div> --}}
 
                     </div>
                     <!-- /CONTENT MAIL -->
@@ -105,3 +87,35 @@
             <!-- /MAIL -->
     </div>
 </div>
+<script src="/js/jquery.twbsPagination.min.js"></script>
+<script>
+        var num_of_pages = 0;
+     function loadItems(page) {
+        var url = '/admin/getAllFeedback?page=' + page; 
+        $.ajax({
+            url: url,
+            cache: true,
+            success: function (data) {
+                cur_page = page;
+                 if (num_of_pages != data.pagination.num_of_pages) {
+                    num_of_pages = data.pagination.num_of_pages;
+                    $('#pagination-demo').twbsPagination('destroy');
+                    $('#pagination-demo').twbsPagination({
+                        totalPages: num_of_pages,
+                        visiblePages: 3,
+                        next: '>',
+                        prev: '<',
+                        onPageClick: function (event, page) {
+                            loadItems(page)
+                        }
+                    });
+                } 
+                getTemplateAjax('/templates/feedback_row.hbs', '#feedbacks', data)
+            }
+        })
+    }
+    $(document).ready(function(){
+         loadItems(1);
+    })
+    
+</script>

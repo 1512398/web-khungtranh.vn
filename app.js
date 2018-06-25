@@ -112,6 +112,14 @@ const jwt = require('jsonwebtoken');
 //Cookie parser
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
+//CSURF
+// var csurf = require('csurf');
+// const csrfMiddleware = csurf({
+// 	cookie: true
+//   });
+// app.use(csrfMiddleware);
+
+
 // Define your routes
 require('./routes/routes.js')(app, passport, jwt);
 require('./routes/payment.js')(app,paypal,onepayDom);
@@ -131,6 +139,9 @@ app.use('/DatHang',design);
 
 var admin = require('./routes/admin.js');
 app.use('/admin',admin);
+
+var feedback = require('./routes/feedback.js')
+app.use('/LienHe',feedback);
 // Set Server Port & Start Server
 app.set('port', (process.env.PORT || 5000));
 

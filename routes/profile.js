@@ -8,14 +8,17 @@ var isValidPassword = function (userpass, password) {
     return bCrypt.compareSync(password, userpass);
 }
 
-router.get('/', isLoggedIn, function (req, res) {
+var csrf = require('csurf')
+var csrfProtection = csrf({ cookie: true })
+
+router.get('/', isLoggedIn, csrfProtection, function (req, res) {
     req.session.avtImg = req.user.avtImg
     if  (req.session.avtImg == undefined){
         req.session.avtImg = '/img/blank_avt.png'
     }
     var avtPath =req.session.avtImg;
     res.render('CapNhatThongTin', {imgPath:avtPath, user: req.user, message: req.flash('updateProfileMessage'), messageSuccess: req.flash('updateSuccessful'),
-        title: 'Cap nhat thong tin',member: req.isAuthenticated() });
+        title: 'Cap nhat thong tin',member: req.isAuthenticated(),csrfToken: req.csrfToken() });
 })
 // Set storage engine
 const multer = require('multer');
@@ -33,23 +36,20 @@ const upload = multer({
 	limits:{fileSize:100000000}
 }).single('myImg');
 
-router.post('/update', 
-    isLoggedIn, 
+router.post('/update',
+    isLoggedIn,
     function(req,res,next){  
         upload(req, res, function(err){
             if ((err)||(req.file === undefined)) {
-                console.log('avt faileddd')
                 return next();
             }
             else{
                 userController.editAvt(req.user.email,String(req.file.path).replace('public',''),function(user){
-                    console.log('update avt to DB success!');
                     return next();
                 });
             }
         })
-        // 
-    },
+    },csrfProtection,
     function (req, res) {
     var new_pass = '';
     if (req.body.new_password == '') // neu khong co yeu cau thay doi mat khau
@@ -80,11 +80,9 @@ router.post('/update',
 router.post('/uploadAvt', function (req,res) {
 	upload(req, res, function(err){
 		if ((err)||(req.file === undefined)) {
-			console.log('avt faileddd')
 			res.redirect('/CapNhatThongTin');
 		}
 		else{
-			console.log('file: ',req.file)
 			req.session.avtImg = String(req.file.path).replace('public','');
 			res.redirect('/CapNhatThongTin');
 			
