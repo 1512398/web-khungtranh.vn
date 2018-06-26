@@ -1,0 +1,41 @@
+<main class="pb-5 mb-5 justify-content-center align-items-center d-flex">
+    <div class="container flex-row d-flex justify-content-center">
+        <div class="col-md-8 pt-4 col-lg-6   mt-5 align-self-center dangky">
+            <h3 class="text-center mt-5" style="color:#03899c;">
+                <i class="fas fa-sign-in-alt"></i> Đăng nhập ADMIN</h3>
+            <hr> {{#if (notEmpty message)}}
+            <div class="alert alert-danger">{{message}}</div>
+            {{/if}}
+            <form  method="post" id="formDangNhap">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nhập tên đăng nhập</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="name@example.com"
+                        required name="email">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Mật khẩu</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
+                </div>
+                <button id="btnSubmit" type="submit" style="width:100%" class="btn btn-success">Đăng nhập tài khoản</button>
+                <hr>
+            </form>
+            <p class="text-center">Chưa có tài khoản?
+                <a href="./DangKy">Đăng Ký</a>
+            </p>
+            <button id="btnTest">Click</button>
+        </div>
+    </div>
+</main> 
+<script>
+    $('#btnTest').on('click',function(){
+        console.log('clicked    ')
+         $.ajax({
+            url: '/admin/posts',
+            type: 'POST',
+            data: {token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMTEsInVzZXJuYW1lIjoidGhpZW50ZiIsImVtYWlsIjoidGhpZW50Zi45N0BnbWFpbC5jb20ifSwiaWF0IjoxNTI5OTc4ODM2LCJleHAiOjE1Mjk5ODE4MzZ9.0Xo68s2igh0YFChiKOIXcoOwBtxbYCYoP9GTP9t11ds"},
+            success: function (data) {
+                catalog_info = data;
+            }
+        })
+    })
+</script>

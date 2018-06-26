@@ -144,7 +144,7 @@ function verifyToken(req,res,next){
 }
 
 function renderHandler(dest){
-    jwt.verify(req.token,'hthieuhoangtrunghieu',(err,authData)=>{
+    jwt.verify(req.qutoken,'hthieuhoangtrunghieu',(err,authData)=>{
         if(err){
             res.redirect('/DangNhap')
         }else{

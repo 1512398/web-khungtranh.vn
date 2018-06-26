@@ -1,6 +1,6 @@
-<script src="js/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="css/dathang.css">
 <link rel="stylesheet" href="./css/style.css">
+<script src="/js/search.js"></script>
 <link rel="stylesheet" href="lib/croppie/croppie.css"/>
 <style>
 /* The Modal (background) */
@@ -290,6 +290,7 @@
     }
     $('#pickCatalog').on('change', function () {
         id = this.value;
+        console.log(id)
         loadItems(1);
     })
 
@@ -439,4 +440,5 @@
         var a = await ireview()
         await console.log(src_final_edit);
     }
+
 </script>

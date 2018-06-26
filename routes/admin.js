@@ -231,4 +231,58 @@ router.post('/editItem',
             })
         });
 
+var jwt=require('jsonwebtoken');
+router.get('/login',function(req,res){
+    res.render('admin_login');
+});
+router.get('/jwtlogin',(req,res)=>{
+    //testing user
+    const user={
+        id:111,
+        username:'thientf',
+        email:'thientf.97@gmail.com'
+    }
+    jwt.sign({user:user},'123456',{expiresIn:'3000s'},(err,token)=>{
+        res.json({
+            token
+        })
+    });
+})
+function verifyToken(req,res,next){
+    //Get auth header
+    const bearerHeader=req.headers['authorization'];
+    //check if undefine
+    if (typeof bearerHeader!=='undefined'){
+        //get token
+        const bearer=bearerHeader.split(' ');
+        const bearerToken=bearer[1];
+        //set token to req
+        req.token=bearerToken;
+        //next middleware
+        next();
+    }else{
+        //forbidden
+        res.sendStatus(403);
+    }
+}
+router.post('/posts',verifyToken,(req,res)=>{
+    console.log(req.token)
+    jwt.verify(req.token,'123456',(err,authData)=>{
+        if(err){
+            res.sendStatus(403);
+        }else{
+            res.json({
+                message: 'You created a post...',
+                //payload data
+                authData
+            })
+        }
+    });
+    
+    res.json({
+        message: 'Post created...'
+    });
+});
+
+
 module.exports = router;
