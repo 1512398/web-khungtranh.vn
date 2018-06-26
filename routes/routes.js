@@ -21,7 +21,7 @@ module.exports = function (app, passport,jwt) {
             }
         });
     }   */
-        res.render('ThanhToan', {member: req.isAuthenticated(), price: req.session.cart.priceAll, count: req.session.cart.countAll});
+        res.render('ThanhToan', {member: req.isAuthenticated(), price: req.session.cart.priceAll, count: req.session.cart.countAll, title:'Thanh Toán Đơn Hàng'});
     })
 
     app.get('/getprofile',function (req,res) {
@@ -108,7 +108,6 @@ module.exports = function (app, passport,jwt) {
 
     app.get('/profile', isLoggedIn, function (req, res) {
         res.send('Wellcome :) ')
-        
         // res.render('profile', req.User)
     });
 };

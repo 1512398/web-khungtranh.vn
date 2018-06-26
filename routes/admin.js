@@ -83,6 +83,24 @@ router.get('/getBillInfo', function (req, res) {
         });
     })
 })
+router.get('/getBillInfoForUser', function (req, res) {
+    var limit = 5;
+    var page = parseInt(req.query.page);
+    var userId = parseInt(req.query.id);
+    page = isNaN(page) ? 1 : page;
+    BillsCtr.countBillbyUserId(userId, function (count) {
+        countBills = count.count;
+        BillsCtr.getAllbyUserId(userId, page, function (bills) {
+            res.json({
+                bills: bills, pagination: {
+                    num_of_pages: Math.ceil(countBills / limit),
+                    limit: limit,
+                    num_of_items: countBills
+                }
+            });
+        });
+    })
+})
 
 router.post('/banUser', csrfProtection, function (req, res) {
     userController.banUser(req.body.userId, req.body.action, function (data) {

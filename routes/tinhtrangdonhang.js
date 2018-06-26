@@ -4,7 +4,7 @@ module.exports = (app) => {
         console.log(req.user.id);
         var userId = req.user.id;
         billCtr.getAllbyIdUser(userId, function(data){
-            res.render('TinhTrangDonHang',{member: req.isAuthenticated(), list: data});
+            res.render('TinhTrangDonHang',{member: req.isAuthenticated(), list: data, title:'Tình Trạng Đơn Hàng', userId: userId});
         })
     })
 }

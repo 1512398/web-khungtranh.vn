@@ -1,0 +1,32 @@
+{{#each bills}}
+    <tr class="giohang_item">
+        <td scope="row"> #{{id}}
+        </td>
+        <td class="pr-0 ">
+            <div class="d-flex flex-row">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped active " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                        style="width: 75%"></div>
+                </div>
+
+                <div class="col-9 pr-0">
+                    <h6>{{id}}</h6>
+                </div>
+        </td>
+        <td>{{price}}vnđ</td>
+        <td>{{date}}</td>
+        <td>Đang xử lý</td>
+        <td class="pt-3">
+            <div class="">
+                <div style="color:green;text-align:center">
+                    {{status}}
+                </div>
+            </div>
+        </td>
+        <td>
+            <p>
+                <i style="margin:0 auto" class="fas fa-trash-alt trashbin" onclick="cancelBill({{id}})"></i>
+            </p>
+        </td>
+    </tr>
+{{/each}}

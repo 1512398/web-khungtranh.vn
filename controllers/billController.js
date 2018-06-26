@@ -34,6 +34,26 @@ var controller = {
                 callback(bill);
             })
     },
+    countBillbyUserId: function(id, callback) {
+        models.Bill
+        .findAndCountAll({
+            where:{userId: id}
+        })  
+        .then(function(bill){
+            callback(bill)
+        })
+    },
+    getAllbyUserId: function(id, page, callback) {
+        models.Bill
+        .findAll({
+            where:{userId: id},
+            limit: itemsPerPage, offset: (page - 1) * itemsPerPage,
+            order: [['id','ASC']]
+        })
+        .then(function(bill) {
+            callback(bill);
+        })
+    },
     getAllbyIdUser: function(id, callback) {
         models.Bill
         .findAll({
@@ -52,6 +72,14 @@ var controller = {
         })
         .then(function(bill){
             callback(bill)
+        })
+    },
+    updateStt: function(id, callback) {
+        models.Bill
+        .update({
+            status: "Đã Hủy"
+        },{
+            where: {id:id}
         })
     }
 }

@@ -23,4 +23,10 @@ module.exports = (app) => {
         console.log('tao day');
         console.log();
     })
+    app.post('/cancelBill', function(req, res){
+        billCtr.updateStt(req.body.id, function(data){
+            res.send('success');
+            //res.redirect('/TinhTrangDonHang');
+        })
+    })
 }

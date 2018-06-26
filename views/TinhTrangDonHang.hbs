@@ -9,18 +9,18 @@
                     <table class="table table-responsive table-striped">
                         <thead class="">
                             <tr>
-                                <th style="width:6%">#</th>
-                                <th style="width:10%">Mã đơn hàng</th>
-                                <th style="width:10%">Giá</th>
-                                <th style="width:10%">Ngày đặt</th>
-                                <th style="width:10%">Ngày dự kiến giao</th>
-                                <th style="width:500px; white-space:nowrap">Tình trạng đơn hàng</th>
-                                <th style="width:14%; white-space:nowrap">Hủy đơn hàng</th>
+                                <th style="width:6%;text-align:center">#</th>
+                                <th style="width:5%;text-align:center">Mã đơn hàng</th>
+                                <th style="width:10%;text-align:center">Giá</th>
+                                <th style="width:20%;text-align:center">Ngày đặt</th>
+                                <th style="width:10%;text-align:center">Ngày dự kiến giao</th>
+                                <th style="width:10%; white-space:nowrap;text-align:center">Tình trạng đơn hàng</th>
+                                <th style="width:14%; white-space:nowrap;text-align:center">Hủy đơn hàng</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {{#each list}}
-                            <!-- Item 1 -->
+                        <tbody id="bills">
+                            <div></div>
+                            <!-- {{#each list}}
                             <tr class="giohang_item">
                                 <td scope="row"> #{{id}}
                                 </td>
@@ -39,10 +39,9 @@
                                 <td>{{date}}</td>
                                 <td>Đang xử lý</td>
                                 <td class="pt-3">
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-                                            style="width:70%">
-                                            Đang chờ giao
+                                    <div class="">
+                                        <div style="color:green;text-align:center">
+                                            {{status}}
                                         </div>
                                     </div>
                                 </td>
@@ -53,8 +52,12 @@
                                 </td>
                             </tr>
                             {{/each}}
+                            -->
                         </tbody>
                     </table>
+                    <div class="text-center">
+                        <ul id="pagination-demo" class="pagination pt-4"></ul>
+                    </div>
                     </div>
                     <div class="row">
                     </div>
@@ -67,3 +70,70 @@
                 <!-- Chi tiết đơn hàng -->
             </div>
 </main>
+<script src="/js/jquery.twbsPagination.min.js"></script>
+<script>
+    var id = 1;
+    var num_of_pages = 0;
+    var cur_page = -1;
+    var data = {
+        userId: {{userId}}
+    }
+    function loadItems(page) {
+        var url = '/admin/getBillInfoForUser?page=' + page+'&id={{userId}}'; 
+        $.ajax({
+            type: "GET",
+            url: url,
+            cache: true,
+            success: function (data) {
+                cur_page = page;
+                 if (num_of_pages != data.pagination.num_of_pages) {
+                    num_of_pages = data.pagination.num_of_pages;
+                    $('#pagination-demo').twbsPagination('destroy');
+                    $('#pagination-demo').twbsPagination({
+                        totalPages: num_of_pages,
+                        visiblePages: 3,
+                        next: '>',
+                        prev: '<',
+                        onPageClick: function (event, page) {
+                            loadItems(page)
+                        }
+                    });
+                } 
+                getTemplateAjax('/templates/bills_row_user.hbs', '#bills', data)
+            }
+        })
+    }
+    function getTemplateAjax(path, target, jsonData) {
+        var source;
+        var template;
+        $.ajax({
+            url: path,
+            cache: false,
+            success: function (data) {
+                source = data;
+                template = Handlebars.compile(source);
+                $(target).html(template(jsonData));
+            }
+        })
+    }
+    $(document).ready(function(){
+         loadItems(1);
+    })
+    var cancelBill = (id) => {
+        var r = confirm('Bạn có chắc chắn muốn hủy đơn hàng?');
+        if (r)
+            $.ajax({
+                type: "POST",
+                url: '/cancelBill',
+                data: JSON.stringify({
+                    id: id
+                }),
+                contentType: 'application/json',
+                cache: true,
+                success: function (data) {
+                    console.log(data);
+                }
+            })
+            alert('Đã hủy thành công! Tín hiệu đang xử lý, bạn có thể F5 lại trang để xem cập nhật!');
+    }
+</script>

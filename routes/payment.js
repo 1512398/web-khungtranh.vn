@@ -77,8 +77,8 @@ module.exports = function (app, paypal, onepayDom) {
                     });
                 });
                 req.session.cart = null;
-                // res.redirect('/TinhTrangDonHang')
-                res.render('index',{member: req.isAuthenticated(),name:'trangchu', title:'Trang chủ'});
+                res.redirect('/TinhTrangDonHang')
+                //res.render('index',{member: req.isAuthenticated(),name:'trangchu', title:'Trang chủ'});
             }
         });
     });
