@@ -10,7 +10,10 @@ var controller = {
             status: "Đã Thanh Toán",
             img: "",
             count: bill.count,
-            price: bill.price
+            price: bill.price,
+            typeDeli: bill.typeDeli,
+            costDeli: bill.costDeli,
+            priceFinal: bill.price + bill.costDeli
         })
         .then((bill) => {
             callback(bill);

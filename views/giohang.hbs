@@ -8,7 +8,7 @@
                 <div class="row pr-2 pl-2">
                     <!--Giao hang tiet kiem -->
                     <div class="col-md-6 col-sm-12 p-2">
-                        <div class="hinhthucgiaohang flex-row d-flex">
+                        <div class="hinhthucgiaohang flex-row d-flex" onclick="hinhthucgiaohang(1, 150000)">
                             <div class="col-10">
                                 <h5> <i class="fas fa-truck"></i>  Giao hàng tiết kiệm</h5>
                                 <p>Nhận hàng vào 21-27 tháng 4, 2018</p>
@@ -16,14 +16,14 @@
                             </div>
                             <div class="col-2 text-center" style="margin:auto">
                                 <div>
-                                    <i style = "visibility: hidden; color:tomato; font-size:2em; margin:auto" class="fas fa-check" id = "tick"></i>
+                                    <i style = "visibility: hidden; color:tomato; font-size:2em; margin:auto" class="fas fa-check" id="tick"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!--Giao hang tieu chuan -->
                     <div class="col-md-6 p-2 col-sm-12">
-                            <div class="hinhthucgiaohang flex-row d-flex activehinhthucgiaohang">
+                            <div class="hinhthucgiaohang flex-row d-flex activehinhthucgiaohang" onclick="hinhthucgiaohang(2, 230000)">
                                 <div class="col-10">
                                     <h5> <i class="fas fa-shipping-fast"></i></i>  Giao hàng tiêu chuẩn</h5>
                                     <p>Nhận hàng vào 20-23 tháng 4, 2018</p>
@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="col-2 text-center" style="margin:auto">
                                     <div>
-                                        <i style = "visibility: hidden; color:tomato; font-size:2em; margin:auto" class="fas fa-check" id = "tick"></i>
+                                        <i style = "visibility: hidden; color:tomato; font-size:2em; margin:auto" class="fas fa-check" id="tick"></i>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                                     <td class="pr-0 " style="min-width: 200px;">
                                         <div class="d-flex flex-row">
                                             <div class="col-3 p-0">
-                                                <img src="./img/thumb_ktranh2.jpg" alt="">
+                                                <img src="{{item.itemImgDemo}}" alt="" style="width:100%;height:50%">
                                             </div>
                                             
                                             <div class="col-9 p-2 pr-0" >
@@ -141,8 +141,7 @@
                             <p class=" font-italic">Đã bao gồm thuế VAT</p>
                     </div>
                 <div class="pt-3 pr-2">
-                    
-                    <a href="/ThanhToan" name="" id="" class="btn btn-danger btn-lg btn-block" <!--onclick="tmp()"-->
+                    <a name="" id="" class="btn btn-danger btn-lg" style="color:aliceblue"onclick="tmp()">
                         Thanh toán đơn hàng
                     </a>
                 </div>     `
@@ -153,58 +152,6 @@
     </div>
     </main>
 <script>
-    // tạm thời test add bill
-    var tmp = function() {
-        var list = [];
-        {{#each items}}
-            var idata = {
-                id: {{item.id}},
-                price: {{item.itemPrice}},
-                count: {{count}}
-            }
-            list.push(idata);
-        {{/each}}
-        console.log("okokok");
-        var uID = function() {
-            var value;
-            //get userID
-            value = 1;
-            return value;
-        }
-        var iID = function(){
-            var value = list;
-            // get listID
-            return value;
-        }
-        var count = function() {
-            var value = list[0];
-            // value = {{countAll}}
-            return {{countAll}};
-        }
-        var price = function() {
-            var value = list[0];
-            // value = {{priceAll}}
-            return {{priceAll}};
-        }
-        
-        var data = {
-            userId: uID(),
-            itemId : iID(),
-            count: count(),
-            price: price()
-        }
-        console.log(data);
-        $.ajax({
-            type: "POST",
-            url: '/bill_pay_done', 
-            cache: true,
-            data: JSON.stringify(data), 
-            contentType: 'application/json',
-            success: (data)=> {
-                console.log(data);
-            }
-        })
-    }
     
     //add 
     
@@ -334,4 +281,26 @@
         document.getElementById('loadItems').innerHTML = r;
         document.getElementById('countItemInCart').innerText = '{{countAll}}'
     } 
+    var type = 2;
+    var cost = 230000;
+    var hinhthucgiaohang = (id, cost)=>{
+        type = id;
+        cost = cost;
+    }
+    var tmp = function() {
+        console.log(type, cost)
+        $.ajax({
+            type: "POST", 
+            url: "/GioHang/hinhthucgiaohang",
+            cache: true,
+            data: JSON.stringify({
+                type: type,
+                cost: cost
+            }),
+            contentType: 'application/json',
+            success: function(data){
+                window.location.href = "/ThanhToan";
+            }
+        })
+    }
 </script> 

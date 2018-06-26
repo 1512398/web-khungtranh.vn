@@ -183,10 +183,10 @@
 
                 <div class="row">
                     <div class="col">
-                        <p>Đơn giá: </p>
+                        <p>Tổng giá các sản phẩm: </p>
                     </div>
                     <div class="col">
-                        <p>120.000</p>
+                        <p>{{price}}vnđ</p>
                     </div>
                 </div>
 
@@ -195,7 +195,7 @@
                         <p>Phí in hình: </p>
                     </div>
                     <div class="col">
-                        <p>100.000</p>
+                        <p>0 vnđ</p>
                     </div>
                 </div>
                 <div class="row">
@@ -203,7 +203,7 @@
                         <p>Vận chuyển: </p>
                     </div>
                     <div class="col">
-                        <p>230.000</p>
+                        <p>{{costdeli}} vnđ</p>
                     </div>
                 </div>
                 <hr style="margin:0; border-color:#888; width: 230px;">
@@ -212,7 +212,7 @@
                         <p style="font-weight:bold; font-size:1.2em">Tổng tiền: </p>
                     </div>
                     <div class="col" style="color:tomato; font-size:1.4em; font-weight:bold">
-                        <p id="price">{{price}}</p>
+                        <p id="price">{{priceFinal}} vnđ</p>
                     </div>
                 </div>
                 <div class="text-right pr-3">
@@ -228,3 +228,5 @@
             <!-- Chi tiết đơn hàng -->
         </div>
 </main>
+<script>
+</script>

@@ -109,5 +109,11 @@ router.get('/remove_cart_item', (req, res)=> {
         res.send('/')
     })
 })
+router.post('/hinhthucgiaohang', function(req, res){
+    var c = req.session.cart;
+    c.delivery = req.body;
+    c.priceFinal = c.priceAll + c.delivery.cost;
+    res.send('ok');
+})
 
 module.exports = router;

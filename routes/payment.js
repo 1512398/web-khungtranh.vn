@@ -52,6 +52,8 @@ module.exports = function (app, paypal, onepayDom) {
             if (error) {
                 throw error;
             } else {
+                console.log('thanh toan');
+                console.log(req.session.cart)
                 var list = [];
                 // add item to bill database
                 for(var key in req.session.cart.items){
@@ -61,7 +63,9 @@ module.exports = function (app, paypal, onepayDom) {
                     userId: req.user.id,
                     itemId: list,
                     count: req.session.cart.countAll,
-                    price: req.session.cart.priceAll
+                    price: req.session.cart.priceAll,
+                    typeDeli: req.session.cart.delivery.type,
+                    costDeli: req.session.cart.delivery.cost
                 }
                 billCtr.add(data1, function(data){
                     data1.itemId.forEach(element => {
