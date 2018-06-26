@@ -234,18 +234,21 @@
     }
     // ---
     var add_cart_item = () => {
-        id = saveIdChoose;
-        var k = getSrcImg()
-        data = {
-            src: src_final_edit
+        var answer = confirm("Bạn có muốn thêm vào giỏ hàng?");
+        if(answer == true) {
+            id = saveIdChoose;
+            var k = getSrcImg()
+            data = {
+                src: src_final_edit
+            }
+            $.ajax({
+                    url:'/GioHang/add_cart_item?id=' + id + '&width='+ k.width +'&height='+ k.height, 
+                    cache: true,
+                    success: (data)=> {
+                            console.log(data)
+                    }
+            })
         }
-        $.ajax({
-                url:'/GioHang/add_cart_item?id=' + id + '&width='+ k.width +'&height='+ k.height, 
-                cache: true,
-                success: (data)=> {
-                        console.log(data)
-                }
-        })
     }
     // ---
     var id = 1;
@@ -307,7 +310,8 @@
         },
         boundary: {
             width: document.getElementById('frame_main').clientWidth, 
-            height: document.getElementById('frame_main').clientHeight
+            height: document.getElementById('frame_main').clientHeight,
+            maxwidth: 400
         },
         showZoomer: true, 
         enableOrientation: true,
@@ -320,6 +324,7 @@
         orientation: 1,
         zoom:0
     })
+    croppie.update();
     croppie.result('blob').then(function(blob) {
         // do something with cropped blob
     });

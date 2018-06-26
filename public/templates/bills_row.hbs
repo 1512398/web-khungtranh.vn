@@ -103,11 +103,13 @@
         DataBillView.user = document.getElementById(nameuser).innerText;
         DataBillView.date = date;
         DataBillView.status = status;
+        DataBillView.id = id;
         DataBillView.cost = document.getElementById(priceid).innerText;
         document.getElementById('nameBill').innerText = DataBillView.user;
         document.getElementById('dateBill').innerText = DataBillView.date;
         document.getElementById('costBill').innerText = DataBillView.cost;
         document.getElementById('statusBill').innerText = DataBillView.status;
+        document.getElementById('idBill').innerText = DataBillView.id;
         //document.getElementById('addressBill').innerText = DataBillView.addressBill;
         //document.getElementById('telBill').innerText = DataBillView.telBill;
     }

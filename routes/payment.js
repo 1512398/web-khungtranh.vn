@@ -31,7 +31,6 @@ module.exports = function (app, paypal, onepayDom) {
                     if (payment.links[i].rel === 'approval_url') {
                         res.redirect(payment.links[i].href);
                     }
-
                 }
             }
         });
@@ -73,10 +72,11 @@ module.exports = function (app, paypal, onepayDom) {
                             price: element.count*element.price
                         }
                         billDetailCtr.add(Json, function(data){
-                            console.log(req.user.id + 'da thanh toan thanh cong');
+                            //console.log(req.user.id + 'da thanh toan thanh cong');
                         })
                     });
                 });
+                req.session.cart = null;
                 res.render('index',{member: req.isAuthenticated(),name:'trangchu', title:'Trang chủ'});
             }
         });
