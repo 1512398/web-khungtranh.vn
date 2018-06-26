@@ -9,9 +9,9 @@ module.exports = function (app, passport,jwt) {
         res.redirect('/');
     })
 
-    app.get('/LienHe', function (req, res) {
-        res.render('LienHe',{member: req.isAuthenticated(),title:'Liên hệ',name:'lienhe'});
-    })
+    // app.get('/LienHe', function (req, res) {
+    //     res.render('LienHe',{member: req.isAuthenticated(),title:'Liên hệ',name:'lienhe'});
+    // })
     app.get('/ThanhToan', function (req, res) {
         /*jwt.verify(req.token,'hthieuhoangtrunghieu',(err,authData)=>{
             if(err){
@@ -33,19 +33,18 @@ module.exports = function (app, passport,jwt) {
       })
 
     app.get('/DangKy', function (req, res) {
-        res.render('DangKy', { message: req.flash('signupMessage') });
+        res.render('DangKy', { message: req.flash('signupMessage')});
     });
 
     app.get('/DangNhap', function (req, res) {
         res.render('DangNhap', {title:'Đăng nhập', name:'dangnhap', message: req.flash('signinMessage') });
     });
-
     app.post('/DangKy',
         function(req,res,next){
             captcha = require('./captcha-verify.js');
             captcha(req,res,req.body['g-recaptcha-response'],function(stt){
                 if (stt)
-                {
+                {   
                     return next();
                 }    
                 else

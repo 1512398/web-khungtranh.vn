@@ -1,0 +1,11 @@
+ {{#each feedbacks}}
+    <tr>
+        <td>
+            <p style="font-weight:bold; color:#0f49a8" >{{name}}</p>
+            <p style="font-style:italic"> <i class="far fa-envelope"></i> {{email}}</p>
+            <p style="font-style:italic"> <i class="fas fa-phone"></i> {{phone}}</p>
+        </td>
+        <td class=" text-justify">{{content}}</td>
+        <td>{{createdAt}}</td>
+    </tr>
+{{/each}}

@@ -46,51 +46,7 @@
         </div>
     </div>
 </div>
-<!--
-<div class="right_col mt-2" role="main">
-    <div class="p">
-        <div class="page-title">
-            <div class="title_left p-3">
-                <h2 > Hệ thống quản lý tài khoản </h2>
-            </div>
-            <div class="title_right">
-            </div>
-            <div class="clearfix"></div>
-            <div id="row">
-                <div class="col-md-12">
-                    <div id="x_panel">
-                        <div id="x_content" style="height:450px">
-                            <table class="table table-striped">
-                                <thead>
-                                     header table 
-                                    <tr>
-                                        <th style="width:1%">ID</th>
-                                        <th style="width:5%;" class="mcenter">Ảnh</th>
-                                        <th style="width:15%;" class="mcenter">Tên người dùng</th>
-                                        <th style="width:15%" class="mcenter"> Email </th>
-                                        <th style="width:10%" class="mcenter"> Số ĐT </th>
-                                        <th style="width:25%" class="mcenter"> Địa chỉ</th>
-                                        <th style="width:10%;" class="mcenter">Ngày tạo TK</th>
-                                        <th class="mcenter">Quản lý</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="users">
-                                     Information an account
-                                    <div ></div>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="text-center">
-                            <ul id="pagination-demo" class="pagination pt-4"></ul>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->
+
 <script src="/js/jquery.twbsPagination.min.js"></script>
 <script>
     var id = 1;
@@ -148,8 +104,8 @@
         
         $.ajax({
             url: '/admin/banUser',
-            type: 'GET',
-            data: {userId:userID,action:action},
+            type: 'POST',
+            data: {userId:userID,action:action,_csrf:'{{csrfToken}}' },
             success: function(data){ 
                 loadItems(cur_page);
             },
