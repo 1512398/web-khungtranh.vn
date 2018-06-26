@@ -107,9 +107,12 @@
             <!-- dat hang main -->
             <div class="col-6 flex-column d-flex align-content-center align-items-center" id="dathang_main">
                 <h2 class=" font-weight-bold pt-2" style="font-weight:bold">Xem trước khung tranh</h2>
-                <div id="frame_main" style="clear: both;">
-                    <img src="./img/hinh_nguoi_dung_1.jpg" alt="" id="pic" style="display:none">
-                </div>
+                <div id="frame_main" style="clear: both;position: relative;">
+                    <img src="/img/demo_F5T x 3cm.png" alt="" style="z-index=1;position:absolute;" id="frame-pic">
+                    <div style="z-index=2;position:absolute;width:90%;height:90%;top:5%;left:5%;bottom:5%;right:5%;">
+                        <img src="./img/hinh_nguoi_dung_1.jpg" alt="" id="pic">
+                    </div>
+                    </div>
                 <div class="row p-3 mt-4" style="width:90%" id="dathang_controlpanel">
                     <div class="col-6">
                         <div class="align-items-center text-center p-0 " id="abs" style="font-size:3em">
@@ -140,12 +143,12 @@
                             <div class="form-row">
                                 <div class="col">
                                     <label for="width">Dài (cm)</label>
-                                    <input type="number" class="form-control" placeholder="Chiều dài" id="width" value="200">
+                                    <input type="number submit" class="form-control" placeholder="Chiều dài" id="width" value="524">
                                 </div>
 
                                 <div class="col">
                                     <label for="height">Rộng (cm)</label>
-                                    <input type="number" class="form-control" placeholder="Chiều rộng" id="height" value="300">
+                                    <input type="number submit" class="form-control" placeholder="Chiều rộng" id="height" value="385">
                                 </div>
                             </div>
 
@@ -194,8 +197,45 @@
 </main>
 <script src="lib/croppie/croppie.js"></script>
 
-<script>
-   
+<script>  
+        var rw = 396;
+        var rh = 385;
+        var ratio = rw / rh;
+    $('document').ready(function(){
+        $('.cr-viewport').removeAttr('style');
+        //$('.cr-boundary').removeAttr('style');
+        //var tmp = 'width:'+document.getElementById('width').value.toString()+'px;height:'+rh.toString()+'px';
+        var tmp = 'width:100%;height:100%'; 
+                //console.log(tmp);
+        $('.cr-boundary').attr('style', tmp);
+    })
+    // update feature resize image design
+    var updateSizeImgDesign = (data) => {
+        var w = parseInt(document.getElementById('width').value);
+        var h = parseInt(document.getElementById('height').value);
+        if(data == 1){   
+            document.getElementById('height').value = h;
+            document.getElementById('width').value = w;
+        } else {
+            ratioh = h / rh;
+            console.log(ratioh);
+            document.getElementById('height').value = h;
+            document.getElementById('width').value = w;
+        }
+        var c = croppie.options.viewport;
+        c.width = w;
+        c.height = h;
+        console.log(croppie.data.url);
+        croppie.bind({
+            url: croppie.data.url, 
+            orientation: 1,
+            zoom:0
+        })
+        $('.cr-viewport').removeAttr('style');
+        var tmp = 'width:'+document.getElementById('width').value.toString()+'px;height:'+rh.toString()+'px';
+                console.log(tmp);
+        $('.cr-boundary').attr('style', tmp);
+    }
     var saveIdChoose = -1;
     var srcSaveImg = "";
     var src_final_edit = "";
@@ -205,6 +245,7 @@
     var yourChoose = (id, src) => {
         saveIdChoose = id;
         srcSaveImg = src;
+        $('#frame-pic').attr('src', src);
     }
     //degisn
     var c = document.getElementById('pic')
@@ -305,8 +346,8 @@
     var frame = document.getElementById('pic');
     var croppie = new Croppie(frame, {
         viewport: {
-            width: 200,
-            height: 200
+            width: document.getElementById('width').value,
+            height: document.getElementById('height').value
         },
         boundary: {
             width: document.getElementById('frame_main').clientWidth, 
@@ -315,7 +356,6 @@
         },
         showZoomer: true, 
         enableOrientation: true,
-        enableResize: true,
         mouseWheelZoom: 'ctrl',
         enforceBoundary:true
     })
@@ -324,17 +364,14 @@
         orientation: 1,
         zoom:0
     })
-    croppie.update();
     croppie.result('blob').then(function(blob) {
         // do something with cropped blob
     });
-    var review = (data) => {
-        
-    }
     var rotate = (i) => {
         croppie.rotate(i);
     }
-
+    // change Size
+    
     // review
     // updatelist
     var updateList = function(id) {
