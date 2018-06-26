@@ -42,6 +42,17 @@ var controller = {
         .then(function(bill){
             callback(bill)
         })
+    },
+    findOne: function(id, callback) {
+        models.Bill
+        .findOne({
+            where: {
+                id: id
+            }
+        })
+        .then(function(bill){
+            callback(bill)
+        })
     }
 }
 module.exports = controller;

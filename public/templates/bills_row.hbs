@@ -34,7 +34,33 @@
     var viewBill = function(id, date, status) {
         var data = {
             id: id
-        } 
+        }
+        $.ajax({
+            type: "POST",
+            url: '/admin/manage_bill/bill', 
+            cache: true,
+            data: JSON.stringify({
+                billId: id
+            }), 
+            contentType: 'application/json',
+            success: (src1)=> {
+                $.ajax({
+                    type: "POST",
+                    url: '/admin/manage_bill/user', 
+                    cache: true,
+                    data: JSON.stringify({
+                        userId: src1.userId
+                    }), 
+                    contentType: 'application/json',
+                    success: (src2)=> {
+                        DataBillView.address = src2.address;
+                        DataBillView.tel = src2.phoneNum;
+                        document.getElementById('addressBill').innerHTML = DataBillView.address;
+                        document.getElementById('telBill').innerHTML = DataBillView.tel;
+                    }
+                })
+            }
+        })
         $.ajax({
             type: "POST", 
             url: '/admin/manage_bill/billitem',
@@ -42,10 +68,8 @@
             data : JSON.stringify(data),
             contentType: 'application/json',
             success: (src)=> {
-                console.log(src);
                 listItem = "";
                 src.rows.forEach(e=>{
-                    console.log(e.itemId);
                     // get info each item
                     var data1 = {
                         itemId: e.itemId
@@ -57,6 +81,7 @@
                         data: JSON.stringify(data1), 
                         contentType: 'application/json',
                         success: (src)=> {
+                            // get name and tel
                             listItem += "<div class='row'>" + "<div class='col-xs-4'>"+"<div id='prodcut-image'>" +
                                         "<img src='"
                                         + src.itemImgDemo
@@ -97,21 +122,23 @@
                 })
             }
         }) 
-        var nameitem = 'nameitem' + id.toString();
-        var nameuser = 'nameuser' + id.toString();
-        var priceid = 'price' + id.toString();
-        DataBillView.user = document.getElementById(nameuser).innerText;
-        DataBillView.date = date;
-        DataBillView.status = status;
-        DataBillView.id = id;
-        DataBillView.cost = document.getElementById(priceid).innerText;
-        document.getElementById('nameBill').innerText = DataBillView.user;
-        document.getElementById('dateBill').innerText = DataBillView.date;
-        document.getElementById('costBill').innerText = DataBillView.cost;
-        document.getElementById('statusBill').innerText = DataBillView.status;
-        document.getElementById('idBill').innerText = DataBillView.id;
-        //document.getElementById('addressBill').innerText = DataBillView.addressBill;
-        //document.getElementById('telBill').innerText = DataBillView.telBill;
+        
+            var nameitem = 'nameitem' + id.toString();
+            var nameuser = 'nameuser' + id.toString();
+            var priceid = 'price' + id.toString();
+            DataBillView.user = document.getElementById(nameuser).innerText;
+            DataBillView.date = date;
+            DataBillView.status = status;
+            DataBillView.id = id;
+            DataBillView.cost = document.getElementById(priceid).innerText;
+            document.getElementById('nameBill').innerText = DataBillView.user;
+            document.getElementById('dateBill').innerText = DataBillView.date;
+            document.getElementById('costBill').innerText = DataBillView.cost;
+            document.getElementById('statusBill').innerText = DataBillView.status;
+            document.getElementById('idBill').innerText = DataBillView.id;
+            document.getElementById('addressBill').innterText = DataBillView.address;
+            document.getElementById('telBill').innterText = DataBillView.tel;
+            console.log(DataBillView)
     }
 
     {{#each bills}}
@@ -145,7 +172,8 @@
             success: (src)=> {
                 var nameuser = 'nameuser' + '{{id}}';
                 document.getElementById(nameuser).innerText = src.fullName;
-                console.log(src.fullName);
+                document.getElementById('addressBill').innterText = src.address;
+                document.getElementById('telBill').innterText = src.phoneNum;
             }
         })
     {{/each}}

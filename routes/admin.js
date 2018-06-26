@@ -140,6 +140,11 @@ router.post('/manage_bill/user', function(req, res) {
         res.send(data);
     })
 })
+router.post('/manage_bill/bill', function(req, res){
+    BillsCtr.findOne(req.body.billId, function(data){
+        res.send(data);
+    })
+})
 
 billDetailCtr = require('../controllers/billDetailController')
 router.post('/manage_bill/billitem', function(req, res){
