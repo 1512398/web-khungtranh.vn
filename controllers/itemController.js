@@ -112,14 +112,14 @@ controller.search = function (searchQuery, limit, offset, callback) {
     if ((searchQuery.fromDate != undefined) && (searchQuery.fromDate != '')) {
         if (whereJson.createdAt == undefined) whereJson.createdAt = {};
         var tmp = searchQuery.fromDate.split('-');
-        var myDate = new Date(tmp[2], tmp[0] - 1, tmp[1]);
+        var myDate = new Date(tmp[0], tmp[1] - 1, tmp[2]);
         whereJson.createdAt.gte = myDate;
     }
 
     if ((searchQuery.toDate != undefined) && (searchQuery.toDate != '')) {
         if (whereJson.createdAt == undefined) whereJson.createdAt = {};
         var tmp = searchQuery.toDate.split('-');
-        var myDate = new Date(tmp[2], tmp[0] - 1, tmp[1]);
+        var myDate = new Date(tmp[0], tmp[1] - 1, tmp[2]);
         whereJson.createdAt.lte = myDate;
     }
     if ((searchQuery.sortBy != undefined) && (searchQuery.sortBy != '')) {

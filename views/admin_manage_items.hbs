@@ -351,6 +351,7 @@
         $.ajax({
             url: url,
             cache: true,
+            headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
             success: function (data) {
                 catalog_info = data;
                 getTemplateAjax('/templates/catalog_row.hbs', '#catalog', data);
@@ -369,6 +370,7 @@
             $.ajax({
                 url: "/admin/newCatalog",
                 type: "POST",
+                headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
                 data: $('#newCatForm').serialize(),
                 success: function (data) {
                     loadCatalog();
@@ -383,6 +385,7 @@
             $.ajax({
                 url: "/admin/editCatalog",
                 type: "POST",
+                headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
                 data: $('#editCatForm').serialize(),
                 success: function (data) {
                     loadCatalog();
@@ -401,6 +404,7 @@
                 url: "/admin/newItem",
                 type: "POST",
                 data: data,
+                headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
                 processData: false,
                 contentType: false,
                 cache: false,
@@ -420,6 +424,7 @@
                 url: "/admin/editItem",
                 type: "POST",
                 data: data,
+                headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
                 processData: false,
                 contentType: false,
                 cache: false,
@@ -448,6 +453,7 @@
             $.ajax({
                 url: "/admin/deleteCatalog",
                 type: "POST",
+                headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
                 data: { id: id, _csrf:'{{csrfToken}}' },
                 success: function (data) {
                     loadCatalog();
@@ -463,6 +469,7 @@
                 url: "/admin/deleteItem",
                 type: "POST",
                 data: { id: id, _csrf:'{{csrfToken}}' },
+                headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
                 success: function (data) {
                     executeSearch(cur_page,templateLink);
                 }

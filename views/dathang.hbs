@@ -1,6 +1,6 @@
-<script src="js/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="css/dathang.css">
 <link rel="stylesheet" href="./css/style.css">
+<script src="/js/search.js"></script>
 <link rel="stylesheet" href="lib/croppie/croppie.css"/>
 <style>
 /* The Modal (background) */
@@ -202,6 +202,7 @@
         var rh = 385;
         var ratio = rw / rh;
     $('document').ready(function(){
+            Handlebars.registerHelper( "compare", HbsCompare);
         $('.cr-viewport').removeAttr('style');
         //$('.cr-boundary').removeAttr('style');
         //var tmp = 'width:'+document.getElementById('width').value.toString()+'px;height:'+rh.toString()+'px';
@@ -277,6 +278,7 @@
     var add_cart_item = () => {
         var answer = confirm("Bạn có muốn thêm vào giỏ hàng?");
         if(answer == true) {
+
             id = saveIdChoose;
             var k = getSrcImg()
             data = {
@@ -286,6 +288,7 @@
                     url:'/GioHang/add_cart_item?id=' + id + '&width='+ k.width +'&height='+ k.height, 
                     cache: true,
                     success: (data)=> {
+                            $('#countItemInCart').html(parseInt($('#countItemInCart').html())+1);
                             console.log(data)
                     }
             })

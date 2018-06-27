@@ -21,7 +21,7 @@ module.exports = function (app, paypal, onepayDom) {
                 "description": "This is the payment description."
             }]
         };
-        create_payment_json.transactions[0].amount.total = req.session.cart.priceAll;
+        create_payment_json.transactions[0].amount.total = req.session.cart.priceFinal;
         
         paypal.payment.create(create_payment_json, function (error, payment) {
             if (error) {
@@ -105,7 +105,7 @@ module.exports = function (app, paypal, onepayDom) {
             req.socket.remoteAddress ||
             (req.connection.socket ? req.connection.socket.remoteAddress : null);
 
-        const amount = req.session.cart.priceAll;
+        const amount = req.session.cart.priceFinal;
         const now = new Date();
 
         // NOTE: only set the common required fields and optional fields from all gateways here, redundant fields will invalidate the payload schema checker
@@ -159,19 +159,46 @@ module.exports = function (app, paypal, onepayDom) {
 
         if (asyncFunc) {
             asyncFunc.then(() => {
-                res.send({
-                    title: 'ABCD',
-                    isSucceed: res.locals.isSucceed,
-                    email: res.locals.email,
-                    orderId: res.locals.orderId,
-                    price: res.locals.price,
-                    message: res.locals.message,
-                    billingStreet: res.locals.billingStreet,
-                    billingCountry: res.locals.billingCountry,
-                    billingCity: res.locals.billingCity,
-                    billingStateProvince: res.locals.billingStateProvince,
-                    billingPostalCode: res.locals.billingPostalCode,
+                var list = [];
+                for(var key in req.session.cart.items){
+                    list.push(req.session.cart.items[key]);
+                }
+                var data1 = {
+                    userId: req.user.id,
+                    itemId: list,
+                    count: req.session.cart.countAll,
+                    price: req.session.cart.priceAll,
+                    typeDeli: req.session.cart.delivery.type,
+                    costDeli: req.session.cart.delivery.cost
+                }
+                billCtr.add(data1, function(data){
+                    data1.itemId.forEach(element => {
+                        var Json = {
+                            billId: data.id,
+                            itemId: element.item.id,
+                            count: element.count, 
+                            price: element.count*element.price
+                        }
+                        billDetailCtr.add(Json, function(data){
+                            //console.log(req.user.id + 'da thanh toan thanh cong');
+                        })
+                    });
                 });
+                req.session.cart = null;
+                res.redirect('/TinhTrangDonHang')
+                // res.send({
+                //     title: 'ABCD',
+                //     isSucceed: res.locals.isSucceed,
+                //     email: res.locals.email,
+                //     orderId: res.locals.orderId,
+                //     price: res.locals.price,
+                //     message: res.locals.message,
+                //     billingStreet: res.locals.billingStreet,
+                //     billingCountry: res.locals.billingCountry,
+                //     billingCity: res.locals.billingCity,
+                //     billingStateProvince: res.locals.billingStateProvince,
+                //     billingPostalCode: res.locals.billingPostalCode,
+                // });
             });
         } else {
             res.send('No callback found');

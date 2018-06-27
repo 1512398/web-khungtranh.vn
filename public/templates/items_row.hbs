@@ -10,14 +10,24 @@
 
         <div class="sanPhamPriceAndVote " style="font-size:0.8em">
             <span class="badge badge-dark" id="sanphamPrice">{{itemPrice}}</span>
-            <span class="badge badge-secondary" id="sanphamStars">
+            {{#compare itemStatus "eq" '1'}}
+                            <span class="badge badge-success">Còn hàng</span>
+                        {{else}} 
+                        {{#compare itemStatus "eq" 2}}
+                            <span class="badge badge-danger">Hết hàng</span>
+                        {{else}}
+                            <span class="badge badge-danger">Ngưng SX</span>
+                        
+                        {{/compare}}
+            {{/compare}}
+            {{!-- <span class="badge badge-secondary" id="sanphamStars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
             </span>
-            <span class="d-inline-block"> ( {{itemCountVotes}} bình chọn)</span>
+            <span class="d-inline-block"> ( {{itemCountVotes}} bình chọn)</span> --}}
         </div>
     </div>
 </div>

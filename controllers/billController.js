@@ -1,4 +1,5 @@
 var models = require('../models');
+var sequelize = require('sequelize')
 const itemsPerPage = 5;
 var controller = {
     add : function(bill, callback) {
@@ -91,6 +92,34 @@ var controller = {
         .then(function(bill) {
             callback(bill)
         })
+    },
+    filter: function(searchQuery,callback){
+        var whereJson = {};
+        whereJson.status = 'Đã Thanh Toán';
+        var type = searchQuery.type;
+        if ((searchQuery.fromDate != undefined) && (searchQuery.fromDate != '')) {
+            if (whereJson.createdAt == undefined) whereJson.createdAt = {};
+            var tmp = searchQuery.fromDate.split('-');
+            var myDate = new Date(parseInt(tmp[0]), parseInt(tmp[1]) - 1, parseInt(tmp[2]));
+            whereJson.createdAt.gte = myDate;
+        }
+    
+        if ((searchQuery.toDate != undefined) && (searchQuery.toDate != '')) {
+            if (whereJson.createdAt == undefined) whereJson.createdAt = {};
+            var tmp = searchQuery.toDate.split('-');
+            var myDate = new Date(parseInt(tmp[0]), parseInt(tmp[1]) - 1, parseInt(tmp[2]));
+            whereJson.createdAt.lte = myDate;
+        }
+        models.Bill.
+            findAll({
+                attributes:[[sequelize.fn('date_trunc', type, sequelize.col('createdAt')),'createdAt'], [sequelize.fn('SUM', sequelize.col('price')), 'total']],
+                where: whereJson,
+                order: [sequelize.fn('date_trunc', type, sequelize.col('createdAt'))],
+                group: [sequelize.fn('date_trunc', type, sequelize.col('createdAt'))]
+            })
+            .then(function(bill){
+                callback(bill);
+            })
     }
 }
 module.exports = controller;

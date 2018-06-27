@@ -56,6 +56,7 @@
         var url = '/admin/getUserInfo?page=' + page; 
         $.ajax({
             url: url,
+            headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
             cache: true,
             success: function (data) {
                 cur_page = page;
@@ -106,6 +107,7 @@
             url: '/admin/banUser',
             type: 'POST',
             data: {userId:userID,action:action,_csrf:'{{csrfToken}}' },
+            headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
             success: function(data){ 
                 loadItems(cur_page);
             },

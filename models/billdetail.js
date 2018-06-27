@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   BillDetail.associate = function(models) {
     // associations can be defined here
-    BillDetail.belongsTo(models.Bill);
+    BillDetail.belongsTo(models.Item,{targetKey:'id', foreignKey: 'itemId'})
   };
   return BillDetail;
 };

@@ -12,17 +12,6 @@ controller.getById = function(email, callback){
     });
 };
 
-// controller.add = function(article_id,new_cmt, callback){
-//     models.Comment
-//     .create({
-//         comment: new_cmt,
-//         ArticleId: article_id,
-//     })
-//     .then(function(comment){
-//         callback(comment);
-//     });
-// };
-
 controller.edit = function(email, password,address,phoneNum, callback){
     models.User
     .update({
