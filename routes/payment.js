@@ -52,8 +52,8 @@ module.exports = function (app, paypal, onepayDom) {
             if (error) {
                 throw error;
             } else {
-                console.log('thanh toan');
-                console.log(req.session.cart)
+                console.log('thong tin thay toan');
+                console.log(req.session.pay)
                 var list = [];
                 // add item to bill database
                 for(var key in req.session.cart.items){
@@ -64,8 +64,13 @@ module.exports = function (app, paypal, onepayDom) {
                     itemId: list,
                     count: req.session.cart.countAll,
                     price: req.session.cart.priceAll,
+                    status: 'Đã Thanh Toán',
                     typeDeli: req.session.cart.delivery.type,
-                    costDeli: req.session.cart.delivery.cost
+                    costDeli: req.session.cart.delivery.cost,
+                    email: req.session.pay.email,
+                    address: req.session.pay.address, 
+                    fullname: req.session.pay.name, 
+                    tel: req.session.pay.tel
                 }
                 billCtr.add(data1, function(data){
                     data1.itemId.forEach(element => {
@@ -150,8 +155,6 @@ module.exports = function (app, paypal, onepayDom) {
 
     app.get('/payment/onepaydom/callback', (req, res) => {
         let asyncFunc = null;
-
-
         asyncFunc = OnePayDomestic.callbackOnePayDomestic(req, res);
 
         if (asyncFunc) {
@@ -174,5 +177,45 @@ module.exports = function (app, paypal, onepayDom) {
             res.send('No callback found');
         }
     });
+    app.post('/payment/thongtinthanhtoan', function(req,res){
+        req.session.pay = req.body;
+        res.send('ok');
+    })
+    app.post('/payment/COD', function(req, res){
+        req.session.pay = req.body;
+        var list = [];
+        // add item to bill database
+        for(var key in req.session.cart.items){
+            list.push(req.session.cart.items[key]);
+        }
+        var data1 = {
+            userId: req.user.id,
+            itemId: list,
+            count: req.session.cart.countAll,
+            price: req.session.cart.priceAll,
+            status: 'Chưa Thanh Toán',
+            typeDeli: req.session.cart.delivery.type,
+            costDeli: req.session.cart.delivery.cost,
+            email: req.session.pay.email,
+            address: req.session.pay.address, 
+            fullname: req.session.pay.name, 
+            tel: req.session.pay.tel
+        }
+        billCtr.add(data1, function(data){
+            data1.itemId.forEach(element => {
+                var Json = {
+                    billId: data.id,
+                    itemId: element.item.id,
+                    count: element.count, 
+                    price: element.count*element.price
+                }
+                billDetailCtr.add(Json, function(data){
+                    //console.log(req.user.id + 'da thanh toan thanh cong');
+                })
+            });
+        });
+        req.session.cart = null;
+        res.send('succes');
+    })
 }
 

@@ -15,13 +15,10 @@
     <td class="mcenter" id="price{{id}}"></td>
     <td class="mcenter" style=" color:green"> {{status}}</td>
     <td class="mcenter">
-        <a class="btn btn-primary btn-md" data-toggle="modal" data-target="#viewModal" onclick="viewBill({{id}}, '{{date}}', '{{status}}')">
+        <a class="btn btn-primary btn-md" data-toggle="modal" data-target="#viewModal" onclick="viewBill({{id}}, '{{date}}', '{{status}}','{{email}}', '{{fullname}}','{{tel}}', '{{address}}')">
             <i class="fa fa-folder" data-toggle="tooltip" data-placement="top" title="View bill"></i>
         </a>
-        <a href="javascript:;" class="btn btn-info btn-md" data-toggle="modal" data-target="#editModal">
-            <i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i>
-        </a>
-        <a href="javascript:;" class="btn btn-danger btn-md">
+        <a href="javascript:;" class="btn btn-danger btn-md" onclick="cancelBill({{id}})">
             <i class="fa fa-trash-o" data-toggle="tooltip" data-placement="top" title="Move to system bin"></i>
         </a>
     </td>
@@ -31,7 +28,11 @@
 <script>
     var DataBillView = {};  
     var listItem;  
-    var viewBill = function(id, date, status) {
+    var viewBill = function(id, date, status, email, fullname, tel, address) {
+        $('#nameBillDeli').html(fullname);
+        $('#emailBillDeli').html(email);
+        $('#telBillDeli').html(tel);
+        $('#addressBillDeli').html(address);
         var data = {
             id: id
         }
@@ -57,6 +58,7 @@
                         DataBillView.tel = src2.phoneNum;
                         document.getElementById('addressBill').innerHTML = DataBillView.address;
                         document.getElementById('telBill').innerHTML = DataBillView.tel;
+                        //document.getElementById('costDeliBill').innerHTML = DataBillView.costDeli;
                     }
                 })
             }
@@ -136,10 +138,10 @@
             document.getElementById('costBill').innerText = DataBillView.cost;
             document.getElementById('statusBill').innerText = DataBillView.status;
             document.getElementById('idBill').innerText = DataBillView.id;
-            document.getElementById('addressBill').innterText = DataBillView.address;
-            document.getElementById('telBill').innterText = DataBillView.tel;
+            //document.getElementById('addressBill').innterText = DataBillView.address;
+            //document.getElementById('telBill').innerHTML = DataBillView.tel;
+            //document.getElementById('costDeliBill').innerHTML = DataBillView.costDeli;
     }
-
     {{#each bills}}
         data = {
             userId: {{userId}}, 

@@ -18,7 +18,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="validationDefault01">Địa chỉ nhận hàng</label>
-                                <input type="text" class="form-control" id="validationDefault01" placeholder="Vui lòng nhập địa chỉ của bạn" value="" required>
+                                <input type="text" class="form-control" id="validationDefault02" placeholder="Vui lòng nhập địa chỉ của bạn" value="" required>
                             </div>
                         </div>
                         <div class="form-row">
@@ -27,40 +27,10 @@
                                 <input type="text" class="form-control" id="validationDefault03" placeholder="Họ và tên người nhận" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="validationDefault04">Tỉnh/ Thành phố</label>
-                                <select class="custom-select" required>
-                                    <option value="">Vui lòng chọn tỉnh/thành phố</option>
-                                    <option value="1">Hà Nội</option>
-                                    <option value="2">Đà Nẵng</option>
-                                    <option value="3">Hồ Chí Minh</option>
-                                </select>
-                            </div>
-
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
                                 <label for="validationDefault03">Số điện thoại người nhận</label>
-                                <input type="text" class="form-control" id="validationDefault03" placeholder="Số điện thoại người nhận" required>
+                                <input type="number" class="form-control" id="validationDefault04" placeholder="Số điện thoại người nhận" required>
                             </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="validationDefault03">Phường/xã</label>
-                                <select class="custom-select" required>
-                                    <option value="">Vui lòng chọn phường/xã</option>
-                                    <option value="1">Quận 1</option>
-                                    <option value="2">Quận 2</option>
-                                    <option value="3">Quận 3</option>
-                                    <option value="4">Quận 4</option>
-                                    <option value="5">Quận 5</option>
-                                    <option value="6">Quận 6</option>
-                                </select>
-                            </div>
-
-
                         </div>
-
-                        <!-- <button class="btn btn-primary" type="submit">Submit form</button> -->
                     </form>
                 </div>
 
@@ -91,7 +61,7 @@
                         <div id="home" class="tab-pane fade in active">
                             <h3>Thanh toán khi nhận hàng</h3>
                             <p>Bạn có thể thanh toán bằng tiền mặt khi nhận hàng tại nhà</p>
-                            <a style="width:200px; margin: 10px auto; " name="" id="" class="btn btn-danger btn-lg btn-block" href="./TinhTrangDonHang.html">
+                            <a style="width:200px; margin: 10px auto; color:white;" name="" id="COD" class="btn btn-danger btn-lg btn-block" onclick="ttnh(1)">
                                 Thanh toán ngay
                             </a>
                         </div>
@@ -137,8 +107,8 @@
                                     Thanh toán ngay
                                 </a> --}}
                             </div>
-                            <form action="/paypal" method="POST">
-                                <input type="submit" value="Thanh toán ngay" class="btn btn-danger btn-lg btn-block" style="width:200px; margin: 10px auto">
+                            <form action="/paypal" id="Paypal" method="POST">
+                                <input value="Thanh toán ngay" class="btn btn-danger btn-lg btn-block" style="width:200px; margin: 10px auto" onclick="ttnh(2)">
                             </form>
                         </div>
                         <div id="menu2" class="tab-pane fade">
@@ -151,8 +121,8 @@
 
                                 <br>Lưu ý: Nếu thẻ có logo Visa, Master hoặc JCB, bạn vui lòng chọn phương thức thanh toán bằng
                                 Thẻ tín dụng/ghi nợ. </p>
-                            <form action="/payment/checkout" method="POST">
-                                <input type="submit" value="Thanh toán ngay" class="btn btn-danger btn-lg btn-block" style="width:200px; margin: 10px auto">
+                            <form action="/payment/checkout" id="VN" method="POST">
+                                <input value="Thanh toán ngay" class="btn btn-danger btn-lg btn-block" style="width:200px; margin: 10px auto;" onclick="ttnh(3)">
                             </form>
                         </div>
 
@@ -192,14 +162,6 @@
 
                 <div class="row">
                     <div class="col">
-                        <p>Phí in hình: </p>
-                    </div>
-                    <div class="col">
-                        <p>0 vnđ</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
                         <p>Vận chuyển: </p>
                     </div>
                     <div class="col">
@@ -219,14 +181,51 @@
                     <p class=" font-italic">Đã bao gồm thuế VAT</p>
                 </div>
                 <div class="pt-3 pr-2">
-
                 </div>
 
-                </di>
+                </div>
             </div>
 
             <!-- Chi tiết đơn hàng -->
         </div>
 </main>
 <script>
+    
+    var ttnh = function(type) {
+        // type 1: COD, 
+        // type 2: Paypal
+        // type 3: VN
+        var data = {
+            email: document.getElementById('validationDefault01').value,
+            address: document.getElementById('validationDefault02').value,
+            name: document.getElementById('validationDefault03').value,
+            tel: document.getElementById('validationDefault04').value
+        }
+        $.ajax({
+            type: "POST",
+            url: "payment/thongtinthanhtoan",
+            data: JSON.stringify(data),
+            cache: true,
+            contentType: 'application/json',
+            success: function(data){
+                console.log(data);
+                if(1 == type) {
+                    $.ajax({
+                        type: "POST", 
+                        url: "payment/COD", 
+                        cache: true,
+                        success: function(data) {
+                            window.location.href = "/TinhTrangDonHang";
+                        }
+                    })
+                } else
+                if(2 == type) {
+                    $('#Paypal').submit();
+                } else 
+                if(3 == type) {
+                    $('#VN').submit();
+                }
+            }
+        })
+    }
 </script>

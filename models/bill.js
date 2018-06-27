@@ -12,12 +12,17 @@ module.exports = (sequelize, DataTypes) => {
     tel: DataTypes.STRING,
     typeDeli: DataTypes.STRING,
     costDeli: DataTypes.INTEGER,
-    priceFinal: DataTypes.INTEGER
+    priceFinal: DataTypes.INTEGER,
+    email: DataTypes.STRING,
+    address: DataTypes.STRING,
+    fullname: DataTypes.STRING,
+    tel: DataTypes.STRING
   }, {});
   Bill.associate = function(models) {
     // associations can be defined here
     Bill.hasMany(models.User);
     Bill.hasMany(models.Item);
+    Bill.hasMany(models.BillDetail);
   };
   return Bill;
 };

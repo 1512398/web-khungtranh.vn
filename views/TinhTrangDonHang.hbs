@@ -127,9 +127,8 @@
                 contentType: 'application/json',
                 cache: true,
                 success: function (data) {
-                    console.log(data);
+                    loadItems(cur_page);
                 }
             })
-            alert('Đã hủy thành công! Tín hiệu đang xử lý, bạn có thể F5 lại trang để xem cập nhật!');
     }
 </script>
