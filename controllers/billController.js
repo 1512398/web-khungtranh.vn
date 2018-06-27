@@ -8,13 +8,17 @@ var controller = {
             userId: bill.userId, 
             itemId: bill.itemId[0].item.id, 
             date: Date(),
-            status: "Đã Thanh Toán",
+            status: bill.status,
             img: "",
             count: bill.count,
             price: bill.price,
             typeDeli: bill.typeDeli,
             costDeli: bill.costDeli,
-            priceFinal: bill.price + bill.costDeli
+            priceFinal: bill.price + bill.costDeli,
+            email: bill.email,
+            address: bill.address, 
+            fullname: bill.fullname,
+            tel: bill.tel
         })
         .then((bill) => {
             callback(bill);
@@ -84,6 +88,9 @@ var controller = {
             status: "Đã Hủy"
         },{
             where: {id:id}
+        })
+        .then(function(bill) {
+            callback(bill)
         })
     },
     filter: function(searchQuery,callback){

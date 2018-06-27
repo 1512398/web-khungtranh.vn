@@ -85,8 +85,15 @@ router.get('/add_cart_item', (req, res)=> {
     listItems.getbyId(req.query.id, (item)=>{
         cartItem.add(item, item.id)
         sessionCart.cart = cartItem;
-        console.log(sessionCart)
-        res.send('/')
+        console.log(sessionCart);
+        if(req.session.cart!=null){
+            var tmp = req.session.cart;
+            console.log(req.session.cart.items)
+            res.render('GioHang', {member: req.isAuthenticated(), title: "Giỏ Hàng", items: req.session.cart.items, countAll: req.session.cart.countAll, priceAll: req.session.cart.priceAll})
+        }
+        else {
+            res.render('GioHang', {member: req.isAuthenticated(), title: "Giỏ Hàng",countAll: 0, priceAll: 0})
+        }
     })
 })
 router.get('/delete_cart_item', (req, res)=> {
@@ -95,8 +102,15 @@ router.get('/delete_cart_item', (req, res)=> {
     listItems.getbyId(req.query.id, (item)=>{
         cartItem.delete(item, item.id)
         sessionCart.cart = cartItem;
-        console.log(sessionCart)
-        res.send('/')
+        console.log(sessionCart);
+        if(req.session.cart!=null){
+            var tmp = req.session.cart;
+            console.log(req.session.cart.items)
+            res.render('GioHang', {member: req.isAuthenticated(), title: "Giỏ Hàng", items: req.session.cart.items, countAll: req.session.cart.countAll, priceAll: req.session.cart.priceAll})
+        }
+        else {
+            res.render('GioHang', {member: req.isAuthenticated(), title: "Giỏ Hàng",countAll: 0, priceAll: 0})
+        }
     })
 })
 router.get('/remove_cart_item', (req, res)=> {
@@ -105,9 +119,19 @@ router.get('/remove_cart_item', (req, res)=> {
     listItems.getbyId(req.query.id, (item)=>{
         cartItem.remove(item, item.id)
         sessionCart.cart = cartItem;
-        console.log(sessionCart)
-        res.send('/')
+        console.log(sessionCart);
+        if(req.session.cart!=null){
+            var tmp = req.session.cart;
+            console.log(req.session.cart.items)
+            res.render('GioHang', {member: req.isAuthenticated(), title: "Giỏ Hàng", items: req.session.cart.items, countAll: req.session.cart.countAll, priceAll: req.session.cart.priceAll})
+        }
+        else {
+            res.render('GioHang', {member: req.isAuthenticated(), title: "Giỏ Hàng",countAll: 0, priceAll: 0})
+        }
     })
+})
+router.get('/getIteminCart', (req, res)=>{
+    res.send(req.session.cart);
 })
 router.post('/hinhthucgiaohang', function(req, res){
     var c = req.session.cart;

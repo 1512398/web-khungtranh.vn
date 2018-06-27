@@ -23,10 +23,14 @@ module.exports = (app) => {
         console.log('tao day');
         console.log();
     })
-    app.post('/cancelBill', function(req, res){
+    app.post('/cancelBill', function(req, res){ 
         billCtr.updateStt(req.body.id, function(data){
-            res.send('success');
-            //res.redirect('/TinhTrangDonHang');
+            res.redirect('/tinhtrangdonhang');
+        })
+    })
+    app.post('/cancleBillbyAdmin', function(req, res){
+        BillCtr.updateStt(req.body.id, function(data){
+            res.redirect('/admin/manage_bill');
         })
     })
 }

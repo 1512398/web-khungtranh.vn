@@ -51,36 +51,6 @@
                             </tr>
                             </thead>
                             <tbody id="loadItems">
-                                {{#each items}}
-                                <tr class = "giohang_item">
-                                    <td scope="row"> #{{item.id}}
-                                    <i class="fas fa-trash-alt trashbin" onclick="remove_cart_item({{item.id}})"></i>
-                                    </td>
-                                    <td class="pr-0 " style="min-width: 200px;">
-                                        <div class="d-flex flex-row">
-                                            <div class="col-3 p-0">
-                                                <img src="{{item.itemImgDemo}}" alt="" style="width:100%;height:50%">
-                                            </div>
-                                            
-                                            <div class="col-9 p-2 pr-0" >
-                                                <h6>{{item.itemName}}</h6>
-                                                <p>Mã hàng: {{item.itemId}}</p>
-                                                <p>Chất liệu: {{item.itemMaterial}}</p>
-                                            </div>
-                                    </td>
-                                    <td>{{item.itemHeightSize}}x{{item.itemWidthSize}}</td>
-                                    <td>{{item.itemPrice}}vnđ</td>
-                                    <td>
-                                        <div class="soluong">
-                                        <div class="btn-group"> 
-                                            <button type="button" class="btn btn-secondary btnInc" onclick="add_cart_item({{item.id}})">+</button>
-                                            <input type="text" class="form-control tbSoluong" value="{{count}}" onchange="change_cart_item({{item.id}})">
-                                            <button type="button" class="btn btn-secondary btnDec" onclick="delete_cart_item({{item.id}})">-</button>
-                                        </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                {{/each}}  
                             </tbody>
                     </table>
                 </div>
@@ -89,7 +59,7 @@
             </div>
 
             <!-- Thanh toan don hang -->
-            <div class="col-md-3 pb-5 pt-2 mt-2 thanhtoandonhang">
+            <div class="col-md-3 pb-5 pt-2 mt-2 thanhtoandonhang" id="loadInfos">
                 {{!-- <h4>Địa điểm giao hàng</h4>
                 <select class="form-control form-control-sm">
                         <option>Hồ Chí Minh</option>
@@ -101,52 +71,8 @@
                 </select>
                 <hr> --}}
                 <!-- Thong tin don hang - thanh toan -->
-                <h4>Thông tin đơn hàng</h4>
-                <div class="row">
-                        <div class="col">
-                            <p>Tổng số lượng: </p>
-                        </div>
-                        <div class="col">
-                            <p class="tongsoluong">{{countAll}}</p>
-                        </div>
-                    </div>
-                       
-                    <div class="row">
-                        <div class="col">
-                            <p>Đơn giá: </p>
-                        </div>
-                        <div class="col">
-                            <p>120.000</p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                            <div class="col">
-                                <p>Phí in hình: </p>
-                            </div>
-                            <div class="col">
-                                <p>100.000</p>
-                            </div>
-                    </div>
-                    <hr style="margin:0; border-color:#888; width: 230px;">
-                    <div class="row pt-2">
-                            <div class="col">
-                                <p style="font-weight:bold; font-size:1.2em">Tổng tiền: </p>
-                            </div>
-                            <div class="col" style="color:tomato; font-size:1.4em; font-weight:bold">
-                                <p>{{priceAll}}</p>
-                            </div>
-                    </div>    
-                    <div class="text-right pr-3">
-                            <p class=" font-italic">Đã bao gồm thuế VAT</p>
-                    </div>
-                <div class="pt-3 pr-2">
-                    <a name="" id="" class="btn btn-danger btn-lg" style="color:aliceblue"onclick="tmp()">
-                        Thanh toán đơn hàng
-                    </a>
-                </div>     `
                     
-            </di>
+            </div>
         </div>
         <!-- Chi tiết đơn hàng -->
     </div>
@@ -154,14 +80,42 @@
 <script>
     
     //add 
-    
+    function getTemplateAjax(path, target, jsonData) {
+        var source;
+        var template;
+        $.ajax({
+            url: path,
+            cache: false,
+            success: function (data) {
+                source = data;
+                template = Handlebars.compile(source);
+                $(target).html(template(jsonData));
+            }
+        })
+    }
+    function Reloads() {
+        var url = '/GioHang/getIteminCart';
+        $.ajax({
+            url: url,
+            cache: true,
+            success: function (data) {
+                if(data != null) {
+                    getTemplateAjax('/templates/cart_item_row.hbs', '#loadItems', data);
+                    getTemplateAjax('/templates/cart_item_col_info.hbs', '#loadInfos', data);
+                }
+            }
+        })
+    }
+    $('document').ready(function(){
+        Reloads();
+    })
     var add_cart_item = (id) => {
         console.log(id)
         $.ajax({
             url:'/GioHang/add_cart_item?id=' +id, 
             cache: true,
             success: (data)=> {
-                location.reload();
+                Reloads();
             }
         })
     }
@@ -171,7 +125,7 @@
             url: '/GioHang/delete_cart_item?id=' +id,
             cache: true,
             success: (data)=>{
-                location.reload();
+               Reloads();
             }
         })
     }
@@ -183,104 +137,12 @@
             url: '/GioHang/remove_cart_item?id=' +id,
             cache: true,
             success: (data)=>{
-                location.reload();
+                Reloads();
             }
         })
     }
      // read data cart from cookie
-    var obj= {
-            id: "001", 
-            name: "Mẫu Composite Trắng Ngà Đơn", 
-            size: { width: 300, height: 200}, 
-            cost: 120000,
-            count: 1, 
-            code: "F5T x 3cm",
-            material: "composite trơn bóng" 
-        }
-    function getCount() {
-        var res = 1;
-        var temp = document.cookie;
-        if(temp != null) {
-            var x = temp.split(';');
-            var y = x[x.length-1].split('=');
-            var z = y[0].split('_');
-            var w = parseInt(z[z.length-1]) + 1;
-            res = w;
-        }
-        return res.toString();
-    }
-    var addCookie = (data) => {
-        count = getCount();
-        var val = JSON.stringify(obj);
-
-        //create cookie
-        var add = "items_" + count + "=" +val;
-        document.cookie = add;
-    }
-    var changeCost = (data) => {
-        var res = "";
-        var cur = data.toString();
-        count = 1;
-        for(var i = cur.length-1; i > 0;i--) {
-            if(3 == count) {
-                count = 1;
-                res = '.' + cur[i]+ res;
-            } 
-            else { 
-                count += 1;
-                res = cur[i] + res;
-            }
-        }
-        res = cur[0] + res; 
-        return res;
-    }
-    var loadItemsCart = (data) => {
-        var temp = document.cookie;
-        var listItems = new Array();
-        // list Items
-        var keyFound = 'items';
-        var x = temp.split(';');
-        x.forEach((e) => {
-            console.log(e)
-            var y = e.split('=')
-            if (y[0].indexOf(keyFound) > -1) {
-                listItems.push(JSON.parse(y[1]));
-            }
-        })
-        // -- 
-        let r = "";
-        for(var e in listItems) {
-            r += '<tr class ="giohang_item">';
-            r += '<td scope="row">';
-            r += '#';
-            r +=  listItems[e].id + '<i class="fas fa-trash-alt trashbin"></i></td>';
-            r += '<td class="pr-0 " style="min-width: 200px;">';
-            r += '<div class="d-flex flex-row">';
-            r += '<div class="col-3 p-0">';
-            r += '<img src="./img/thumb_ktranh2.jpg" alt="">';
-            r += '</div>'
-            r += '<div class="col-9 p-2 pr-0" >'
-            r += '<h6>' + listItems[e].name + '</h6>'
-            r += '<p>Mã hàng: ' + listItems[e].code + '</p>'
-            r += '<p>Chất liệu: ' + listItems[e].material + '</p>'
-            r += '</div>'
-            r += '</td>'
-            r += '<td>' + listItems[e].size.height + 'x' + listItems[e].size.width + '</td>'
-            r += '<td>' + changeCost(listItems[e].cost) + 'đ</td>'
-            r += '<td>'
-            r += '<div class="soluong">'
-            r += '<div class="btn-group">'
-            r += '<button type="button" class="btn btn-secondary btnInc">+</button>'
-            r += '<input type="text" class="form-control tbSoluong" value="' + listItems[e].count +'">'   
-            r += '<button type="button" class="btn btn-secondary btnDec">-</button>'
-            r += '</div>'
-            r += '</div>' 
-            r += '</td>'
-            r += '</tr>'
-        }
-        document.getElementById('loadItems').innerHTML = r;
-        document.getElementById('countItemInCart').innerText = '{{countAll}}'
-    } 
+    
     var type = 2;
     var cost = 230000;
     var hinhthucgiaohang = (id, icost)=>{

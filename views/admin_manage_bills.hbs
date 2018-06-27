@@ -86,35 +86,63 @@
             </div>
             <br/>
             <div class="row">
-                <div class="profile-product-tilte row-md-4">  
-                    <label class="col-md-5 "> Mã Hóa Đơn </label>
-                    <strong class="col-md-7" id="idBill"></strong>
-                </div>
-                <div class="profile-product-tilte row-md-4">  
-                    <label class="col-md-5 "> Người dùng </label>
-                    <strong class="col-md-7" id="nameBill"></strong>
-                </div>
-                <div class="profile-product-tilte row-md-4">
-                    <label class="col-md-5 "> Thời gian </label>
-                    <small class="col-md-7" id="dateBill">	</small>
-                </div>
-                <div class="profile-product-tilte row-md-4">
-                    <label class="col-md-5 "> Trạng Thái </label>
-                    <small class="col-md-7" style="color:green" id="statusBill"> </small>
-                </div>
-                <div class="profile-product-tilte row-md-4">
-                        <label class="col-md-5 "> Số điện thoại</label>
-                        <small class="col-md-7" style="color:black" id="telBill"></small>
+                <div class="col-xs-6">
+                    <div class="profile-product-tilte row-md-4">  
+                        <label class="col-md-5 "> Mã Hóa Đơn </label>
+                        <strong class="col-md-7" id="idBill"></strong>
                     </div>
-                <div class="profile-product-tilte row-md-4">
-                    <label class="col-md-5 "> Địa chỉ </label>
-                    <small class="col-md-7" style="color:black" id="addressBill"> </small>
+                    <div class="profile-product-tilte row-md-4">  
+                        <label class="col-md-5 "> Người dùng </label>
+                        <strong class="col-md-7" id="nameBill"></strong>
+                    </div>
+                    <div class="profile-product-tilte row-md-4">
+                        <label class="col-md-5 "> Thời gian </label>
+                        <small class="col-md-7" id="dateBill">	</small>
+                    </div>
+                    <div class="profile-product-tilte row-md-4">
+                        <label class="col-md-5 "> Trạng Thái </label>
+                        <small class="col-md-7" style="color:green" id="statusBill"> </small>
+                    </div>
+                    <div class="profile-product-tilte row-md-4">
+                            <label class="col-md-5 "> Số điện thoại</label>
+                            <small class="col-md-7" style="color:black" id="telBill"></small>
+                        </div>
+                    <div class="profile-product-tilte row-md-4">
+                        <label class="col-md-5 "> Địa chỉ </label>
+                        <small class="col-md-7" style="color:black" id="addressBill"> </small>
+                    </div>
+                </div>  
+                <div class="col-xs-6">
+                    <div class="profile-product-tilte row-md-4">  
+                        <label class="col-md-12"> Thông tin người nhận </label>
+                    </div>
+                    <div class="profile-product-tilte row-md-4">  
+                        <label class="col-md-5 "> Người nhận </label>
+                        <strong class="col-md-7" id="nameBillDeli"></strong>
+                    </div>
+                    <div class="profile-product-tilte row-md-4">
+                        <label class="col-md-5 "> Email </label>
+                        <small class="col-md-7" style="color:green" id="emailBillDeli"> </small>
+                    </div>
+                    <div class="profile-product-tilte row-md-4">
+                            <label class="col-md-5 "> Số điện thoại</label>
+                            <small class="col-md-7" style="color:black" id="telBillDeli"></small>
+                        </div>
+                    <div class="profile-product-tilte row-md-4">
+                        <label class="col-md-5 "> Địa chỉ </label>
+                        <small class="col-md-7" style="color:black" id="addressBillDeli"> </small>
+                    </div>
                 </div>
-                <div class="profile-product-tilte row-md-4">
-                    <label class="col-md-5 "> Giá </label>
-                    <small class="col-md-7"> <label id="costBill"> </label> <label class="pull-right"><span class="fa fa-angle-up"></span>10% VAT</label></small>
+            </div> 
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="profile-product-tilte row-md-4">
+                        <label class="col-md-5 "> Giá </label>
+                        <strong class="col-md-7"> <label id="costBill" style="font-size:2rem; color:red;"> </label> <label class="pull-right"><span class="fa fa-angle-up"></span>10% VAT</label></strong>
+                    </div>
                 </div>
-            </div>  
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -171,6 +199,24 @@
     $(document).ready(function(){
          loadItems(1);
     })
+
+    var cancelBill = (id) => {
+        var r = confirm('Bạn có chắc chắn muốn hủy đơn hàng?');
+        if (r)
+            $.ajax({
+                type: "POST",
+                url: '/cancelBillbyAdmin',
+                data: JSON.stringify({
+                    id: id
+                }),
+                contentType: 'application/json',
+                cache: true,
+                success: function (data) {
+                    loadItems(cur_page);
+                }
+            })
+    }
+
     var loads = function() {
         document.getElementById('nameBill').innerText = DataBillView.user;
         document.getElementById('dateBill').innerText = DataBillView.date;
