@@ -17,12 +17,14 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/jquery-ui.css">
-    <script defer src="fontawesome/svg-with-js/js/fontawesome-all.js"></script>
+    <script defer src="/fontawesome/svg-with-js/js/fontawesome-all.js"></script>
     <!-- Java Script -->
     <script src="/js/handlebars-v4.0.11.js"></script>
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/script.js"></script>
-    <script src="js/jquery-ui.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <script src="/js/jquery.twbsPagination.min.js"></script>
+    <script src="/js/jquery.cookie.min.js"></script>
 
 </head>
 
@@ -37,10 +39,9 @@
     <script src="/js/popper.min.js"></script>
 </body>
 <script>
-    $(document).ready(function(){
-      
-        $('nav .active').removeClass('active');
-        $('nav #{{name}}').addClass('active');
+    $(document).ready(function(){  
+    $('nav .active').removeClass('active');
+    $('nav #{{name}}').addClass('active');
     });
 </script>
 

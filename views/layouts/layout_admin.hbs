@@ -23,6 +23,8 @@
     <script src="/js/admin.js"></script>
     <!-- CHART JS -->
     <script src="/lib/chart/Chart.js"></script>
+    {{!-- Cookie Jquery --}}
+    <script src="/js/jquery.cookie.min.js"></script>
 
 </head>
 <body class="main">
@@ -42,7 +44,7 @@
                             </div>
                             <div class="profile_info">
                               <span>Chào mừng,</span>
-                              <h2> Admin </h2>
+                              <h2 id = 'adname'> </h2>
                             </div>
                     </div>
                           
@@ -58,11 +60,11 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="../img/avatar.jpg" alt="...">Admin
+                                    <img src="../img/avatar.jpg" alt="..."/> <span id="adname2"></span>
                                     <span class="fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href=""><i class="fa fa-sign-out pull-right"></i> Logout</a></li>
+                                    <li><a href="/admin/logout"><i class="fa fa-sign-out pull-right"></i> Logout</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -81,3 +83,16 @@
 
 </body>
 </html>
+
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url: '/admin/adminName',
+            headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
+            success: function (data) {
+                $('#adname').html(data);
+                $('#adname2').html(data);
+            }
+        })
+    })
+</script>

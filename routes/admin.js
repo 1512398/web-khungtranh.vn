@@ -2,12 +2,14 @@ var express = require('express');
 var router = express.Router();
 var csrf = require('csurf')
 var csrfProtection = csrf({ cookie: true })
+var jwtad = require('./admin_JWT.js')
 
+// ADMIN GET METHOD
 router.get('/', function (req, res) {
     res.redirect('/admin/index')
-    // res.render('DatHang',{member: req.isAuthenticated(),name:'dathang', title:'Đặt Hàng',catalog:catalog});
 })
 router.get('/index', function (req, res) {
+    console.log(req.session.authData)
     res.render('admin_dashboard', { layout: 'layout_admin' })
 })
 router.get('/manage_account', csrfProtection, function (req, res) {
@@ -24,8 +26,14 @@ router.get('/manage_item', csrfProtection, function (req, res) {
 router.get('/mail_inbox', function (req, res) {
     res.render('admin_mail_box', { layout: 'layout_admin' })
 })
+
+router.get('/login',function (req,res) {
+    res.render('admin_signin');
+  })
+
+// QUẢN LÝ USERS
 var userController = require('../controllers/userController');
-router.get('/getUserInfo', function (req, res) {
+router.get('/getUserInfo', jwtad.verifyToken,function (req, res) {
     var limit = 5;
     var page = parseInt(req.query.page);
     page = isNaN(page) ? 1 : page;
@@ -43,8 +51,16 @@ router.get('/getUserInfo', function (req, res) {
         });
     })
 })
+router.post('/banUser', csrfProtection, jwtad.verifyToken, function (req, res) {
+    userController.banUser(req.body.userId, req.body.action, function (data) {
+        res.send('oke')
+    })
+})
+
+
+// QUẢN LÝ FEEDBACKS
 var feedbackController = require('../controllers/feedbackController');
-router.get('/getAllFeedback', function (req, res) {
+router.get('/getAllFeedback', jwtad.verifyToken, function (req, res) {
     var limit = 10;
     var page = parseInt(req.query.page);
     page = isNaN(page) ? 1 : page;
@@ -63,8 +79,7 @@ router.get('/getAllFeedback', function (req, res) {
     })
 })
 
-
-
+// QUẢN LÝ ĐƠN HÀNG
 BillsCtr = require('../controllers/billController');
 router.get('/getBillInfo', function (req, res) {
     var limit = 5;
@@ -83,6 +98,8 @@ router.get('/getBillInfo', function (req, res) {
         });
     })
 })
+
+
 router.get('/getBillInfoForUser', function (req, res) {
     var limit = 5;
     var page = parseInt(req.query.page);
@@ -102,14 +119,10 @@ router.get('/getBillInfoForUser', function (req, res) {
     })
 })
 
-router.post('/banUser', csrfProtection, function (req, res) {
-    userController.banUser(req.body.userId, req.body.action, function (data) {
-        res.send('oke')
-    })
-})
 
+// QUẢN LÝ DANH MỤC MẶT HÀNG
 var catalogController = require('../controllers/catalogController');
-router.get('/getCatalogInfo', function (req, res) {
+router.get('/getCatalogInfo',jwtad.verifyToken, function (req, res) {
     catalogController.getAll(function (catalog) {
         var arr_catalog = [];
         catalog.forEach(element => {
@@ -119,59 +132,35 @@ router.get('/getCatalogInfo', function (req, res) {
     })
 })
 
-router.post('/newCatalog', csrfProtection, function (req, res) {
+router.post('/newCatalog',jwtad.verifyToken, csrfProtection, function (req, res) {
     catalogController.add(req.body.title, req.body.summary, function (catalog) {
         res.send('oke');
     })
 })
 
-router.post('/editCatalog', csrfProtection, function (req, res) {
+router.post('/editCatalog',jwtad.verifyToken, csrfProtection, function (req, res) {
     catalogController.update(req.body.id, req.body.title, req.body.summary, function (catalog) {
         res.send('oke');
     })
 })
 
-router.post('/deleteCatalog', csrfProtection, function (req, res) {
+router.post('/deleteCatalog', jwtad.verifyToken, csrfProtection, function (req, res) {
     catalogController.delete(req.body.id, function (catalog) {
         res.send('oke');
     })
 })
 
+
+// QUẢN LÝ MẶT HÀNG
 const upload = require('../routes/uploadImg')
 
 var itemController = require('../controllers/itemController');
-router.post('/deleteItem', csrfProtection, function (req, res) {
+router.post('/deleteItem', jwtad.verifyToken, csrfProtection, function (req, res) {
     itemController.delete(req.body.id, function (catalog) {
         res.send('oke');
     })
 })
-
-router.post('/manage_bill/item', function(req, res) {
-    itemController.findOne(req.body.itemId, function(data) {
-        res.send(data);
-    })
-    
-})
-
-router.post('/manage_bill/user', function(req, res) {
-    userController.findOne(req.body.userId, function(data) {
-        res.send(data);
-    })
-})
-router.post('/manage_bill/bill', function(req, res){
-    BillsCtr.findOne(req.body.billId, function(data){
-        res.send(data);
-    })
-})
-
-billDetailCtr = require('../controllers/billDetailController')
-router.post('/manage_bill/billitem', function(req, res){
-    billDetailCtr.getAll(req.body.id, function(src){
-        res.send(src);
-    })
-})
-
-router.post('/newItem',
+router.post('/newItem', 
     function (req, res, next) {
        
         upload.fields([{name:'itemImg',maxCount:1},{name:'itemDemo',maxCount:1}])(req, res, function (err) {
@@ -186,6 +175,7 @@ router.post('/newItem',
             }
         })
     },
+    jwtad.verifyToken,
     csrfProtection,
     function (req, res) {
         var imgPath = '';
@@ -222,11 +212,12 @@ router.post('/editItem',
             }
             else {
                 console.log('success!')
-              
                 return next();
             }
         })
-    },csrfProtection,
+    },
+    jwtad.verifyToken,
+    csrfProtection,
     function (req, res) {
             var imgPath = '#';
             var demoPath = '#';
@@ -254,4 +245,77 @@ router.post('/editItem',
             })
         });
 
+
+// QUẢN LÝ ĐƠN HÀNG
+billDetailCtr = require('../controllers/billDetailController')
+router.post('/manage_bill/item',  function(req, res) {
+    itemController.findOne(req.body.itemId, function(data) {
+        res.send(data);
+    })
+    
+})
+
+router.post('/manage_bill/user', function(req, res) {
+    userController.findOne(req.body.userId, function(data) {
+        res.send(data);
+    })
+})
+router.post('/manage_bill/bill', function(req, res){
+    BillsCtr.findOne(req.body.billId, function(data){
+        res.send(data);
+    })
+})
+
+router.post('/manage_bill/billitem', function(req, res){
+    billDetailCtr.getAll(req.body.id, function(src){
+        res.send(src);
+    })
+})
+
+// QUẢN LÝ ĐĂNG NHẬP ADMIN
+router.post("/login", jwtad.login);
+router.get("/logout",function (req,res) {
+    res.cookie('JWT','');
+    res.redirect('/')
+  })
+
+router.get('/adminName', jwtad.verifyToken, function (req,res) {
+    res.send(req.session.authData.admin);
+    // res.send('oke')
+  })
+
+// QUẢN LÝ XUẤT BÁO CÁO - VẼ BIỂU ĐỒ
+router.post("/thongke",function(req,res){
+    BillsCtr.filter(req.body,function(data){
+        res.json(data);
+    })
+});
+
+router.post("/thongketheoloai", function(req,res){
+    // billDetailCtr.filter(req.body,4,function(data){
+    //     console.log(data[0].dataValues.total)
+    // })
+    catalogController.getAll(function (catalog) {
+        var stt = [];
+        var count = 0;
+        catalog.forEach(element => {
+            billDetailCtr.filter(req.body,element.id,function(data){
+                val = 0;
+                if (data.length!=0)
+
+                    val = (data)
+                tmp={}
+                tmp.total = val;
+                tmp.id = element.id;
+                tmp.name = element.title;
+                stt.push(tmp);
+                count ++;
+                if (count == catalog.length){
+                    console.log(stt)
+                    res.send(stt)
+                }
+        });
+    })
+    })
+})
 module.exports = router;
