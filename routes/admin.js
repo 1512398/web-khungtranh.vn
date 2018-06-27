@@ -9,6 +9,7 @@ router.get('/', function (req, res) {
     res.redirect('/admin/index')
 })
 router.get('/index', function (req, res) {
+    console.log(req.session.authData)
     res.render('admin_dashboard', { layout: 'layout_admin' })
 })
 router.get('/manage_account', csrfProtection, function (req, res) {
@@ -276,6 +277,11 @@ router.post("/login", jwtad.login);
 router.get("/logout",function (req,res) {
     res.cookie('JWT','');
     res.redirect('/')
+  })
+
+router.get('/adminName', jwtad.verifyToken, function (req,res) {
+    res.send(req.session.authData.admin);
+    // res.send('oke')
   })
 
 module.exports = router;
