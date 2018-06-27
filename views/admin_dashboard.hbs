@@ -1,5 +1,5 @@
 <div class="right_col" role="main">
-    <div class="row tile_count">
+    {{!-- <div class="row tile_count">
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-3 mb-2 bg-success text-white" >
         <span class="count_top"><i class="fa fa-user"></i> Người dùng truy cập và mua</span>
         <div class="count">30</div>
@@ -30,16 +30,45 @@
         <div class="count">12</div>
         <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> So với tháng trước </span>
         </div>
-    </div>
+    </div> --}}
     <div class="row tile_count">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                <h2>Biểu đồ thống kê 6 tháng năm <strong>2018</strong></h2>
+                <h2>Biểu đồ thống kê doanh số</h2>
                 <div class="title_right">
                 </div>
                 <div class="clearfix"></div>
                 </div>
+                <form id="thongkeform">
+                        <div class="col-md-2">
+                            <label for="type">Thống kê theo</label>
+                            <select class="form-control" id="type" required value="day" name="type">
+                                <option value="day">Ngày</option>
+                                <option value="month">Tháng</option>
+                                <option value="year">Năm</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-3">   
+                        <label for="fromDate">Từ</label>
+                        <input class="form-control" type="date" min="0" value="" id="fromDate">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="toDate">Đến</label>
+                            <input class="form-control" type="date" min="0" value="" id="toDate">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="catalogSelect">Danh mục sản phẩm</label>
+                             <select class="form-control" id="catalogSelect"></select>
+                        </div>
+                        <div class="col-md-1">
+                            <label for="btnThongKe">Xuất</label>
+                            <button class="btn btn-primary" id="btnThongKe">Thống kê</button>
+                        </div>
+                    </form>
                 <div class="x_content">
                     <canvas id="myChart"></canvas>       
                 </div>
@@ -49,7 +78,18 @@
 </div>
 
 <script>
-var data =  {
+function loadCatalog() {
+        var url = '/admin/getCatalogInfo';
+        $.ajax({
+            url: url,
+            cache: true,
+            headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
+            success: function (data) {
+                getTemplateAjax('/templates/catalog_select_s.hbs', '#catalogSelect', data);
+            }
+        })
+    }
+var dataDummy =  {
         labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
         datasets: [{
             label: 'Tài khoản người dùng',
@@ -61,40 +101,27 @@ var data =  {
                 'rgba(255,99,132,1)'
             ],
             borderWidth: 1
-        },{
-            label: 'Hóa đơn thanh toán',
-            data: [11, 12, 39, 15, 41, 61],
+            }]  
+    }
+var dataTemplate =  {
+        labels: '',
+        datasets: [{
+            label: 'Thống kê doanh số',
+            data: '',
             backgroundColor: [
-                'rgba(54, 162, 235, 0.2)'
+                'rgba(255, 99, 132, 0.2)'
             ],
             borderColor: [
-                'rgba(54, 162, 235, 1)'
+                'rgba(255,99,132,1)'
             ],
             borderWidth: 1
-        },{
-            label: 'Sản phẩm bán ra',
-            data: [60, 50, 10, 19, 10, 31],
-            backgroundColor: [
-                'rgba(255, 206, 86, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 206, 86, 1)'
-            ],
-            borderWidth: 1
-        },{
-            label: 'Thư góp ý gửi về',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(75, 192, 192, 0.2)'
-            ],
-            borderColor: [
-                'rgba(75, 192, 192, 1)'
-            ],
-            borderWidth: 1
-        }]
+            }]  
     }
 var ctx = document.getElementById("myChart").getContext('2d');
-var myChart = new Chart(ctx, {
+
+function loadChart(data){
+    {{!-- console.log(data) --}}
+    var myChart = new Chart(ctx, {
     type: 'line',
     data: data,
     options: {
@@ -107,4 +134,43 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+}
+
+$('#btnThongKe').on('click',function(){
+    $.ajax({
+                url: "/admin/thongke",
+                type: "POST",
+                {{!-- headers: {'Authorization': 'bearer ' + $.cookie('JWT')}, --}}
+                {{!-- data: $('#thongkeform').serialize(), --}}
+                data: {fromDate: $('#fromDate').val(), toDate: $('#toDate').val(), type: $('#type').val()},
+                success: function (data) {
+                    labels = []
+                    dataset = []
+                    var type = $('#type').val();
+                    console.log(data);
+                    for (i=0;i<data.length;i++){
+                        d = new Date(data[i].createdAt);
+                        console.log(d)
+                        switch (type){
+                            case 'month':
+                                labels.push('Tháng '+ (parseInt(d.getMonth())+1).toString())
+                                break;
+                            case 'day':
+                                labels.push(d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear())
+                        }
+                        
+                        dataset.push(parseInt(data[i].total));
+                        {{!-- console.log(data[i].total); --}}
+                    }
+                    dataTemplate.labels = labels;
+                    dataTemplate.datasets[0].data = dataset;
+                    loadChart(dataTemplate);
+                }
+            })
+    return false;
+})
+
+$(document).ready(function(){
+    loadCatalog();
+})
 </script>

@@ -81,7 +81,7 @@ router.get('/getAllFeedback', jwtad.verifyToken, function (req, res) {
 
 // QUẢN LÝ ĐƠN HÀNG
 BillsCtr = require('../controllers/billController');
-router.get('/getBillInfo',jwtad.verifyToken, function (req, res) {
+router.get('/getBillInfo', function (req, res) {
     var limit = 5;
     var page = parseInt(req.query.page);
     page = isNaN(page) ? 1 : page;
@@ -284,4 +284,12 @@ router.get('/adminName', jwtad.verifyToken, function (req,res) {
     // res.send('oke')
   })
 
+// QUẢN LÝ XUẤT BÁO CÁO - VẼ BIỂU ĐỒ
+router.post("/thongke",function(req,res){
+    console.log(req.body)
+
+    BillsCtr.filter(req.body,function(data){
+        res.json(data);
+    })
+});
 module.exports = router;

@@ -61,7 +61,8 @@ jwtadmin.login = function(req, res) {
             var payload = {admin: admin.admin};
             var token = jwt.sign(payload, opts.secretOrKey,{expiresIn:'3000000s'});
             res.cookie('JWT',token);
-            res.send(token)
+            // res.send(token)
+            res.redirect('/admin')
           } else {
             res.status(401).json({message:"Password không hợp lệ"});
           }
