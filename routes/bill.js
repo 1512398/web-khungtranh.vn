@@ -28,9 +28,15 @@ module.exports = (app) => {
             res.redirect('/tinhtrangdonhang');
         })
     })
-    app.post('/cancleBillbyAdmin', function(req, res){
-        BillCtr.updateStt(req.body.id, function(data){
-            res.redirect('/admin/manage_bill');
+    app.post('/cancelBillbyAdmin', function(req, res){
+        console.log('tao day ne');
+        billCtr.updateStt(req.body.id, function(data){
+            res.send('ok');
+        })
+    })
+    app.post('/doneDelivery', function(req, res){
+        billCtr.updateSttDone(req.body.id, function(data){
+            res.send('ok');
         })
     })
 }

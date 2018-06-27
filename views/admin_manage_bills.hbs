@@ -217,6 +217,21 @@
             })
     }
 
+    var doneBillDeli = function(id) {
+        console.log('okok'+id);
+        $.ajax({
+            type: "POST",
+            url: '/doneDelivery',
+            data: JSON.stringify({
+                id: id
+            }),
+            contentType: 'application/json',
+            cache: true,
+            success: function(data) {
+                loadItems(cur_page);
+            }
+        })
+    }
     var loads = function() {
         document.getElementById('nameBill').innerText = DataBillView.user;
         document.getElementById('dateBill').innerText = DataBillView.date;
