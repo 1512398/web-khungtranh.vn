@@ -94,8 +94,6 @@ var controller = {
             if (whereJson.createdAt == undefined) whereJson.createdAt = {};
             var tmp = searchQuery.fromDate.split('-');
             var myDate = new Date(parseInt(tmp[0]), parseInt(tmp[1]) - 1, parseInt(tmp[2]));
-            // console.log('start day:')
-            // console.log(myDate)
             whereJson.createdAt.gte = myDate;
         }
     
@@ -103,8 +101,6 @@ var controller = {
             if (whereJson.createdAt == undefined) whereJson.createdAt = {};
             var tmp = searchQuery.toDate.split('-');
             var myDate = new Date(parseInt(tmp[0]), parseInt(tmp[1]) - 1, parseInt(tmp[2]));
-            // console.log('to day:')
-            // console.log(myDate)
             whereJson.createdAt.lte = myDate;
         }
         models.Bill.

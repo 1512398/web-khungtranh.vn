@@ -286,10 +286,36 @@ router.get('/adminName', jwtad.verifyToken, function (req,res) {
 
 // QUẢN LÝ XUẤT BÁO CÁO - VẼ BIỂU ĐỒ
 router.post("/thongke",function(req,res){
-    console.log(req.body)
-
     BillsCtr.filter(req.body,function(data){
         res.json(data);
     })
 });
+
+router.post("/thongketheoloai", function(req,res){
+    // billDetailCtr.filter(req.body,4,function(data){
+    //     console.log(data[0].dataValues.total)
+    // })
+    catalogController.getAll(function (catalog) {
+        var stt = [];
+        var count = 0;
+        catalog.forEach(element => {
+            billDetailCtr.filter(req.body,element.id,function(data){
+                val = 0;
+                if (data.length!=0)
+
+                    val = (data)
+                tmp={}
+                tmp.total = val;
+                tmp.id = element.id;
+                tmp.name = element.title;
+                stt.push(tmp);
+                count ++;
+                if (count == catalog.length){
+                    console.log(stt)
+                    res.send(stt)
+                }
+        });
+    })
+    })
+})
 module.exports = router;

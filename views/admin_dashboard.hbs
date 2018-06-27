@@ -33,13 +33,7 @@
     </div> --}}
     <div class="row tile_count">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-                <div class="x_title">
-                <h2>Biểu đồ thống kê doanh số</h2>
-                <div class="title_right">
-                </div>
-                <div class="clearfix"></div>
-                </div>
+            <div class="mt-2 mb-2">
                 <form id="thongkeform">
                         <div class="col-md-2">
                             <label for="type">Thống kê theo</label>
@@ -69,8 +63,28 @@
                             <button class="btn btn-primary" id="btnThongKe">Thống kê</button>
                         </div>
                     </form>
+            </div>
+            <hr>
+            <div class="x_panel" style="margin-top:20px">
+                <div class="x_title">
+                <h2>Biểu đồ thống kê tổng doanh số</h2>
+                <div class="title_right">
+                </div>
+                <div class="clearfix"></div>
+                </div>
                 <div class="x_content">
                     <canvas id="myChart"></canvas>       
+                </div>
+            </div>
+            <div class="x_panel" style="margin-top:20px">
+                <div class="x_title">
+                <h2>Biểu đồ thống kê doanh số theo danh mục mặt hàng</h2>
+                <div class="title_right">
+                </div>
+                <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <canvas id="myChart2"></canvas>       
                 </div>
             </div>
         </div>
@@ -118,10 +132,9 @@ var dataTemplate =  {
             }]  
     }
 var ctx = document.getElementById("myChart").getContext('2d');
-
-function loadChart(data){
-    {{!-- console.log(data) --}}
-    var myChart = new Chart(ctx, {
+var ctx2 = document.getElementById("myChart2").getContext('2d');
+function loadChart(data,ctxt){
+    var myChart = new Chart(ctxt, {
     type: 'line',
     data: data,
     options: {
@@ -136,37 +149,44 @@ function loadChart(data){
 });
 }
 
+
 $('#btnThongKe').on('click',function(){
     $.ajax({
-                url: "/admin/thongke",
-                type: "POST",
-                {{!-- headers: {'Authorization': 'bearer ' + $.cookie('JWT')}, --}}
-                {{!-- data: $('#thongkeform').serialize(), --}}
-                data: {fromDate: $('#fromDate').val(), toDate: $('#toDate').val(), type: $('#type').val()},
-                success: function (data) {
-                    labels = []
-                    dataset = []
-                    var type = $('#type').val();
-                    console.log(data);
-                    for (i=0;i<data.length;i++){
-                        d = new Date(data[i].createdAt);
-                        console.log(d)
-                        switch (type){
-                            case 'month':
-                                labels.push('Tháng '+ (parseInt(d.getMonth())+1).toString())
-                                break;
-                            case 'day':
-                                labels.push(d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear())
-                        }
-                        
-                        dataset.push(parseInt(data[i].total));
-                        {{!-- console.log(data[i].total); --}}
-                    }
-                    dataTemplate.labels = labels;
-                    dataTemplate.datasets[0].data = dataset;
-                    loadChart(dataTemplate);
+        url: "/admin/thongke",
+        type: "POST",
+        {{!-- headers: {'Authorization': 'bearer ' + $.cookie('JWT')}, --}}
+        data: {fromDate: $('#fromDate').val(), toDate: $('#toDate').val(), type: $('#type').val()},
+        success: function (data) {
+            labels = []
+            dataset = []
+            var type = $('#type').val();
+            for (i=0;i<data.length;i++){
+                d = new Date(data[i].createdAt);
+                switch (type){
+                    case 'month':
+                        labels.push('Tháng '+ (parseInt(d.getMonth())+1).toString())
+                        break;
+                    case 'day':
+                        labels.push(d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear())
                 }
-            })
+                
+                dataset.push(parseInt(data[i].total));
+            }
+            dataTemplate.labels = labels;
+            dataTemplate.datasets[0].data = dataset;
+            loadChart(dataTemplate,ctx);
+        }
+    })
+    $.ajax({
+        url: "/admin/thongketheoloai",
+        type: "POST",
+        {{!-- headers: {'Authorization': 'bearer ' + $.cookie('JWT')}, --}}
+        data: {fromDate: $('#fromDate').val(), toDate: $('#toDate').val(), type: $('#type').val()},
+        success: function(data){
+            loadChart(dataDummy,ctx2);
+            console.log(data)
+        }
+    })
     return false;
 })
 
