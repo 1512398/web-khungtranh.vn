@@ -1,0 +1,37 @@
+<main class="pb-5 mb-5 justify-content-center align-items-center d-flex">
+    <div class="container flex-row d-flex justify-content-center">
+        <div class="col-md-8 pt-4 col-lg-6   mt-5 align-self-center dangky">
+            <h3 class="text-center mt-5" style="color:brown;">
+                <i class="fas fa-sign-in-alt"></i> Đăng nhập quản trị viên</h3>
+            <hr> {{#if (notEmpty message)}}
+            <div class="alert alert-danger">{{message}}</div>
+            {{/if}}
+            <form  method="post" id="formDangNhap">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nhập username</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="username"
+                        required name="admin">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Mật khẩu</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
+                </div>
+                <button id="btnSubmit" type="submit" style="width:100%" class="btn btn-danger">Đăng nhập tài khoản</button>
+                <hr>
+            </form>
+        </div>
+    </div>
+</main>
+<script>
+    $('#btnSubmit').on('click',function(){
+        $.ajax({
+            url:'/admin/login',
+            type: 'POST',
+            data: $('formDangNhap').serialize(),
+            success: function(data){
+               return false;
+            }
+        }
+        )
+    })
+</script>

@@ -49,3 +49,38 @@ function executeSearch(page,templateLink) {
     })
 }
 
+function handlePagination(num_of_pages){
+    if (num_of_pages == 0){
+                     $('#pagination-demo').twbsPagination('destroy');
+                }
+                else {
+                     $('#pagination-demo').twbsPagination('destroy');
+                $('#pagination-demo').twbsPagination({
+                    totalPages: num_of_pages,
+                    visiblePages: 3,
+                    next: '>',
+                    prev: '<',
+                    onPageClick: function (event, page) {
+                        loadItems(page)
+                    }
+                });   
+                }
+}
+
+function HbsCompare( v1, op, v2, options ) {
+
+        var c = {
+            "eq": function( v1, v2 ) {
+            return v1 == v2;
+            },
+            "neq": function( v1, v2 ) {
+            return v1 != v2;
+            },
+
+        }
+
+        if( Object.prototype.hasOwnProperty.call( c, op ) ) {
+            return c[ op ].call( this, v1, v2 ) ? options.fn( this ) : options.inverse( this );
+        }
+        return options.inverse( this );
+        } ;

@@ -25,6 +25,7 @@ function callbackOnePayDomestic(req, res) {
 
 	return onepayDom.verifyReturnUrl(query).then(results => {
 		if (results) {
+			res.render
 			res.locals.email = 'tu.nguyen@naustud.io';
 			res.locals.orderId = results.orderId || '';
 			res.locals.price = results.amount;
