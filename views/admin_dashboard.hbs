@@ -131,6 +131,20 @@ var dataTemplate =  {
             borderWidth: 1
             }]  
     }
+var dataTemplate2 =  {
+        labels: '',
+        datasets: [{
+            label: 'Thống kê doanh số',
+            data: '',
+            backgroundColor: [
+                'rgba(141, 178, 239,0.2)'
+            ],
+            borderColor: [
+                'rgb(66, 134, 244)'
+            ],
+            borderWidth: 1
+            }]  
+    }
 var ctx = document.getElementById("myChart").getContext('2d');
 var ctx2 = document.getElementById("myChart2").getContext('2d');
 function loadChart(data,ctxt){
@@ -148,8 +162,23 @@ function loadChart(data,ctxt){
     }
 });
 }
-
-
+function format(date,labels){
+    d = new Date(date);
+    var type = $('#type').val();
+    switch (type){
+        case 'month':
+            labels.push('Tháng '+ (parseInt(d.getMonth())+1).toString())
+            break;
+        case 'day':
+            labels.push(d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear())
+            break;
+        case 'year':
+            labels.push(d.getFullYear());
+            break;
+    }
+                
+}
+ var maindata = null;
 $('#btnThongKe').on('click',function(){
     $.ajax({
         url: "/admin/thongke",
@@ -159,17 +188,8 @@ $('#btnThongKe').on('click',function(){
         success: function (data) {
             labels = []
             dataset = []
-            var type = $('#type').val();
             for (i=0;i<data.length;i++){
-                d = new Date(data[i].createdAt);
-                switch (type){
-                    case 'month':
-                        labels.push('Tháng '+ (parseInt(d.getMonth())+1).toString())
-                        break;
-                    case 'day':
-                        labels.push(d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear())
-                }
-                
+                format(data[i].createdAt,labels)
                 dataset.push(parseInt(data[i].total));
             }
             dataTemplate.labels = labels;
@@ -177,18 +197,38 @@ $('#btnThongKe').on('click',function(){
             loadChart(dataTemplate,ctx);
         }
     })
+
+   
     $.ajax({
         url: "/admin/thongketheoloai",
         type: "POST",
         {{!-- headers: {'Authorization': 'bearer ' + $.cookie('JWT')}, --}}
         data: {fromDate: $('#fromDate').val(), toDate: $('#toDate').val(), type: $('#type').val()},
         success: function(data){
-            loadChart(dataDummy,ctx2);
-            console.log(data)
+            maindata = data;
+            
         }
     })
     return false;
 })
+
+$('#catalogSelect').on('change',function(){
+        c = $('#catalogSelect').val();
+        for (i=0;i<maindata.length;i++){
+                if (maindata[i].id == c){
+                    labels = [];
+                    dataset = [];
+                    for (j=0;j<maindata[i].label.length;j++){
+                        format(maindata[i].label[j],labels);
+                    }
+                    dataTemplate2.labels = labels;
+                    dataTemplate2.datasets[0].data = maindata[i].value;
+                    dataTemplate2.datasets[0].label = maindata[i].name;
+                    loadChart(dataTemplate2,ctx2);
+                    break;
+                } 
+            }
+    });
 
 $(document).ready(function(){
     loadCatalog();
