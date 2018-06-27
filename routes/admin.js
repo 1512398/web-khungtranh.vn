@@ -300,18 +300,23 @@ router.post("/thongketheoloai", function(req,res){
         var count = 0;
         catalog.forEach(element => {
             billDetailCtr.filter(req.body,element.id,function(data){
-                val = 0;
+                value = [];
+                label = [];
                 if (data.length!=0)
-
-                    val = (data)
+                {
+                    for (i =0; i< data.length;i++){
+                        value.push(data[i].dataValues.prc)
+                        label.push(data[i].dataValues.createdAt)
+                    }
+                }
                 tmp={}
-                tmp.total = val;
-                tmp.id = element.id;
+                tmp.value = value;
                 tmp.name = element.title;
+                tmp.id = element.id;
+                tmp.label = label;
                 stt.push(tmp);
                 count ++;
                 if (count == catalog.length){
-                    console.log(stt)
                     res.send(stt)
                 }
         });
