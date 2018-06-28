@@ -1,4 +1,5 @@
  {{#each itemsList.rows}}
+    {{#compare itemStatus "neq" '3'}}
 <div class="d-flex flex-row p-0 dathang_item" onclick="yourChoose({{id}}, '{{itemImgDemo}}','{{itemType}}', '{{itemWidthSize}}', '{{itemHeightSize}}')">
     <div class="col-3 p-0">
         <img src="{{itemImg}}" alt="" style="width:100%; height:100%">
@@ -10,25 +11,10 @@
 
         <div class="sanPhamPriceAndVote " style="font-size:0.8em">
             <span class="badge badge-dark" id="sanphamPrice">{{itemPrice}}</span>
-            {{#compare itemStatus "eq" '1'}}
-                            <span class="badge badge-success">Còn hàng</span>
-                        {{else}} 
-                        {{#compare itemStatus "eq" 2}}
-                            <span class="badge badge-danger">Hết hàng</span>
-                        {{else}}
-                            <span class="badge badge-danger">Ngưng SX</span>
-                        
-                        {{/compare}}
-            {{/compare}}
-            {{!-- <span class="badge badge-secondary" id="sanphamStars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-            </span>
-            <span class="d-inline-block"> ( {{itemCountVotes}} bình chọn)</span> --}}
+         
+            <span class="badge badge-success">Còn hàng</span>
         </div>
     </div>
 </div>
+  {{/compare}}
 {{/each}}

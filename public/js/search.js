@@ -57,7 +57,7 @@ function handlePagination(num_of_pages){
                      $('#pagination-demo').twbsPagination('destroy');
                 $('#pagination-demo').twbsPagination({
                     totalPages: num_of_pages,
-                    visiblePages: 3,
+                    visiblePages: 5,
                     next: '>',
                     prev: '<',
                     onPageClick: function (event, page) {
