@@ -93,6 +93,17 @@ var controller = {
             callback(bill)
         })
     },
+    updateSttDone: function(id, callback) {
+        models.Bill
+        .update({
+            status: "Đã Giao Hàng"
+        },{
+            where: {id:id}
+        })
+        .then(function(bill) {
+            callback(bill)
+        })
+    },
     filter: function(searchQuery,callback){
         var whereJson = {};
         whereJson.status = 'Đã Thanh Toán';

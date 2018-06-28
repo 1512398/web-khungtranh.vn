@@ -169,7 +169,11 @@ module.exports = function (app, paypal, onepayDom) {
                     count: req.session.cart.countAll,
                     price: req.session.cart.priceAll,
                     typeDeli: req.session.cart.delivery.type,
-                    costDeli: req.session.cart.delivery.cost
+                    costDeli: req.session.cart.delivery.cost,
+                    email: req.session.pay.email,
+                    address: req.session.pay.address, 
+                    fullname: req.session.pay.name, 
+                    tel: req.session.pay.tel
                 }
                 billCtr.add(data1, function(data){
                     data1.itemId.forEach(element => {
