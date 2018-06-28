@@ -116,8 +116,8 @@
             <div class="col-6 flex-column d-flex align-content-center align-items-center" id="dathang_main">
                 <h2 class=" font-weight-bold pt-2" style="font-weight:bold">Xem trước khung tranh</h2>
                 <div id="frame_main" style="clear: both;position: relative;">
-                    <img src="/img/demo_F5T x 3cm.png" alt="" style="z-index=1;position:absolute;" id="frame-pic">
-                    <div style="z-index=2;position:absolute;width:90%;height:90%;top:5%;left:5%;bottom:5%;right:5%;">
+                    <img src="/img/demo_F5T x 3cm.png" alt="" style="z-index=1;position:absolute;top: 0;left: 0;right: 0;bottom: 0;" id="frame-pic">
+                    <div style="z-index=2;position:absolute;width:87%;height:87%;top:6.5%;left:6.5%;bottom:6.5%;right:6.5%;">
                         <img src="./img/hinh_nguoi_dung_1.jpg" alt="" id="pic">
                     </div>
                     </div>
@@ -261,7 +261,6 @@
                         console.log(tmp);
                 $('.cr-boundary').attr('style', tmp);
                         $('#frame-pic').attr('style', tmp+';display:flex;margin-left:auto;margin-right:auto;')
-
             } else {
                 document.getElementById('height').value = rh;
                 document.getElementById('width').value = rw;
@@ -269,8 +268,7 @@
                 $('.cr-viewport').removeAttr('style');
                 var tmp = 'width:100%;height:100%';
                 $('.cr-boundary').attr('style', tmp);
-                        $('#frame-pic').attr('style', tmp+';display:flex;margin-left:auto;margin-right:auto;')
-
+                $('#frame-pic').attr('style', tmp+';display:flex;margin-left:auto;margin-right:auto;')
             }
         } else {
             document.getElementById('height').value = rh;
