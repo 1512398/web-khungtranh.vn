@@ -75,7 +75,7 @@
 }
 </style>
 <main>
-    <form id="abcd" action="/GioHang/add_cart_item"  method="POST">
+    <form id="abcd" action="/GioHang/add_cart_item"  method="POST" style="display:none">
                         <input type="hidden" class="custom-file-input" id="customFile" name="myImg" >
                         <input type="text" name="id" id="id">
                         <input type="text" name="width" id="widthhh">
@@ -311,16 +311,8 @@
             $('#heighthh').val(k.height);
             $('#widthhh').val(k.width);
             $('#customFile').val(src_final_edit);
-            $('#abcd').submit();
-            {{!-- $.ajax({
-                    url:'/GioHang/add_cart_item?id=' + id + '&width='+ k.width +'&height='+ k.height, 
-                    cache: true,
-                    success: (data)=> {
-                            $('#countItemInCart').html(parseInt($('#countItemInCart').html())+1);
-                            console.log(data)
-                    }
-            }) --}}
-            {{!-- $.ajax({
+            //$('#abcd').submit();
+            $.ajax({
                     type: 'POST',
                     url:'/GioHang/add_cart_item',
                     data: $('#abcd').serialize() ,
@@ -329,7 +321,7 @@
                             $('#countItemInCart').html(parseInt($('#countItemInCart').html())+1);
                             console.log(data)
                     }
-            }) --}}
+            })
         }
     }
     // ---

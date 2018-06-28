@@ -42,7 +42,7 @@ app.use(express.static(__dirname + '/public'));
 // Body Parser Middleware
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false, limit:'50mb' }));
 
 //===== Login and Signup =====
 var passport = require('passport');
