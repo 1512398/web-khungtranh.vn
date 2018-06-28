@@ -91,42 +91,57 @@
                         data: JSON.stringify(data1), 
                         contentType: 'application/json',
                         success: (src)=> {
-                            // get name and tel
-                            listItem += "<div class='row'>" + "<div class='col-xs-4'>"+"<div id='prodcut-image'>" +
-                                        "<img src='"
-                                        + src.itemImgDemo
-                                        +"' alt='...'' style='width:100%;text-align: center'>" +
-                                        "</div>" + "</div>" + "<div class='col-xs-8'>"+
-                                        '<div class="row">'+
-                                        '<div class="col-md-3"> Tên khung </div>'+
-                                        '<strong class="col-md-9">' +src.itemName+'</strong>'+
-                                        '</div>'+
-                                        '<div class="row">'+
-                                        '<div class="col-md-3"> Thông tin </div>'+
-                                        '<strong class="col-md-9">' +src.itemInfo+ '</strong>'+
-                                        '</div>'+
-                                        '<div class="row">'+
-                                        '<div class="col-md-3"> Chất liệu </div>'+
-                                        '<strong class="col-md-9">' +src.itemMaterial+ '</strong>'+
-                                        '</div>'+ 
-                                        '<div class="row">'+
-                                        '<div class="col-md-3"> Kích thước </div>'+
-                                        '<strong class="col-md-9">' +src.itemWidthSize+'x'+src.itemHeightSize+ '</strong>'+
-                                        '</div>'+
-                                        '<div class="row">'+
-                                        '<div class="col-md-3"> Loại </div>'+
-                                        '<strong class="col-md-9">' +src.itemType+ '</strong>'+
-                                        '</div>'+ 
-                                        '<div class="row">'+
-                                        '<div class="col-md-3"> Giá </div>'+
-                                        '<strong class="col-md-9">' +src.itemPrice+ '</strong>'+
-                                        '</div>'+   
-                                        '<div class="row">'+
-                                        '<div class="col-md-3"> Số lượng </div>'+
-                                        '<strong class="col-md-9">' +e.count+ '</strong>'+
-                                        '</div>'+   
-                                         "</div>" + "</div>"+'<hr>';                        
-                            document.getElementById('listItemBill').innerHTML = listItem;    
+                            // ajax lay hinh
+                             $.ajax({
+                                type: "POST",
+                                url: '/admin/manage_bill/itemDetail', 
+                                headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
+                                cache: true,
+                                data: JSON.stringify({
+                                    billId: id, 
+                                    itemId: data1.itemId
+                                }), 
+                                contentType: 'application/json',
+                                success: (srcc)=> {
+                                    // get name and tel
+                                    //
+                                    listItem += "<div class='row'>" + "<div class='col-xs-4'>"+"<div id='prodcut-image'>" +
+                                                "<img src='"
+                                                + srcc.img
+                                                +"' alt='...'' style='width:100%;text-align: center'>" +
+                                                "</div>" + "</div>" + "<div class='col-xs-8'>"+
+                                                '<div class="row">'+
+                                                '<div class="col-md-3"> Tên khung </div>'+
+                                                '<strong class="col-md-9">' +src.itemName+'</strong>'+
+                                                '</div>'+
+                                                '<div class="row">'+
+                                                '<div class="col-md-3"> Thông tin </div>'+
+                                                '<strong class="col-md-9">' +src.itemInfo+ '</strong>'+
+                                                '</div>'+
+                                                '<div class="row">'+
+                                                '<div class="col-md-3"> Chất liệu </div>'+
+                                                '<strong class="col-md-9">' +src.itemMaterial+ '</strong>'+
+                                                '</div>'+ 
+                                                '<div class="row">'+
+                                                '<div class="col-md-3"> Kích thước </div>'+
+                                                '<strong class="col-md-9">' + srcc.width +'x'+ srcc.height + '</strong>'+
+                                                '</div>'+
+                                                '<div class="row">'+
+                                                '<div class="col-md-3"> Loại </div>'+
+                                                '<strong class="col-md-9">' +src.itemType+ '</strong>'+
+                                                '</div>'+ 
+                                                '<div class="row">'+
+                                                '<div class="col-md-3"> Giá </div>'+
+                                                '<strong class="col-md-9">' +src.itemPrice+ '</strong>'+
+                                                '</div>'+   
+                                                '<div class="row">'+
+                                                '<div class="col-md-3"> Số lượng </div>'+
+                                                '<strong class="col-md-9">' +e.count+ '</strong>'+
+                                                '</div>'+   
+                                                "</div>" + "</div>"+'<hr>';                        
+                                    document.getElementById('listItemBill').innerHTML = listItem;  
+                                }
+                            })  
                         }
                     })
                 })
@@ -169,8 +184,6 @@
                 var price = '{{priceFinal}} vnđ';
                 var priceid = 'price' + '{{id}}';
                 document.getElementById(priceid).innerText = price;
-                var avatar = 'avatarItem'+ '{{id}}';
-                document.getElementById(avatar).src = src.itemImgDemo;
             }
         })
         $.ajax({

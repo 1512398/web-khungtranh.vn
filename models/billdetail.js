@@ -5,7 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     itemId: DataTypes.INTEGER,
     count: DataTypes.INTEGER,
     price: DataTypes.INTEGER,
-    img: DataTypes.STRING
+    img: DataTypes.STRING,
+    width: DataTypes.STRING,
+    height: DataTypes.STRING
   }, {});
   BillDetail.associate = function(models) {
     // associations can be defined here
