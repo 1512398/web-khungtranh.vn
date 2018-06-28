@@ -1,10 +1,11 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "trunghieuhoang1997",
-    "database": "DB_WebKhungTranh",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "username": "qsuarfspxcscuz",
+    "password": "a71339634c58de4902ce212b37b0f7a3488d38b43b0f019789e66c033bb5bbed",
+    "database": "d11epaap57chs7h",
+    "host": "ec2-54-243-61-173.compute-1.amazonaws.comh",
+    "dialect": "postgres",
+    "port": "5432"
   },
   "test": {
     "username": "qsuarfspxcscuz",
@@ -15,12 +16,12 @@
     "port": "5432"
   },
   "production": {
+    "use_env_variable": "DATABASE_URL",    
     "username": "qsuarfspxcscuz",
     "password": "a71339634c58de4902ce212b37b0f7a3488d38b43b0f019789e66c033bb5bbed",
     "database": "d11epaap57chs7h",
     "host": "ec2-54-243-61-173.compute-1.amazonaws.com",
     "dialect": "postgres",
     "port": "5432"
-    
   }
 }
