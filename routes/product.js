@@ -12,7 +12,7 @@ router.get('/', function(req,res){
 router.get('/catalog', function (req, res) {
     console.log(req.query)
     //catalogController.getById(req.params.id,page,function(article){
-    var limit = 5;
+    var limit = 6;
     var page = parseInt(req.query.page);
     page = isNaN(page) ? 1 : page;
     var offset = Math.max(0,(page-1)*limit);

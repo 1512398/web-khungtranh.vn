@@ -196,5 +196,11 @@
                 $('.mypagination li').addClass('page-item');
                 $('.mypagination li a').addClass('page-link');
                 Handlebars.registerHelper( "compare", HbsCompare);
+                Handlebars.registerHelper("asgn", function (index){
+                        index = 0
+                });
+                Handlebars.registerHelper("counter", function (index){
+                return index + 1;
+                });
         });  
 </script>

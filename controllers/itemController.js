@@ -155,6 +155,8 @@ controller.search = function (searchQuery, limit, offset, callback) {
             }
         }
     }
+    // whereJson.itemStatus = {};
+    // whereJson.itemStatus.lt = 3;
     models.Item.
         findAndCountAll({
             where: whereJson,
