@@ -1,6 +1,15 @@
 var models = require('../models');
 var sequelize = require('sequelize')
 var controller = {
+    getImgDesign: function(billId, itemId, callback){
+        models.BillDetail
+        .findOne({
+            where:{billId:billId, itemId:itemId}
+        })
+        .then(function(billDetail) {
+            callback(billDetail)
+        })
+    },
     add : function(billDetail, callback) {
         models.BillDetail
         .create({

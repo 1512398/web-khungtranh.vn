@@ -122,7 +122,7 @@ router.get('/getBillInfoForUser', function (req, res) {
 
 // QUẢN LÝ DANH MỤC MẶT HÀNG
 var catalogController = require('../controllers/catalogController');
-router.get('/getCatalogInfo',jwtad.verifyToken, function (req, res) {
+router.get('/getCatalogInfo', function (req, res) {
     catalogController.getAll(function (catalog) {
         var arr_catalog = [];
         catalog.forEach(element => {
@@ -271,6 +271,11 @@ router.post('/manage_bill/billitem',jwtad.verifyToken, function(req, res){
         res.send(src);
     })
 })
+router.post('/manage_bill/itemDetail',jwtad.verifyToken, function(req, res){
+    billDetailCtr.getImgDesign(req.body.billId, req.body.itemId, function(src){
+        res.send(src);
+    })
+} )
 
 // QUẢN LÝ ĐĂNG NHẬP ADMIN
 router.post("/login", jwtad.login);
