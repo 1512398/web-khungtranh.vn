@@ -183,7 +183,7 @@ $('#btnThongKe').on('click',function(){
     $.ajax({
         url: "/admin/thongke",
         type: "POST",
-        {{!-- headers: {'Authorization': 'bearer ' + $.cookie('JWT')}, --}}
+        headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
         data: {fromDate: $('#fromDate').val(), toDate: $('#toDate').val(), type: $('#type').val()},
         success: function (data) {
             labels = []
@@ -202,7 +202,7 @@ $('#btnThongKe').on('click',function(){
     $.ajax({
         url: "/admin/thongketheoloai",
         type: "POST",
-        {{!-- headers: {'Authorization': 'bearer ' + $.cookie('JWT')}, --}}
+        headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
         data: {fromDate: $('#fromDate').val(), toDate: $('#toDate').val(), type: $('#type').val()},
         success: function(data){
             maindata = data;

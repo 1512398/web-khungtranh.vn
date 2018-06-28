@@ -13,10 +13,12 @@ module.exports = function (app, passport,jwt) {
     //     res.render('LienHe',{member: req.isAuthenticated(),title:'Liên hệ',name:'lienhe'});
     // })
     
-    app.get('/ThanhToan', function (req, res) {
-        console.log('kiem tra');
-        console.log(req.session.cart)
-        res.render('ThanhToan', {member: req.isAuthenticated(), price: req.session.cart.priceAll, count: req.session.cart.countAll, title:'Thanh Toán Đơn Hàng', costdeli: req.session.cart.delivery.cost, priceFinal:req.session.cart.priceFinal});
+    app.get('/ThanhToan', isLoggedIn, function (req, res) {
+        if (req.session.cart == null){
+            res.redirect('/');
+        }
+        else
+            res.render('ThanhToan', {member: req.isAuthenticated(), price: req.session.cart.priceAll, count: req.session.cart.countAll, title:'Thanh Toán Đơn Hàng', costdeli: req.session.cart.delivery.cost, priceFinal:req.session.cart.priceFinal});
     })
     
     app.get('/getprofile',function (req,res) {
@@ -105,6 +107,9 @@ module.exports = function (app, passport,jwt) {
         res.send('Wellcome :) ')
         // res.render('profile', req.User)
     });
+   
+   
+   
 };
 
 // route middleware to make sure a user is logged in
@@ -116,33 +121,4 @@ function isLoggedIn(req, res, next) {
 
     // if they aren't redirect them to the home page
     res.redirect('/');
-}
-
-function verifyToken(req,res,next){
-    //Get auth header
-    const bearerHeader=req.query.auth;
-    console.log(bearerHeader);
-    //check if undefine
-    if (typeof bearerHeader!=='undefined'){
-        //get token
-        const bearer=bearerHeader.split(' ');
-        const bearerToken=bearer[1];
-        //set token to req
-        req.token=bearerHeader;
-        //next middleware
-        next();
-    }else{
-        //forbidden
-        res.sendStatus(403);
-    }
-}
-
-function renderHandler(dest){
-    jwt.verify(req.token,'hthieuhoangtrunghieu',(err,authData)=>{
-        if(err){
-            res.redirect('/DangNhap')
-        }else{
-            res.render(dest,{member:true});
-        }
-    });
 }

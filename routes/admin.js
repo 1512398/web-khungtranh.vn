@@ -81,7 +81,7 @@ router.get('/getAllFeedback', jwtad.verifyToken, function (req, res) {
 
 // QUẢN LÝ ĐƠN HÀNG
 BillsCtr = require('../controllers/billController');
-router.get('/getBillInfo', function (req, res) {
+router.get('/getBillInfo',jwtad.verifyToken, function (req, res) {
     var limit = 5;
     var page = parseInt(req.query.page);
     page = isNaN(page) ? 1 : page;
@@ -100,7 +100,7 @@ router.get('/getBillInfo', function (req, res) {
 })
 
 
-router.get('/getBillInfoForUser', function (req, res) {
+router.get('/getBillInfoForUser',jwtad.verifyToken, function (req, res) {
     var limit = 5;
     var page = parseInt(req.query.page);
     var userId = parseInt(req.query.id);
@@ -248,25 +248,25 @@ router.post('/editItem',
 
 // QUẢN LÝ ĐƠN HÀNG
 billDetailCtr = require('../controllers/billDetailController')
-router.post('/manage_bill/item',  function(req, res) {
+router.post('/manage_bill/item',jwtad.verifyToken,  function(req, res) {
     itemController.findOne(req.body.itemId, function(data) {
         res.send(data);
     })
     
 })
 
-router.post('/manage_bill/user', function(req, res) {
+router.post('/manage_bill/user', jwtad.verifyToken, function(req, res) {
     userController.findOne(req.body.userId, function(data) {
         res.send(data);
     })
 })
-router.post('/manage_bill/bill', function(req, res){
+router.post('/manage_bill/bill', jwtad.verifyToken,  function(req, res){
     BillsCtr.findOne(req.body.billId, function(data){
         res.send(data);
     })
 })
 
-router.post('/manage_bill/billitem', function(req, res){
+router.post('/manage_bill/billitem',jwtad.verifyToken, function(req, res){
     billDetailCtr.getAll(req.body.id, function(src){
         res.send(src);
     })
@@ -285,16 +285,13 @@ router.get('/adminName', jwtad.verifyToken, function (req,res) {
   })
 
 // QUẢN LÝ XUẤT BÁO CÁO - VẼ BIỂU ĐỒ
-router.post("/thongke",function(req,res){
+router.post("/thongke", jwtad.verifyToken, function(req,res){
     BillsCtr.filter(req.body,function(data){
         res.json(data);
     })
 });
 
-router.post("/thongketheoloai", function(req,res){
-    // billDetailCtr.filter(req.body,4,function(data){
-    //     console.log(data[0].dataValues.total)
-    // })
+router.post("/thongketheoloai", jwtad.verifyToken, function(req,res){
     catalogController.getAll(function (catalog) {
         var stt = [];
         var count = 0;

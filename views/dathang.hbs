@@ -75,7 +75,13 @@
 }
 </style>
 <main>
-    
+    <form id="abcd" action="/GioHang/add_cart_item"  method="POST">
+                        <input type="hidden" class="custom-file-input" id="customFile" name="myImg" >
+                        <input type="text" name="id" id="id">
+                        <input type="text" name="width" id="widthhh">
+                        <input type="text" name="height" id="heighthh">
+                        {{!-- <input type="submit" value="submit!"> --}}
+                    </form>
     <div class="container-fluid" id="DatHangKhungTranh">
         <div class="row pt-0">
             <!-- catalogue -->
@@ -135,6 +141,8 @@
                         </div>
 
                     </div>
+                    
+
                     <div class="col-6" id="abc">
                         <form>
                             <div class="form-row">
@@ -191,6 +199,9 @@
       <img src="" alt="" class="modal-content" id="img01">
       <canvas id="canvas-id"></canvas>
   </div>
+
+
+
 </main>
 <script src="lib/croppie/croppie.js"></script>
 
@@ -296,14 +307,29 @@
             data = {
                 src: src_final_edit
             }
-            $.ajax({
-                url:'/GioHang/add_cart_item?id=' + id + '&width='+ k.width +'&height='+ k.height, 
-                cache: true,
-                success: (data)=> {
-                    $('#countItemInCart').html(parseInt($('#countItemInCart').html())+1);
-                    console.log(data)
-                }
-            })
+            $('#id').val(id);
+            $('#heighthh').val(k.height);
+            $('#widthhh').val(k.width);
+            $('#customFile').val(src_final_edit);
+            $('#abcd').submit();
+            {{!-- $.ajax({
+                    url:'/GioHang/add_cart_item?id=' + id + '&width='+ k.width +'&height='+ k.height, 
+                    cache: true,
+                    success: (data)=> {
+                            $('#countItemInCart').html(parseInt($('#countItemInCart').html())+1);
+                            console.log(data)
+                    }
+            }) --}}
+            {{!-- $.ajax({
+                    type: 'POST',
+                    url:'/GioHang/add_cart_item',
+                    data: $('#abcd').serialize() ,
+                    cache: true,
+                    success: (data)=> {
+                            $('#countItemInCart').html(parseInt($('#countItemInCart').html())+1);
+                            console.log(data)
+                    }
+            }) --}}
         }
     }
     // ---
