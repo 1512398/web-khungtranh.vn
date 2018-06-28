@@ -177,6 +177,7 @@ module.exports = function (app, paypal, onepayDom) {
                     email: req.session.pay.email,
                     address: req.session.pay.address, 
                     fullname: req.session.pay.name, 
+                    status: 'Đã Thanh Toán',
                     tel: req.session.pay.tel,
                     img: list[0].linkSave
                 }

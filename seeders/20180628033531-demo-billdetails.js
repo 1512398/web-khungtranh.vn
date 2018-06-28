@@ -8,7 +8,7 @@ module.exports = {
         itemId: 3,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-27 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -17,7 +17,7 @@ module.exports = {
         itemId: 3,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-03-27 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -26,7 +26,7 @@ module.exports = {
         itemId: 4,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-05-27 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -35,7 +35,7 @@ module.exports = {
         itemId: 5,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-04-27 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -44,7 +44,7 @@ module.exports = {
         itemId: 6,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-04-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -53,7 +53,7 @@ module.exports = {
         itemId: 7,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-06-27 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -62,7 +62,7 @@ module.exports = {
         itemId: 8,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-15 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -71,7 +71,7 @@ module.exports = {
         itemId: 9,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-03-30 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -80,7 +80,7 @@ module.exports = {
         itemId: 10,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-04-22 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -89,7 +89,7 @@ module.exports = {
         itemId: 11,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-25 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -98,7 +98,7 @@ module.exports = {
         itemId: 12,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-04-01 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -107,7 +107,7 @@ module.exports = {
         itemId: 13,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-03-22 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -116,7 +116,7 @@ module.exports = {
         itemId: 14,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-15 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -125,7 +125,7 @@ module.exports = {
         itemId: 15,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-06-16 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -134,7 +134,7 @@ module.exports = {
         itemId: 16,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -143,7 +143,7 @@ module.exports = {
         itemId: 16,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -152,7 +152,7 @@ module.exports = {
         itemId: 17,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -161,7 +161,7 @@ module.exports = {
         itemId: 18,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -170,7 +170,7 @@ module.exports = {
         itemId: 19,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-04-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -179,7 +179,7 @@ module.exports = {
         itemId: 20,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-18 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -188,7 +188,7 @@ module.exports = {
         itemId: 21,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-22 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -197,7 +197,7 @@ module.exports = {
         itemId: 22,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-05-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -206,7 +206,7 @@ module.exports = {
         itemId: 23,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-03-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -215,7 +215,7 @@ module.exports = {
         itemId: 24,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-03-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -224,7 +224,7 @@ module.exports = {
         itemId: 25,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-21 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },{
@@ -232,7 +232,7 @@ module.exports = {
         itemId: 26,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -241,7 +241,7 @@ module.exports = {
         itemId: 27,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -250,7 +250,7 @@ module.exports = {
         itemId: 28,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-04-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -259,7 +259,7 @@ module.exports = {
         itemId: 29,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-18 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -268,7 +268,7 @@ module.exports = {
         itemId: 30,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-22 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -277,7 +277,7 @@ module.exports = {
         itemId: 31,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-05-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -286,7 +286,7 @@ module.exports = {
         itemId: 32,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-03-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -295,7 +295,7 @@ module.exports = {
         itemId: 33,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-03-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -304,7 +304,7 @@ module.exports = {
         itemId: 34,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-21 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },{
@@ -312,7 +312,7 @@ module.exports = {
         itemId: 35,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -321,7 +321,7 @@ module.exports = {
         itemId: 36,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -330,7 +330,7 @@ module.exports = {
         itemId: 36,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-04-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -339,7 +339,7 @@ module.exports = {
         itemId: 37,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-18 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -348,7 +348,7 @@ module.exports = {
         itemId: 38,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-22 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -357,7 +357,7 @@ module.exports = {
         itemId: 39,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-05-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -366,7 +366,7 @@ module.exports = {
         itemId: 40,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-03-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -375,7 +375,7 @@ module.exports = {
         itemId: 41,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-03-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -384,7 +384,7 @@ module.exports = {
         itemId: 42,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-21 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },{
@@ -392,7 +392,7 @@ module.exports = {
         itemId: 43,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },
@@ -401,7 +401,7 @@ module.exports = {
         itemId: 43,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-21 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       },{
@@ -409,7 +409,7 @@ module.exports = {
         itemId: 44,
         count: 1,
         price: 123000,
-        img: '',
+        img: "/img/demo.png", width: "240", height: "120",
         createdAt: '2018-02-23 02:05:16+07',
         updatedAt: Sequelize.literal('NOW()')
       }

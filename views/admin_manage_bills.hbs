@@ -138,14 +138,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="profile-product-tilte row-md-4">
-                        <label class="col-md-5 "> Giá </label>
-                        <strong class="col-md-7"> <label id="costBill" style="font-size:2rem; color:red;"> </label> <label class="pull-right"><span class="fa fa-angle-up"></span>10% VAT</label></strong>
+                        <label class="col-md-5 "> Tổng trị giá hóa đơn </label>
+                        <strong class="col-md-7"> <label id="costBill" style="font-size:2rem; color:red;"> </label> <label class="pull-right"></label></strong>
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" onclick="loads()">Loads</button>
             <button type="button" class="btn btn-danger" id="exportBill">Xuất hóa đơn</button>
         </div>
@@ -201,7 +201,9 @@
     $(document).ready(function(){
          loadItems(1);
     })
-
+    $('#viewModal').on('hidden.bs.modal', function () {
+        $('#listItemBill').html('');
+    });
     var cancelBill = (id) => {
         var r = confirm('Bạn có chắc chắn muốn hủy đơn hàng?');
         if (r)
