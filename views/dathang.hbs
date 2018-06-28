@@ -240,7 +240,7 @@
         var tmp = 'width:100%;height:100%'; 
                 //console.log(tmp);
         $('.cr-boundary').attr('style', tmp);
-        $('#frame-pic').attr('style', tmp+";display: flex;align-items: center;justify-content: center;margin-left:auto;margin-right:auto");
+        $('#frame-pic').attr('style', tmp+';display:flex;margin-left:auto;margin-right:auto;')
     })
     // update feature resize image design
     var updateSizeImgDesign = () => {
@@ -260,7 +260,7 @@
                 var tmp = 'width:'+(w/rw*100).toString()+'%;height:'+(h/rh*100).toString()+'%';
                         console.log(tmp);
                 $('.cr-boundary').attr('style', tmp);
-                $('#frame-pic').attr('style', tmp+';display: flex;align-items: center;justify-content: center;margin-left:auto;margin-right:auto');
+                        $('#frame-pic').attr('style', tmp+';display:flex;margin-left:auto;margin-right:auto;')
             } else {
                 document.getElementById('height').value = rh;
                 document.getElementById('width').value = rw;
@@ -268,7 +268,7 @@
                 $('.cr-viewport').removeAttr('style');
                 var tmp = 'width:100%;height:100%';
                 $('.cr-boundary').attr('style', tmp);
-                $('#frame-pic').attr('style', tmp+";display: flex;align-items: center;justify-content: center;margin-left:auto;margin-right:auto");
+                $('#frame-pic').attr('style', tmp+';display:flex;margin-left:auto;margin-right:auto;')
             }
         } else {
             document.getElementById('height').value = rh;

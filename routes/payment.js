@@ -80,7 +80,9 @@ module.exports = function (app, paypal, onepayDom) {
                             itemId: element.item.id,
                             count: element.count, 
                             price: element.count*element.price,
-                            img: element.linkSave
+                            img: element.linkSave,
+                            width: element.width,
+                            height: element.height
                         }
                         billDetailCtr.add(Json, function(data){
                             //console.log(req.user.id + 'da thanh toan thanh cong');
@@ -185,7 +187,9 @@ module.exports = function (app, paypal, onepayDom) {
                             itemId: element.item.id,
                             count: element.count, 
                             price: element.count*element.price,
-                            img: element.linkSave
+                            img: element.linkSave,
+                            width: element.width,
+                            height: element.height
                         }
                         billDetailCtr.add(Json, function(data){
                             //console.log(req.user.id + 'da thanh toan thanh cong');
@@ -244,7 +248,9 @@ module.exports = function (app, paypal, onepayDom) {
                     itemId: element.item.id,
                     count: element.count, 
                     price: element.count*element.price,
-                    img: element.linkSave
+                    img: element.linkSave,
+                    width: element.width,
+                    height: element.height
                 }
                 billDetailCtr.add(Json, function(data){
                     //console.log(req.user.id + 'da thanh toan thanh cong');

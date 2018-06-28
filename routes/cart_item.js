@@ -34,14 +34,30 @@ function Cart(_this) {
     this.items = _this.items || {}
     this.countAll = _this.countAll || 0
     this.priceAll = _this.priceAll || 0
-    this.add = (item, id, linkSave) => { 
+    this.add = (item, id, linkSave, w, h) => { 
         var listItem = this.items[id]
         if(!listItem) {
             listItem = this.items[id] = {
                 item: item, 
                 count: 0,
                 price: 0,
-                linkSave: linkSave
+                linkSave: linkSave,
+                width: w, 
+                height: h
+            }
+        }
+        listItem.count += 1
+        listItem.price = listItem.item.itemPrice * listItem.count
+        this.countAll += 1
+        this.priceAll += listItem.item.itemPrice
+    }
+    this.add1 = (item, id) => { 
+        var listItem = this.items[id]
+        if(!listItem) {
+            listItem = this.items[id] = {
+                item: item, 
+                count: 0,
+                price: 0
             }
         }
         listItem.count += 1
@@ -86,7 +102,7 @@ router.get('/add_cart_item', (req, res)=> {
     var sessionCart = req.session;
     let cartItem = new Cart(sessionCart.cart? sessionCart.cart:{})
     listItems.getbyId(req.query.id, (item)=>{
-        cartItem.add(item, item.id)
+        cartItem.add1(item, item.id)
         sessionCart.cart = cartItem;
         console.log(sessionCart);
         if(req.session.cart!=null){
@@ -122,7 +138,7 @@ router.post('/add_cart_item', (req, res)=> {
     var sessionCart = req.session;
     let cartItem = new Cart(sessionCart.cart? sessionCart.cart:{})
     listItems.getbyId(req.body.id, (item)=>{
-        cartItem.add(item, item.id, linkSave)
+        cartItem.add(item, item.id, linkSave, parseInt(req.body.width), parseInt(req.body.height))
         sessionCart.cart = cartItem;
         if(req.session.cart!=null){
             var tmp = req.session.cart;
