@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var listItems = require('../controllers/cart_itemController');
-
+var fs = require('fs');
+var crypto = require('crypto');
+var format = require('biguint-format');
 require('async')
 
 router.get('/', isLoggedIn, async (req, res) => {
@@ -32,13 +34,14 @@ function Cart(_this) {
     this.items = _this.items || {}
     this.countAll = _this.countAll || 0
     this.priceAll = _this.priceAll || 0
-    this.add = (item, id) => { 
+    this.add = (item, id, linkSave) => { 
         var listItem = this.items[id]
         if(!listItem) {
             listItem = this.items[id] = {
                 item: item, 
                 count: 0,
-                price: 0
+                price: 0,
+                linkSave: linkSave
             }
         }
         listItem.count += 1
@@ -98,14 +101,28 @@ router.get('/add_cart_item', (req, res)=> {
 })
 // Submit image design by user 
 // Set storage engine
-
+function randomC (qty) {
+    var x= crypto.randomBytes(qty);
+    return format(x, 'dec');
+}
 router.post('/add_cart_item', (req, res)=> {
-    console.log('------->')
+    // save as
     console.log(req.body);
+    var linkSave = '/img/user/'+ randomC(10).toString()+'.png';
+    var nameImg = 'public' + linkSave;
+    fs.appendFile(nameImg, req.body.myImg.split('data:image/png;base64,')[1], 'base64', function(err) {
+        /* var ws = fs.createWriteStream(nameImg);
+        fs.write(req.body.myImg, 'base64');
+        ws.on('finish', () => {  
+            console.log('wrote all data to file');
+        }); */
+        if(err) throw err;
+    });
+    // ===============
     var sessionCart = req.session;
     let cartItem = new Cart(sessionCart.cart? sessionCart.cart:{})
     listItems.getbyId(req.body.id, (item)=>{
-        cartItem.add(item, item.id)
+        cartItem.add(item, item.id, linkSave)
         sessionCart.cart = cartItem;
         if(req.session.cart!=null){
             var tmp = req.session.cart;

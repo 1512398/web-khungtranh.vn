@@ -18,7 +18,8 @@ var controller = {
             email: bill.email,
             address: bill.address, 
             fullname: bill.fullname,
-            tel: bill.tel
+            tel: bill.tel,
+            img: bill.img
         })
         .then((bill) => {
             callback(bill);

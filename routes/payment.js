@@ -70,7 +70,8 @@ module.exports = function (app, paypal, onepayDom) {
                     email: req.session.pay.email,
                     address: req.session.pay.address, 
                     fullname: req.session.pay.name, 
-                    tel: req.session.pay.tel
+                    tel: req.session.pay.tel,
+                    img: list[0].linkSave
                 }
                 billCtr.add(data1, function(data){
                     data1.itemId.forEach(element => {
@@ -78,7 +79,8 @@ module.exports = function (app, paypal, onepayDom) {
                             billId: data.id,
                             itemId: element.item.id,
                             count: element.count, 
-                            price: element.count*element.price
+                            price: element.count*element.price,
+                            img: element.linkSave
                         }
                         billDetailCtr.add(Json, function(data){
                             //console.log(req.user.id + 'da thanh toan thanh cong');

@@ -2,6 +2,8 @@
 <link rel="stylesheet" href="./css/style.css">
 <script src="/js/search.js"></script>
 <link rel="stylesheet" href="lib/croppie/croppie.css"/>
+<script src="/lib/html2canvas/html2canvas.min.js"></script>
+
 <style>
 /* The Modal (background) */
 .modal {
@@ -219,8 +221,8 @@
         saveIdChoose = id;
         srcSaveImg = src;
         console.log(itype);
-        if(itype == "Khung đặt làm") type = 0;
-        else type = 1;
+        if(itype == "Khung đặt làm") type = 1;
+        else type = 0;
         rw = iw;
         rh = ih;
         $('#width').attr('value', rw);
@@ -432,6 +434,7 @@
     // save list default
     var saveList = "";
     //
+    var canvas;
     var listImageNguoiDungUpdate = [];
     // drag drop file
     (async function(){
@@ -458,7 +461,7 @@
             var img01 = document.getElementById('img01');
             //img01.src = tmp.toString();
             // megre 2 image
-            var canvas = document.createElement('canvas');
+            canvas = document.createElement('canvas');
             var ctx;       
             if(srcSaveImg != "") {
                 canvas.width = 300;

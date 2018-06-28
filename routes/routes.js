@@ -49,8 +49,7 @@ module.exports = function (app, passport,jwt) {
                     req.flash('signupMessage', 'Vui lòng kiểm tra lại mã captcha!')
                     return res.redirect('/DangKy')
                 }
-            })
-            
+            }) 
         },
         passport.authenticate('local-signup', {
             successRedirect: '/', // redirect to the secure profile section
