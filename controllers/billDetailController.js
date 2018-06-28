@@ -43,7 +43,13 @@ var controller = {
             findAll({
                 includeIgnoreAttributes: false,
                 include: [{model: models.Item, where:{CatalogId:catalog}, attributes:['CatalogId']}],
-                attributes:["Item.CatalogId",[sequelize.fn('date_trunc', type, sequelize.col('BillDetail.createdAt')),'createdAt'],[sequelize.fn('SUM', sequelize.col('itemPrice')), 'prc']],
+                attributes:[
+                    "Item.CatalogId",
+                    [sequelize.fn('date_trunc', type, sequelize.col('BillDetail.createdAt')),'createdAt'],
+                    [sequelize.fn('SUM', sequelize.col('itemPrice')), 'prc'],
+                    [sequelize.fn('COUNT', sequelize.col('BillDetail.id')), 'count']
+                ],
+                    
                 order: [sequelize.fn('date_trunc', type, sequelize.col('BillDetail.createdAt'))],
                 where: whereJson,
                 group: ['Item.CatalogId',sequelize.fn('date_trunc', type, sequelize.col('BillDetail.createdAt'))]
