@@ -137,10 +137,7 @@
                             </div>
                         </div>
                         <hr class="m-2" style="border-color: white">
-                        <div class="form-check pt-1 pl-5">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked> In hình kèm khung
-                            </label>
+                        <div class="pt-1 pl-5" id="statusType">
                         </div>
 
                     </div>
@@ -151,12 +148,12 @@
                             <div class="form-row">
                                 <div class="col">
                                     <label for="width">Dài (cm)</label>
-                                    <input type="number submit" class="form-control" placeholder="Chiều dài" id="width" value="524">
+                                    <input type="number submit" class="form-control" placeholder="Chiều dài" id="width" value="524" onchange="updateSizeImgDesign()">
                                 </div>
 
                                 <div class="col">
                                     <label for="height">Rộng (cm)</label>
-                                    <input type="number submit" class="form-control" placeholder="Chiều rộng" id="height" value="385">
+                                    <input type="number submit" class="form-control" placeholder="Chiều rộng" id="height" value="385" onchange="updateSizeImgDesign()">
                                 </div>
                             </div>
 
@@ -209,9 +206,30 @@
 <script src="lib/croppie/croppie.js"></script>
 
 <script>  
-        var rw = 396;
-        var rh = 385;
-        var ratio = rw / rh;
+    var saveIdChoose = -1;
+    var srcSaveImg = "";
+    var src_final_edit = "";
+    var type = 0;
+    var rw = 524;
+    var rh = 385;
+    // add_item
+    
+    // handlers
+    var yourChoose = (id, src, itype, iw, ih) => {
+        saveIdChoose = id;
+        srcSaveImg = src;
+        console.log(itype);
+        if(itype == "Khung đặt làm") type = 0;
+        else type = 1;
+        rw = iw;
+        rh = ih;
+        $('#width').attr('value', rw);
+        $('#height').attr('value', rh);
+        $('#frame-pic').attr('src', src);
+        $('#statusType').html(itype);
+
+    }
+    var ratio = rw / rh;
     $('document').ready(function(){
             Handlebars.registerHelper( "compare", HbsCompare);
         $('.cr-viewport').removeAttr('style');
@@ -222,43 +240,38 @@
         $('.cr-boundary').attr('style', tmp);
     })
     // update feature resize image design
-    var updateSizeImgDesign = (data) => {
-        var w = parseInt(document.getElementById('width').value);
-        var h = parseInt(document.getElementById('height').value);
-        if(data == 1){   
-            document.getElementById('height').value = h;
-            document.getElementById('width').value = w;
+    var updateSizeImgDesign = () => {
+        if(type) {
+            var w = parseInt(document.getElementById('width').value);
+            var h = parseInt(document.getElementById('height').value);
+            if(w <= rw && h <= rh) {
+                var c = croppie.options.viewport;
+                c.width = w;
+                c.height = h;
+                croppie.bind({
+                    url: croppie.data.url, 
+                    orientation: 1,
+                    zoom:0
+                })
+                $('.cr-viewport').removeAttr('style');
+                var tmp = 'width:'+(w/rw*100).toString()+'%;height:'+(h/rh*100).toString()+'%';
+                        console.log(tmp);
+                $('.cr-boundary').attr('style', tmp);
+            } else {
+                document.getElementById('height').value = rh;
+                document.getElementById('width').value = rw;
+                alert("Bạn không thể thay đổi kích thước vượt quá kích thước giới hạn ban đầu!");
+                $('.cr-viewport').removeAttr('style');
+                var tmp = 'width:100%;height:100%';
+                $('.cr-boundary').attr('style', tmp);
+            }
         } else {
-            ratioh = h / rh;
-            console.log(ratioh);
-            document.getElementById('height').value = h;
-            document.getElementById('width').value = w;
+            document.getElementById('height').value = rh;
+            document.getElementById('width').value = rw;
+            alert("Bạn không thể thay đổi kích thước, loại khung này có kích thước cố định!");
         }
-        var c = croppie.options.viewport;
-        c.width = w;
-        c.height = h;
-        console.log(croppie.data.url);
-        croppie.bind({
-            url: croppie.data.url, 
-            orientation: 1,
-            zoom:0
-        })
-        $('.cr-viewport').removeAttr('style');
-        var tmp = 'width:'+document.getElementById('width').value.toString()+'px;height:'+rh.toString()+'px';
-                console.log(tmp);
-        $('.cr-boundary').attr('style', tmp);
     }
-    var saveIdChoose = -1;
-    var srcSaveImg = "";
-    var src_final_edit = "";
-    // add_item
     
-    // handlers
-    var yourChoose = (id, src) => {
-        saveIdChoose = id;
-        srcSaveImg = src;
-        $('#frame-pic').attr('src', src);
-    }
     //degisn
     var c = document.getElementById('pic')
     var getSrcImg = function() {
@@ -289,7 +302,6 @@
     var add_cart_item = () => {
         var answer = confirm("Bạn có muốn thêm vào giỏ hàng?");
         if(answer == true) {
-
             id = saveIdChoose;
             var k = getSrcImg()
             data = {
@@ -350,7 +362,6 @@
     function getTemplateAjax(path, target, jsonData) {
         var source;
         var template;
-
         $.ajax({
             url: path,
             cache: false,
@@ -421,38 +432,7 @@
     var modal = document.getElementById('myModal');
     var modalImg = document.getElementById("img01");
     var ireview = function(){
-        croppie.result('base64').then(src => {
-            var tmp = src.toString();
-            var img01 = document.getElementById('img01');
-            //img01.src = tmp.toString();
-            // megre 2 image
-            var canvas = document.createElement('canvas');
-            var ctx;       
-            if(srcSaveImg != "") {
-                canvas.width = 300;
-                canvas.height = 200;
-                ctx = canvas.getContext("2d");
-                var imageFrame = new Image(); //imageframe
-                imageFrame.src = srcSaveImg;
-                ctx.drawImage(imageFrame, 0, 0, canvas.width, canvas.height);
-                var imageContent = new Image();
-                imageContent.src = tmp.toString();
-                var alphax = 10;
-                var alphay = 10;
-                ctx.drawImage(imageContent, alphax, alphay, canvas.width-20, canvas.height-20);
-                var _img = canvas.toDataURL('image/png');
-                setTimeout(function(){ 
-                    img01.src = _img;
-                    modal.style.display = "block";
-                    src_final_edit = _img;
-                }, 3000);
-                
-            } else {
-                img01.src = tmp.toString();
-                modal.style.display = "block";
-                src_final_edit = tmp.toString();
-            }
-        })
+        modal.style.display = "block";
     }
     var creview = function() { 
         modal.style.display = "none";
@@ -481,6 +461,33 @@
             }
             if(add != "")
                 document.getElementById('listHinhNguoiDung').innerHTML = add;
+            croppie.result('base64').then(src => {
+            var tmp = src.toString();
+            var img01 = document.getElementById('img01');
+            //img01.src = tmp.toString();
+            // megre 2 image
+            var canvas = document.createElement('canvas');
+            var ctx;       
+            if(srcSaveImg != "") {
+                canvas.width = 300;
+                canvas.height = 200;
+                ctx = canvas.getContext("2d");
+                var imageFrame = new Image();
+                imageFrame.src = srcSaveImg;
+                ctx.drawImage(imageFrame, 0, 0, canvas.width, canvas.height);
+                var imageContent = new Image();
+                imageContent.src = tmp.toString();
+                var alphax = 10;
+                var alphay = 10;
+                ctx.drawImage(imageContent, alphax, alphay, canvas.width-20, canvas.height-20);
+                var _img = canvas.toDataURL('image/png');
+                img01.src = _img;
+                src_final_edit = _img;
+            } else {
+                img01.src = tmp.toString();
+                src_final_edit = tmp.toString();
+            }
+            })
         }
         setInterval(update, 2000);
 
