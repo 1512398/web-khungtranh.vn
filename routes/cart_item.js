@@ -4,7 +4,7 @@ var listItems = require('../controllers/cart_itemController');
 
 require('async')
 
-router.get('/', async (req, res) => {
+router.get('/', isLoggedIn, async (req, res) => {
     var sessionCart = req.session;
     console.log(req.session)
     //init
@@ -78,23 +78,58 @@ function Cart(_this) {
     }
 }
 
-router.get('/add_cart_item', (req, res)=> {
+// router.get('/add_cart_item', (req, res)=> {
+//     console.log(req.body);
+//     var sessionCart = req.session;
+//     let cartItem = new Cart(sessionCart.cart? sessionCart.cart:{})
+//     listItems.getbyId(req.query.id, (item)=>{
+//         cartItem.add(item, item.id)
+//         sessionCart.cart = cartItem;
+//         console.log(sessionCart);
+//         if(req.session.cart!=null){
+//             var tmp = req.session.cart;
+//             console.log(req.session.cart.items)
+//             res.render('GioHang', {member: req.isAuthenticated(), title: "Giỏ Hàng", items: req.session.cart.items, countAll: req.session.cart.countAll, priceAll: req.session.cart.priceAll})
+//         }
+//         else {
+//             res.render('GioHang', {member: req.isAuthenticated(), title: "Giỏ Hàng",countAll: 0, priceAll: 0})
+//         }
+//     })
+// })
+// Submit image design by user 
+// Set storage engine
+const multer = require('multer');
+const path = require('path')
+const storage = multer.diskStorage({
+    destination: './public/uploads/',
+    filename: function (req,file,cb) {
+        cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }	
+})
+
+//Init Upload
+const upload = multer({
+    storage: storage,
+    limits:{fileSize:100000000}
+}).single('myImg');
+router.post('/add_cart_item', (req, res)=> {
+    console.log('------->')
     console.log(req.body);
-    var sessionCart = req.session;
-    let cartItem = new Cart(sessionCart.cart? sessionCart.cart:{})
-    listItems.getbyId(req.query.id, (item)=>{
-        cartItem.add(item, item.id)
-        sessionCart.cart = cartItem;
-        console.log(sessionCart);
-        if(req.session.cart!=null){
-            var tmp = req.session.cart;
-            console.log(req.session.cart.items)
-            res.render('GioHang', {member: req.isAuthenticated(), title: "Giỏ Hàng", items: req.session.cart.items, countAll: req.session.cart.countAll, priceAll: req.session.cart.priceAll})
-        }
-        else {
-            res.render('GioHang', {member: req.isAuthenticated(), title: "Giỏ Hàng",countAll: 0, priceAll: 0})
-        }
-    })
+    res.send('oke')
+    // var sessionCart = req.session;
+    // let cartItem = new Cart(sessionCart.cart? sessionCart.cart:{})
+    // listItems.getbyId(req.body.id, (item)=>{
+    //     cartItem.add(item, item.id)
+    //     sessionCart.cart = cartItem;
+    //     if(req.session.cart!=null){
+    //         var tmp = req.session.cart;
+    //         // console.log(req.session.cart.items)
+    //         res.render('GioHang', {member: req.isAuthenticated(), title: "Giỏ Hàng", items: req.session.cart.items, countAll: req.session.cart.countAll, priceAll: req.session.cart.priceAll})
+    //     }
+    //     else {
+    //         res.render('GioHang', {member: req.isAuthenticated(), title: "Giỏ Hàng",countAll: 0, priceAll: 0})
+    //     }
+    // })
 })
 router.get('/delete_cart_item', (req, res)=> {
     var sessionCart = req.session;
@@ -139,5 +174,16 @@ router.post('/hinhthucgiaohang', function(req, res){
     c.priceFinal = c.priceAll + c.delivery.cost;
     res.send('ok');
 })
+
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on 
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
+
 
 module.exports = router;

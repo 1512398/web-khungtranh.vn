@@ -164,6 +164,7 @@
         $.ajax({
             url: url,
             cache: true,
+            headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
             success: function (data) {
                 cur_page = page;
                  if (num_of_pages != data.pagination.num_of_pages) {
@@ -189,6 +190,7 @@
         $.ajax({
             url: path,
             cache: false,
+            headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
             success: function (data) {
                 source = data;
                 template = Handlebars.compile(source);
@@ -206,6 +208,7 @@
             $.ajax({
                 type: "POST",
                 url: '/cancelBillbyAdmin',
+                headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
                 data: JSON.stringify({
                     id: id
                 }),

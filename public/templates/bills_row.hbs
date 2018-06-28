@@ -40,6 +40,7 @@
             type: "POST",
             url: '/admin/manage_bill/bill', 
             cache: true,
+            headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
             data: JSON.stringify({
                 billId: id
             }), 
@@ -69,6 +70,7 @@
             cache: true, 
             data : JSON.stringify(data),
             contentType: 'application/json',
+            headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
             success: (src)=> {
                 listItem = "";
                 src.rows.forEach(e=>{
@@ -153,6 +155,7 @@
             cache: true,
             data: JSON.stringify(data), 
             contentType: 'application/json',
+            headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
             success: (src)=> {
                 var nameitem = 'nameitem' + '{{id}}';
                 document.getElementById(nameitem).innerText = src.itemName;
@@ -167,6 +170,7 @@
         $.ajax({
             type: "POST",
             url: '/admin/manage_bill/user', 
+            headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
             cache: true,
             data: JSON.stringify(data), 
             contentType: 'application/json',
