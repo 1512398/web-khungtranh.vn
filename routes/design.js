@@ -7,7 +7,7 @@ router.get('/', function (req, res) {
     catalogController.getAll(function (catalog) {
         console.log(catalog[3].title);
         console.log(catalog[3].Items.length)
-        res.render('DatHang',{member: req.isAuthenticated(),name:'dathang', title:'Đặt Hàng',catalog:catalog});
+        res.render('dathang',{member: req.isAuthenticated(),name:'dathang', title:'Đặt Hàng',catalog:catalog});
       })
 })
 
