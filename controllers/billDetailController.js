@@ -6,7 +6,7 @@ var controller = {
         .create({
             billId: billDetail.billId, 
             itemId: billDetail.itemId, 
-            img: "",
+            img: billDetail.img,
             count: billDetail.count,
             price: billDetail.price
         })

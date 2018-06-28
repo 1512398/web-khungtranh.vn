@@ -100,7 +100,7 @@ router.get('/getBillInfo',jwtad.verifyToken, function (req, res) {
 })
 
 
-router.get('/getBillInfoForUser',jwtad.verifyToken, function (req, res) {
+router.get('/getBillInfoForUser', function (req, res) {
     var limit = 5;
     var page = parseInt(req.query.page);
     var userId = parseInt(req.query.id);
