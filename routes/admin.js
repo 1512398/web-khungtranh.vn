@@ -122,7 +122,7 @@ router.get('/getBillInfoForUser', function (req, res) {
 
 // QUẢN LÝ DANH MỤC MẶT HÀNG
 var catalogController = require('../controllers/catalogController');
-router.get('/getCatalogInfo',jwtad.verifyToken, function (req, res) {
+router.get('/getCatalogInfo', function (req, res) {
     catalogController.getAll(function (catalog) {
         var arr_catalog = [];
         catalog.forEach(element => {
