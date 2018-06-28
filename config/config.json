@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "trunghieuhoang1997",
-    "database": "DB_WebKhungTranh",
-    "host": "127.0.0.1",
+    "username": "qsuarfspxcscuz",
+    "password": "a71339634c58de4902ce212b37b0f7a3488d38b43b0f019789e66c033bb5bbed",
+    "database": "d11epaap57chs7h",
+    "host": "ec2-54-243-61-173.compute-1.amazonaws.com:5432",
     "dialect": "postgres"
   },
   "test": {
-    "username": "postgres",
-    "password": "trunghieuhoang1997",
-    "database": "DB_WebKhungTranh",
-    "host": "127.0.0.1",
+    "username": "qsuarfspxcscuz",
+    "password": "a71339634c58de4902ce212b37b0f7a3488d38b43b0f019789e66c033bb5bbed",
+    "database": "d11epaap57chs7h",
+    "host": "ec2-54-243-61-173.compute-1.amazonaws.com:5432",
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": "trunghieuhoang1997",
-    "database": "DB_WebKhungTranh",
-    "host": "127.0.0.1",
+    "username": "qsuarfspxcscuz",
+    "password": "a71339634c58de4902ce212b37b0f7a3488d38b43b0f019789e66c033bb5bbed",
+    "database": "d11epaap57chs7h",
+    "host": "ec2-54-243-61-173.compute-1.amazonaws.com:5432",
     "dialect": "postgres"
   }
 }
