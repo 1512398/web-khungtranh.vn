@@ -100,7 +100,7 @@ router.get('/getBillInfo',jwtad.verifyToken, function (req, res) {
 })
 
 
-router.get('/getBillInfoForUser',jwtad.verifyToken, function (req, res) {
+router.get('/getBillInfoForUser', function (req, res) {
     var limit = 5;
     var page = parseInt(req.query.page);
     var userId = parseInt(req.query.id);
@@ -299,11 +299,13 @@ router.post("/thongketheoloai", jwtad.verifyToken, function(req,res){
             billDetailCtr.filter(req.body,element.id,function(data){
                 value = [];
                 label = [];
+                countData = [];
                 if (data.length!=0)
                 {
                     for (i =0; i< data.length;i++){
                         value.push(data[i].dataValues.prc)
                         label.push(data[i].dataValues.createdAt)
+                        countData.push(data[i].dataValues.count)
                     }
                 }
                 tmp={}
@@ -311,6 +313,7 @@ router.post("/thongketheoloai", jwtad.verifyToken, function(req,res){
                 tmp.name = element.title;
                 tmp.id = element.id;
                 tmp.label = label;
+                tmp.count = countData;
                 stt.push(tmp);
                 count ++;
                 if (count == catalog.length){

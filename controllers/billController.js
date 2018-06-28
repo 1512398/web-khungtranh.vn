@@ -123,7 +123,12 @@ var controller = {
         }
         models.Bill.
             findAll({
-                attributes:[[sequelize.fn('date_trunc', type, sequelize.col('createdAt')),'createdAt'], [sequelize.fn('SUM', sequelize.col('price')), 'total']],
+                attributes:[
+                [sequelize.fn('date_trunc', type, sequelize.col('createdAt')),'createdAt'], 
+                [sequelize.fn('SUM', sequelize.col('price')), 'total'],
+                [sequelize.fn('count', sequelize.col('id')), 'count'],
+                [sequelize.fn('count', sequelize.fn('distinct',sequelize.col('userId'))), 'countUser']
+                ],
                 where: whereJson,
                 order: [sequelize.fn('date_trunc', type, sequelize.col('createdAt'))],
                 group: [sequelize.fn('date_trunc', type, sequelize.col('createdAt'))]

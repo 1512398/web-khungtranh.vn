@@ -1,36 +1,4 @@
 <div class="right_col" role="main">
-    {{!-- <div class="row tile_count">
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-3 mb-2 bg-success text-white" >
-        <span class="count_top"><i class="fa fa-user"></i> Người dùng truy cập và mua</span>
-        <div class="count">30</div>
-        <span class="count_bottom" ><i class="green">Hôm nay </i>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-3 mb-2 bg-info text-white">
-        <span class="count_top"><i class="fa fa-clock-o"></i> Thời gian trung bình kết nối</span>
-        <div class="count">123.50</div>
-        <span class="count_bottom"> Hôm nay </span>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-3 mb-2 bg-primary text-white">
-        <span class="count_top"><i class="fa fa-user"></i> Tổng hóa đơn</span>
-        <div class="count green">62</div>
-        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> So với tuần trước`</span>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-3 mb-2 bg-danger text-white">
-        <span class="count_top"><i class="fa fa-user"></i> Tổng sản phẩm</span>
-        <div class="count">32</div>
-        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> So với tuần trước</span>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-3 mb-2 bg-warning text-white">
-        <span class="count_top"><i class="fa fa-user"></i>Tổng kết nối</span>
-        <div class="count">601</div>
-        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> So với tuần trước</span>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count p-3 mb-2 bg-dark text-white">
-        <span class="count_top"><i class="fa fa fa-envelope"></i> Thư góp ý</span>
-        <div class="count">12</div>
-        <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> So với tháng trước </span>
-        </div>
-    </div> --}}
     <div class="row tile_count">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="mt-2 mb-2">
@@ -44,48 +12,120 @@
                             </select>
                         </div>
 
-                        <div class="col-md-3">   
+                        <div class="col-md-4">   
                         <label for="fromDate">Từ</label>
                         <input class="form-control" type="date" min="0" value="" id="fromDate">
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label for="toDate">Đến</label>
                             <input class="form-control" type="date" min="0" value="" id="toDate">
                         </div>
 
-                        <div class="col-md-3">
-                            <label for="catalogSelect">Danh mục sản phẩm</label>
-                             <select class="form-control" id="catalogSelect"></select>
-                        </div>
-                        <div class="col-md-1">
-                            <label for="btnThongKe">Xuất</label>
-                            <button class="btn btn-primary" id="btnThongKe">Thống kê</button>
+                        <div class="col-md-2">
+                            <label for="btnThongKe">Xuất biểu đồ</label>
+                            <button class="btn btn-primary" id="btnThongKe" style="width:100%">
+                                <i class="fas fa-chart-bar"></i>
+                                Thống kê
+
+                            </button>
                         </div>
                     </form>
             </div>
             <hr>
             <div class="x_panel" style="margin-top:20px">
                 <div class="x_title">
-                <h2>Biểu đồ thống kê tổng doanh số</h2>
-                <div class="title_right">
+                    <h2>Biểu đồ thống kê tổng doanh số</h2>
+                    <div class="title_right"></div>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="clearfix"></div>
+
+                <div class="panel-group">
+                    <div class="x_content">
+                        <canvas id="myChart"></canvas>   
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="padding-top:10px" style="text-decoration:none">
+                                    <a data-toggle="collapse" href="#collapse1">
+                                        <i class="fas fa-table"></i>
+                                        Xem báo cáo dạng bảng
+                                    </a>
+                                </h3>
+                               
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse">
+                                 <table  class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Thời gian</th>
+                                            <th>Tổng doanh thu</th>
+                                            <th>Tổng số đơn hàng</th>
+                                            <th>Tổng số người mua</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="tbdoanhthu"></tbody>
+                                 </table>
+                            </div>
+                        </div>           
+                    </div>
                 </div>
-                <div class="x_content">
-                    <canvas id="myChart"></canvas>       
-                </div>
+
+                
             </div>
             <div class="x_panel" style="margin-top:20px">
                 <div class="x_title">
-                <h2>Biểu đồ thống kê doanh số theo danh mục mặt hàng</h2>
-                <div class="title_right">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h2>Biểu đồ thống kê doanh số theo danh mục mặt hàng</h2>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="catalogSelect">Lựa chọn danh mục </label>
+                                <select class="form-control" id="catalogSelect"></select>
+                        </div>
+                    </div>
+                      
+                    <div class="title_right"></div>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="clearfix"></div>
+
+                <div class="panel-group">
+                    <div class="x_content">
+                        <canvas id="myChart2"></canvas>   
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" style="padding-top:10px" style="text-decoration:none">
+                                    <a data-toggle="collapse" href="#collapse2">
+                                        <i class="fas fa-table"></i>
+                                        Xem báo cáo dạng bảng
+                                    </a>
+                                </h3>
+                               
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse">
+                                <table  class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Thời gian</th>
+                                            <th>Tổng doanh số mặt hàng</th>
+                                            <th>Tổng số hàng bán ra</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbdoanhthutheosp">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>           
+                    </div>
                 </div>
-                <div class="x_content">
-                    <canvas id="myChart2"></canvas>       
-                </div>
+        
+
+
+
+              
             </div>
         </div>
     </div>
@@ -162,6 +202,21 @@ function loadChart(data,ctxt){
     }
 });
 }
+
+function getTemplateAjax(path, target, jsonData) {
+    var source;
+    var template;
+    $.ajax({
+        url: path,
+        cache: false,
+        success: function (data) {
+            source = data;
+            template = Handlebars.compile(source);
+            $(target).html(template(jsonData));
+        }
+    })
+}
+
 function format(date,labels){
     d = new Date(date);
     var type = $('#type').val();
@@ -195,6 +250,15 @@ $('#btnThongKe').on('click',function(){
             dataTemplate.labels = labels;
             dataTemplate.datasets[0].data = dataset;
             loadChart(dataTemplate,ctx);
+
+            var src = ''
+            for (i=0;i<data.length;i++){
+                src += '<tr><td>'+parseInt(i+1)+'</td><td>' +
+                     labels[i] + '</td>' + '<td>' + dataset[i]+ 
+                    '</td><td>' + data[i].count + '</td><td>'+ data[i].countUser+
+                    '</td></tr>'
+            }
+            $('#tbdoanhthu').html(src);
         }
     })
 
@@ -214,6 +278,7 @@ $('#btnThongKe').on('click',function(){
 
 $('#catalogSelect').on('change',function(){
         c = $('#catalogSelect').val();
+        console.log(maindata);
         for (i=0;i<maindata.length;i++){
                 if (maindata[i].id == c){
                     labels = [];
@@ -225,9 +290,20 @@ $('#catalogSelect').on('change',function(){
                     dataTemplate2.datasets[0].data = maindata[i].value;
                     dataTemplate2.datasets[0].label = maindata[i].name;
                     loadChart(dataTemplate2,ctx2);
-                    break;
+                    
+
+                    var src = ''
+                for (j=0;j<maindata[i].label.length;j++){
+                    src += '<tr><td>'+parseInt(j+1)+'</td><td>' +
+                            labels[j] + '</td>' + '<td>' + maindata[i].value[j]+ 
+                            '</td><td>'+maindata[i].count[j]+ '</td><td>'+
+                            '</td></tr>'
+                }
+                $('#tbdoanhthutheosp').html(src);
+                break;
                 } 
             }
+        
     });
 
 $(document).ready(function(){

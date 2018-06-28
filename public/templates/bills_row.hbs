@@ -53,6 +53,7 @@
                 $.ajax({
                     type: "POST",
                     url: '/admin/manage_bill/user', 
+                    headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
                     cache: true,
                     data: JSON.stringify({
                         userId: src1.userId
@@ -85,6 +86,7 @@
                     $.ajax({
                         type: "POST",
                         url: '/admin/manage_bill/item', 
+                        headers: {'Authorization': 'bearer ' + $.cookie('JWT')},
                         cache: true,
                         data: JSON.stringify(data1), 
                         contentType: 'application/json',
